@@ -45,6 +45,27 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  cloud_firestore: ^3.1.8
+  firebase_core: ^1.12.0
+  google_fonts: ^2.3.0
+  flutter_screenutil: ^5.3.1
+  get: ^4.6.1
+  persistent_bottom_nav_bar_v2: ^4.1.1
+  flutter_svg: ^1.0.3
+  cached_network_image: ^3.2.0
+  file_picker: ^4.4.0
+  dio: ^4.0.4
+  email_validator: ^2.0.1
+  firebase_messaging: ^11.2.6
+  firebase_auth: ^3.3.7
+  intl_phone_number_input: ^0.7.0+2
+  stacked: ^2.2.8
+  pin_code_fields: ^7.3.0
+  fluttertoast: ^8.0.9
+  form_field_validator: ^1.1.0
+  intl_phone_field: ^3.0.1
+  geolocator: ^8.2.0
+  get_storage:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
