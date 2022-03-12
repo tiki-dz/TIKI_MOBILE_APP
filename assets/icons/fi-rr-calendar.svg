@@ -1,0 +1,6 @@
+<svg id="fi-rr-calendar" xmlns="http://www.w3.org/2000/svg" width="15.154" height="15.154" viewBox="0 0 15.154 15.154">
+  <path id="Path_49" data-name="Path 49" d="M12,1.263h-.631V.631a.631.631,0,1,0-1.263,0v.631H5.051V.631a.631.631,0,0,0-1.263,0v.631H3.157A3.161,3.161,0,0,0,0,4.42V12a3.161,3.161,0,0,0,3.157,3.157H12A3.161,3.161,0,0,0,15.154,12V4.42A3.161,3.161,0,0,0,12,1.263ZM1.263,4.42A1.894,1.894,0,0,1,3.157,2.526H12A1.894,1.894,0,0,1,13.891,4.42v.631H1.263ZM12,13.891H3.157A1.894,1.894,0,0,1,1.263,12V6.314H13.891V12A1.894,1.894,0,0,1,12,13.891Z"/>
+  <circle id="Ellipse_1" data-name="Ellipse 1" cx="0.947" cy="0.947" r="0.947" transform="translate(6.63 8.524)"/>
+  <circle id="Ellipse_2" data-name="Ellipse 2" cx="0.947" cy="0.947" r="0.947" transform="translate(3.473 8.524)"/>
+  <circle id="Ellipse_3" data-name="Ellipse 3" cx="0.947" cy="0.947" r="0.947" transform="translate(9.787 8.524)"/>
+</svg>

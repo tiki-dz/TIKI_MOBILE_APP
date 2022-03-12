@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
           padding:  EdgeInsets.all(10),
           child: Column(
             children: [
-              button("Sign up",(){
+               Button("Sign up",(){
                 print('cc');
               })
             ],

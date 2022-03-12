@@ -1,34 +1,41 @@
 import 'package:flutter/material.dart';
-import '../../../data/font.data.dart';
+
+import 'package:flutter/material.dart';
 import '../../../data/pallete.data.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class InputComponent extends StatelessWidget {
-  String leadingIcon;
+class InputComponentPassword extends StatefulWidget {
   String hintText;
   TextEditingController textEditingController;
-  InputComponent(
-      {required this.leadingIcon,
-      required this.textEditingController,
-      required this.hintText});
+
+  InputComponentPassword(
+      {required this.textEditingController, required this.hintText});
 
   @override
+  State<InputComponentPassword> createState() => _InputComponentPasswordState();
+}
+
+class _InputComponentPasswordState extends State<InputComponentPassword> {
+  bool showPassword = false;
+  @override
   Widget build(BuildContext context) {
+    var regular;
     return Container(
       height: 49.h,
       child: TextFormField(
         showCursor: false,
+        obscureText: showPassword,
         cursorColor: ButtonColor,
-        controller: textEditingController,
+        controller: widget.textEditingController,
         style: TextStyle(fontSize: 12.sp, height: 4.5.h, fontWeight: regular),
         decoration: InputDecoration(
           prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
             SizedBox(
               width: 20.w,
             ),
-            SvgPicture.asset(leadingIcon),
+            SvgPicture.asset("assets/icons/fi-rr-unlock.svg"),
             SizedBox(
               width: 10.w,
             ),
@@ -47,9 +54,23 @@ class InputComponent extends StatelessWidget {
             maxHeight: 35.sp,
             maxWidth: 50.w,
           ),
+          suffixIcon: InkWell(
+            onTap: () {
+              setState(() {
+                showPassword = !showPassword;
+              });
+            },
+            child: Padding(
+                padding: EdgeInsets.only(
+                  right: 18.2.w,
+                ),
+                child: showPassword
+                    ? SvgPicture.asset('assets/icons/fi-rr-eye-crossed.svg')
+                    : SvgPicture.asset('assets/icons/fi-rr-eye.svg')),
+          ),
           filled: true,
           fillColor: GreyColor,
-          hintText: hintText,
+          hintText: widget.hintText,
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: GreyColor),
             borderRadius: BorderRadius.circular(8.sp),
@@ -68,6 +89,8 @@ class InputComponent extends StatelessWidget {
           ),
         ),
       ),
+    
+    
     );
   }
 }
