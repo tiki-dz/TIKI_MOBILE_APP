@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../data/pallete.data.dart';
 
-Widget Button(String title, VoidCallback? function) {
+Widget button(String title, VoidCallback? function) {
   return SizedBox(
     width: double.infinity,
     height: 57.h,

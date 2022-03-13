@@ -87,7 +87,7 @@ class SignUpWidget extends StatelessWidget {
           SizedBox(
             height: 50.h,
           ),
-          Button("signup".tr, () {
+          button("signup".tr, () {
             Get.to(ConfirmationWidget());
           }),
           SizedBox(

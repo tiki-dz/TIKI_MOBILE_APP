@@ -218,7 +218,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                   SizedBox(
                     height: 139.h,
                   ),
-                  Button('confirm'.tr, () {}),
+                  button('confirm'.tr, () {}),
                   SizedBox(
                     height: 28.h,
                   ),
