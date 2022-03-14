@@ -8,7 +8,6 @@ class SignUpController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController confimPasswordController =
       TextEditingController();
-  final TextEditingController codePinController = TextEditingController(); 
   final formKey = GlobalKey<FormState>();
   @override
   void onInit() {

@@ -16,56 +16,52 @@ class InputComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 49.h,
-      child: TextFormField(
-        showCursor: false,
-        cursorColor: ButtonColor,
-        controller: textEditingController,
-        style: TextStyle(fontSize: 12.sp, height: 4.5.h, fontWeight: regular),
-        decoration: InputDecoration(
-          prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
-            SizedBox(
-              width: 20.w,
-            ),
-            SvgPicture.asset(leadingIcon),
-            SizedBox(
-              width: 10.w,
-            ),
-            Container(
-              height: 24.h,
-              width: 1.w,
-              color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
-            ),
-            SizedBox(
-              width: 10.w,
-            ),
-          ]),
-          prefixIconConstraints:
-              BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
-          suffixIconConstraints: BoxConstraints(
-            maxHeight: 35.sp,
-            maxWidth: 50.w,
+    return TextFormField(
+      cursorColor: ButtonColor,
+      controller: textEditingController,
+      style: TextStyle(fontSize: 12.sp, fontWeight: regular),
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 2.0.h, horizontal: 0.0),
+        prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
+          SizedBox(
+            width: 20.w,
           ),
-          filled: true,
-          fillColor: GreyColor,
-          hintText: hintText,
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: GreyColor),
-            borderRadius: BorderRadius.circular(8.sp),
+          SvgPicture.asset(leadingIcon),
+          SizedBox(
+            width: 10.w,
           ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red),
-            borderRadius: BorderRadius.circular(8.sp),
+          Container(
+            height: 24.h,
+            width: 1.w,
+            color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
           ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red),
-            borderRadius: BorderRadius.circular(8.sp),
+          SizedBox(
+            width: 10.w,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: GreyColor),
-            borderRadius: BorderRadius.circular(8.sp),
-          ),
+        ]),
+        prefixIconConstraints: BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
+        suffixIconConstraints: BoxConstraints(
+          maxHeight: 35.sp,
+          maxWidth: 50.w,
+        ),
+        filled: true,
+        fillColor: GreyColor,
+        hintText: hintText,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: GreyColor),
+          borderRadius: BorderRadius.circular(8.sp),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(8.sp),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(8.sp),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: GreyColor),
+          borderRadius: BorderRadius.circular(8.sp),
         ),
       ),
     );
