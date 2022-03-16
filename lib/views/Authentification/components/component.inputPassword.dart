@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 import '../../../data/pallete.data.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -27,30 +27,30 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
       obscureText: showPassword,
       cursorColor: ButtonColor,
       controller: widget.textEditingController,
-      style: TextStyle(fontSize: 12.sp, fontWeight: regular),
+      style: TextStyle(fontSize: 10.sp, fontWeight: regular),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 2.0.h, horizontal: 0.0),
+        contentPadding: EdgeInsets.symmetric(vertical: 1.0.h, horizontal: 0.0),
         prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(
-            width: 20.w,
+            width: 5.w,
           ),
           SvgPicture.asset("assets/icons/fi-rr-unlock.svg"),
           SizedBox(
-            width: 10.w,
+            width: 5.w,
           ),
           Container(
-            height: 24.h,
-            width: 1.w,
+            height: 3.h,
+            width: 0.5.w,
             color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
           ),
           SizedBox(
-            width: 10.w,
+            width: 3.w,
           ),
         ]),
         prefixIconConstraints: BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
         suffixIconConstraints: BoxConstraints(
-          maxHeight: 35.sp,
-          maxWidth: 50.w,
+          maxHeight: 12.sp,
+          maxWidth: 10.w,
         ),
         suffixIcon: InkWell(
           onTap: () {
@@ -60,11 +60,19 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
           },
           child: Padding(
               padding: EdgeInsets.only(
-                right: 18.2.w,
+                right: 4.2.w,
               ),
               child: showPassword
-                  ? SvgPicture.asset('assets/icons/fi-rr-eye-crossed.svg')
-                  : SvgPicture.asset('assets/icons/fi-rr-eye.svg')),
+                  ? SvgPicture.asset(
+                      'assets/icons/fi-rr-eye-crossed.svg',
+                      height: 8.sp,
+                      width: 8.sp,
+                    )
+                  : SvgPicture.asset(
+                      'assets/icons/fi-rr-eye.svg',
+                      height: 8.sp,
+                      width: 8.sp,
+                    )),
         ),
         filled: true,
         fillColor: GreyColor,
