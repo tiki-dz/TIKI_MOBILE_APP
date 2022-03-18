@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 import '../../../data/pallete.data.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -22,75 +22,78 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
   @override
   Widget build(BuildContext context) {
     var regular;
-    return Container(
-      height: 49.h,
-      child: TextFormField(
-        showCursor: false,
-        obscureText: showPassword,
-        cursorColor: ButtonColor,
-        controller: widget.textEditingController,
-        style: TextStyle(fontSize: 12.sp, height: 4.5.h, fontWeight: regular),
-        decoration: InputDecoration(
-          prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
-            SizedBox(
-              width: 20.w,
-            ),
-            SvgPicture.asset("assets/icons/fi-rr-unlock.svg"),
-            SizedBox(
-              width: 10.w,
-            ),
-            Container(
-              height: 24.h,
-              width: 1.w,
-              color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
-            ),
-            SizedBox(
-              width: 10.w,
-            ),
-          ]),
-          prefixIconConstraints:
-              BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
-          suffixIconConstraints: BoxConstraints(
-            maxHeight: 35.sp,
-            maxWidth: 50.w,
+    return TextFormField(
+      showCursor: false,
+      obscureText: showPassword,
+      cursorColor: ButtonColor,
+      controller: widget.textEditingController,
+      style: TextStyle(fontSize: 10.sp, fontWeight: regular),
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 1.0.h, horizontal: 0.0),
+        prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
+          SizedBox(
+            width: 5.w,
           ),
-          suffixIcon: InkWell(
-            onTap: () {
-              setState(() {
-                showPassword = !showPassword;
-              });
-            },
-            child: Padding(
-                padding: EdgeInsets.only(
-                  right: 18.2.w,
-                ),
-                child: showPassword
-                    ? SvgPicture.asset('assets/icons/fi-rr-eye-crossed.svg')
-                    : SvgPicture.asset('assets/icons/fi-rr-eye.svg')),
+          SvgPicture.asset("assets/icons/fi-rr-unlock.svg"),
+          SizedBox(
+            width: 5.w,
           ),
-          filled: true,
-          fillColor: GreyColor,
-          hintText: widget.hintText,
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: GreyColor),
-            borderRadius: BorderRadius.circular(8.sp),
+          Container(
+            height: 3.h,
+            width: 0.5.w,
+            color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
           ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red),
-            borderRadius: BorderRadius.circular(8.sp),
+          SizedBox(
+            width: 3.w,
           ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red),
-            borderRadius: BorderRadius.circular(8.sp),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: GreyColor),
-            borderRadius: BorderRadius.circular(8.sp),
-          ),
+        ]),
+        prefixIconConstraints: BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
+        suffixIconConstraints: BoxConstraints(
+          maxHeight: 12.sp,
+          maxWidth: 10.w,
+        ),
+        suffixIcon: InkWell(
+          onTap: () {
+            setState(() {
+              showPassword = !showPassword;
+            });
+          },
+          child: Padding(
+              padding: EdgeInsets.only(
+                right: 4.2.w,
+              ),
+              child: showPassword
+                  ? SvgPicture.asset(
+                      'assets/icons/fi-rr-eye-crossed.svg',
+                      height: 8.sp,
+                      width: 8.sp,
+                    )
+                  : SvgPicture.asset(
+                      'assets/icons/fi-rr-eye.svg',
+                      height: 8.sp,
+                      width: 8.sp,
+                    )),
+        ),
+        filled: true,
+        fillColor: GreyColor,
+        hintText: widget.hintText,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: GreyColor),
+          borderRadius: BorderRadius.circular(8.sp),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(8.sp),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(8.sp),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: GreyColor),
+          borderRadius: BorderRadius.circular(8.sp),
         ),
       ),
-    
-    
     );
   }
 }

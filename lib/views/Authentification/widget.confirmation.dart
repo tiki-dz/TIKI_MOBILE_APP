@@ -1,13 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiki/data/font.data.dart';
 import 'package:tiki/data/pallete.data.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tiki/views/Authentification/components/component.button.dart';
 
+import '../../controllers/confirmation.controller.dart';
 import '../../controllers/registration.controller.dart';
 
 class ConfirmationWidget extends StatefulWidget {
@@ -19,48 +22,75 @@ class ConfirmationWidget extends StatefulWidget {
 
 class _ConfirmationWidgetState extends State<ConfirmationWidget> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final controller = Get.find<SignUpController>();
+    final controller = Get.put<ConfirmatioController>(ConfirmatioController());
     return Scaffold(
         backgroundColor: BackGroundColor,
         body: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                  vertical: 24.h,
+                padding: EdgeInsets.only(
+                  left: 10.w,
+                  right: 10.w,
+                  top: 1.h,
                 ),
                 child: Column(children: [
                   SizedBox(
-                    height: 10.h,
+                    height: 5.h,
                   ),
                   InkWell(
                     onTap: () {
                       Get.back();
                     },
                     child: Align(
-                        alignment: Alignment.topLeft,
-                        child: SvgPicture.asset('assets/icons/back.svg')),
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        height: 35.sp,
+                        width: 35.sp,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.15),
+                              spreadRadius: 0.1,
+                              blurRadius: 10,
+                              offset:
+                                  Offset(0, 1), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/icons/back.svg',
+                          height: 2.sp,
+                          width: 2.sp,
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(
-                    height: 50.h,
+                    height: 3.h,
                   ),
                   Text(
                     'verification'.tr,
                     style: TextStyle(
                       fontWeight: semiBold,
-                      fontSize: 27.sp,
+                      fontSize: 17.sp,
                       color: SecondaryTextColor,
                     ),
                   ),
                   SizedBox(
-                    height: 18.h,
+                    height: 1.h,
                   ),
                   Text(
                     "confirmDesc".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: regular,
-                      fontSize: 12.sp,
+                      fontSize: 11.sp,
                       color: SecondaryTextColor,
                     ),
                   ),
@@ -69,12 +99,12 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: regular,
-                      fontSize: 12.sp,
+                      fontSize: 11.sp,
                       color: SecondaryTextColor,
                     ),
                   ),
                   SizedBox(
-                    height: 53.h,
+                    height: 5.h,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
@@ -82,81 +112,83 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                       'email'.tr + " :",
                       style: TextStyle(
                         fontWeight: medium,
-                        fontSize: 15.sp,
+                        fontSize: 12.sp,
                         color: SecondaryTextColor,
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 7.h,
+                    height: 2.h,
                   ),
-                  Container(
-                    height: 49.h,
-                    child: TextFormField(
-                      showCursor: false,
-                      readOnly: true,
-                      cursorColor: ButtonColor,
-                      controller: controller.codePinController,
-                      style: TextStyle(
-                          fontSize: 12.sp, height: 4.5.h, fontWeight: regular),
-                      decoration: InputDecoration(
-                        prefixIcon:
-                            Row(mainAxisSize: MainAxisSize.min, children: [
-                          SizedBox(
-                            width: 20.w,
-                          ),
-                          SvgPicture.asset("assets/icons/fi-rr-unlock.svg"),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Container(
-                            height: 24.h,
-                            width: 1.w,
-                            color: Color.fromRGBO(112, 112, 112, 1)
-                                .withOpacity(0.3),
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                        ]),
-                        prefixIconConstraints:
-                            BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
-                        suffixIconConstraints: BoxConstraints(
-                          maxHeight: 35.sp,
-                          maxWidth: 50.w,
+                  TextFormField(
+                    showCursor: false,
+                    readOnly: true,
+                    cursorColor: ButtonColor,
+                    controller: controller.codePinController,
+                    style: TextStyle(fontSize: 12.sp, fontWeight: regular),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: 1.0.h, horizontal: 0.0),
+                      prefixIcon:
+                          Row(mainAxisSize: MainAxisSize.min, children: [
+                        SizedBox(
+                          width: 5.w,
                         ),
-                        suffixIcon: InkWell(
-                            onTap: () {},
-                            child: Padding(
-                                padding: EdgeInsets.only(
-                                  right: 18.2.w,
-                                ),
-                                child: SvgPicture.asset(
-                                    'assets/icons/fi-rr-pencil.svg'))),
-                        filled: true,
-                        fillColor: GreyColor,
-                        hintText: "email".tr,
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: GreyColor),
-                          borderRadius: BorderRadius.circular(8.sp),
+                        SvgPicture.asset(
+                          'assets/icons/fi-rr-envelope.svg',
                         ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
-                          borderRadius: BorderRadius.circular(8.sp),
+                        SizedBox(
+                          width: 5.w,
                         ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
-                          borderRadius: BorderRadius.circular(8.sp),
+                        Container(
+                          height: 4.h,
+                          width: 0.5.w,
+                          color:
+                              Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: GreyColor),
-                          borderRadius: BorderRadius.circular(8.sp),
+                        SizedBox(
+                          width: 3.w,
                         ),
+                      ]),
+                      prefixIconConstraints:
+                          BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
+                      suffixIconConstraints: BoxConstraints(
+                        maxHeight: 12.sp,
+                        maxWidth: 10.w,
+                      ),
+                      suffixIcon: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Padding(
+                              padding: EdgeInsets.only(
+                                right: 18.2.w,
+                              ),
+                              child: SvgPicture.asset(
+                                  'assets/icons/fi-rr-pencil.svg'))),
+                      filled: true,
+                      fillColor: GreyColor,
+                      hintText: "email".tr,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: GreyColor),
+                        borderRadius: BorderRadius.circular(8.sp),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.circular(8.sp),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.circular(8.sp),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: GreyColor),
+                        borderRadius: BorderRadius.circular(8.sp),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 42.h,
+                    height: 5.h,
                   ),
                   Align(
                       alignment: Alignment.centerLeft,
@@ -164,12 +196,12 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                         'verificationCode'.tr + " :",
                         style: TextStyle(
                           fontWeight: medium,
-                          fontSize: 15.sp,
+                          fontSize: 13.sp,
                           color: SecondaryTextColor,
                         ),
                       )),
                   SizedBox(
-                    height: 25.h,
+                    height: 5.h,
                   ),
                   PinCodeTextField(
                     onSubmitted: (s) {},
@@ -186,6 +218,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                     cursorColor: Colors.black,
                     animationDuration: Duration(milliseconds: 300),
                     enableActiveFill: true,
+                    autoFocus: true,
                     keyboardType: TextInputType.number,
                     showCursor: false,
                     pastedTextStyle: TextStyle(
@@ -201,9 +234,9 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                       activeFillColor: GreyColor,
                       inactiveFillColor: GreyColor,
                       shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(5.r),
-                      fieldHeight: 48.h,
-                      fieldWidth: 40.w,
+                      borderRadius: BorderRadius.circular(5.sp),
+                      fieldHeight: 34.sp,
+                      fieldWidth: 34.sp,
                     ),
                     onCompleted: (v) async {},
                     onChanged: (value) {
@@ -216,34 +249,50 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                     },
                   ),
                   SizedBox(
-                    height: 139.h,
+                    height: 21.h,
                   ),
                   button('confirm'.tr, () {}),
                   SizedBox(
-                    height: 28.h,
+                    height: 3.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'resendAfter'.tr,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: SecondaryTextColor,
+                  GetBuilder<ConfirmatioController>(builder: (controller) {
+                    if (controller.start == 0) {
+                      return InkWell(
+                        onTap: () {
+                          controller.startTimer();
+                        },
+                        child: Text(
+                          'resend'.tr,
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            color: ButtonColor,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      Text(
-                        '50 seconds',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: ButtonColor,
+                      );
+                    }
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'resendAfter'.tr,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: SecondaryTextColor,
+                          ),
                         ),
-                      ),
-                    ],
-                  )
+                        SizedBox(
+                          width: 2.w,
+                        ),
+                        Text(
+                          controller.start.toString() + ' Seconds',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: ButtonColor,
+                          ),
+                        )
+                      ],
+                    );
+                  }),
                 ]))));
   }
 }
