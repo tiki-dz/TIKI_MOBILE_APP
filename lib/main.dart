@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiki/views/Authentification/widget.signup.dart';
 import 'package:tiki/views/Profile/widget.profile.dart';
+import 'package:tiki/views/splash/widget.splash.dart';
 
 import 'data/translation.data.dart';
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               debugShowCheckedModeBanner: false,
-              home: SignUpWidget(),
+              home: SplashScreen(),
             ));
   }
 }
