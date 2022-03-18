@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../data/font.data.dart';
 import '../../../data/pallete.data.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class InputComponent extends StatelessWidget {
   String leadingIcon;
@@ -19,29 +20,29 @@ class InputComponent extends StatelessWidget {
     return TextFormField(
       cursorColor: ButtonColor,
       controller: textEditingController,
-      style: TextStyle(fontSize: 12.sp, fontWeight: regular),
+      style: TextStyle(fontSize: 10.sp, fontWeight: regular),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 2.0.h, horizontal: 0.0),
+        contentPadding: EdgeInsets.symmetric(vertical: 0.05.h, horizontal: 0.0),
         prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(
-            width: 20.w,
+            width: 5.w,
           ),
           SvgPicture.asset(leadingIcon),
           SizedBox(
-            width: 10.w,
+            width: 5.w,
           ),
           Container(
-            height: 24.h,
-            width: 1.w,
+            height: 3.h,
+            width: 0.5.w,
             color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
           ),
           SizedBox(
-            width: 10.w,
+            width: 3.w,
           ),
         ]),
         prefixIconConstraints: BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
         suffixIconConstraints: BoxConstraints(
-          maxHeight: 35.sp,
+          maxHeight: 12.sp,
           maxWidth: 50.w,
         ),
         filled: true,

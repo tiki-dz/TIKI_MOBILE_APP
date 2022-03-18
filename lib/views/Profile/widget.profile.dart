@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../data/pallete.data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({Key? key}) : super(key: key);
@@ -67,16 +67,20 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   const SizedBox(
                     width: 20,
                   ),
-                  SvgPicture.asset("assets/icons/edit.svg",height: 20,width: 20,),
+                  SvgPicture.asset(
+                    "assets/icons/edit.svg",
+                    height: 20,
+                    width: 20,
+                  ),
                 ],
               )),
           SizedBox(height: 30.h),
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 5.w),
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
             child: Column(
               children: [
-                myList("Score","score"),
-                myList("Settings","settings"),
+                myList("Score", "score"),
+                myList("Settings", "settings"),
                 myList("Share", "share"),
                 myList("Rate", "rate"),
                 myList("Contacter nous", "cnous"),
@@ -90,38 +94,45 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   }
 }
 
-Widget myList(String title ,String icon  ) => Padding(
-  padding: EdgeInsets.symmetric(vertical: 8.5.h),
-  child:   ListTile(
-     leading: Container(
-       width: 50.h,
-       height: 50.h,
-       decoration: BoxDecoration(
-         borderRadius: BorderRadius.circular(10.sp),
-         color: Colors.white,
-         boxShadow: [
-           BoxShadow(
-             color: Colors.grey.withOpacity(0.2),
-             spreadRadius: 1,
-             blurRadius: 5,
-             offset: Offset(0, 2), // changes position of shadow
-           ),
-         ],
-       ),
-       padding: EdgeInsets.all(15.sp),
-       child: SvgPicture.asset("assets/icons/$icon.svg",height: 20,width: 20,color: Colors.black,),
-     ),
-     title: Padding(
-       padding: EdgeInsets.only(left: 10),
-       child: Text(
-         title,
-         style: GoogleFonts.poppins(
-             fontSize: 16.sp,
-             color: Colors.black,
-             fontWeight: FontWeight.w500),
-       ),
-     ),
-    trailing: Icon(Icons.arrow_forward_ios_rounded,color: Colors.black,),
-  ),
-);
-
+Widget myList(String title, String icon) => Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.5.h),
+      child: ListTile(
+        leading: Container(
+          width: 50.h,
+          height: 50.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.sp),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: Offset(0, 2), // changes position of shadow
+              ),
+            ],
+          ),
+          padding: EdgeInsets.all(15.sp),
+          child: SvgPicture.asset(
+            "assets/icons/$icon.svg",
+            height: 20,
+            width: 20,
+            color: Colors.black,
+          ),
+        ),
+        title: Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: Text(
+            title,
+            style: GoogleFonts.poppins(
+                fontSize: 16.sp,
+                color: Colors.black,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          color: Colors.black,
+        ),
+      ),
+    );

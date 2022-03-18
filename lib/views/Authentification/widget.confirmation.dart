@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiki/data/font.data.dart';
 import 'package:tiki/data/pallete.data.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -33,13 +33,14 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
         backgroundColor: BackGroundColor,
         body: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                  vertical: 24.h,
+                padding: EdgeInsets.only(
+                  left: 10.w,
+                  right: 10.w,
+                  top: 1.h,
                 ),
                 child: Column(children: [
                   SizedBox(
-                    height: 10.h,
+                    height: 5.h,
                   ),
                   InkWell(
                     onTap: () {
@@ -48,8 +49,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Container(
-                        height: 42.sp,
-                        width: 42.sp,
+                        height: 35.sp,
+                        width: 35.sp,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -64,32 +65,32 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                         ),
                         child: SvgPicture.asset(
                           'assets/icons/back.svg',
-                          height: 42.sp,
-                          width: 42.sp,
+                          height: 2.sp,
+                          width: 2.sp,
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 50.h,
+                    height: 3.h,
                   ),
                   Text(
                     'verification'.tr,
                     style: TextStyle(
                       fontWeight: semiBold,
-                      fontSize: 27.sp,
+                      fontSize: 17.sp,
                       color: SecondaryTextColor,
                     ),
                   ),
                   SizedBox(
-                    height: 18.h,
+                    height: 1.h,
                   ),
                   Text(
                     "confirmDesc".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: regular,
-                      fontSize: 12.sp,
+                      fontSize: 11.sp,
                       color: SecondaryTextColor,
                     ),
                   ),
@@ -98,12 +99,12 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: regular,
-                      fontSize: 12.sp,
+                      fontSize: 11.sp,
                       color: SecondaryTextColor,
                     ),
                   ),
                   SizedBox(
-                    height: 53.h,
+                    height: 5.h,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
@@ -111,13 +112,13 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                       'email'.tr + " :",
                       style: TextStyle(
                         fontWeight: medium,
-                        fontSize: 15.sp,
+                        fontSize: 12.sp,
                         color: SecondaryTextColor,
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 7.h,
+                    height: 2.h,
                   ),
                   TextFormField(
                     showCursor: false,
@@ -127,33 +128,33 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                     style: TextStyle(fontSize: 12.sp, fontWeight: regular),
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(
-                          vertical: 8.0.h, horizontal: 0.0),
+                          vertical: 1.0.h, horizontal: 0.0),
                       prefixIcon:
                           Row(mainAxisSize: MainAxisSize.min, children: [
                         SizedBox(
-                          width: 20.w,
+                          width: 5.w,
                         ),
                         SvgPicture.asset(
                           'assets/icons/fi-rr-envelope.svg',
                         ),
                         SizedBox(
-                          width: 10.w,
+                          width: 5.w,
                         ),
                         Container(
-                          height: 24.h,
-                          width: 1.w,
+                          height: 4.h,
+                          width: 0.5.w,
                           color:
                               Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
                         ),
                         SizedBox(
-                          width: 10.w,
+                          width: 3.w,
                         ),
                       ]),
                       prefixIconConstraints:
                           BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
                       suffixIconConstraints: BoxConstraints(
-                        maxHeight: 35.sp,
-                        maxWidth: 50.w,
+                        maxHeight: 12.sp,
+                        maxWidth: 10.w,
                       ),
                       suffixIcon: InkWell(
                           onTap: () {
@@ -187,7 +188,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                     ),
                   ),
                   SizedBox(
-                    height: 42.h,
+                    height: 5.h,
                   ),
                   Align(
                       alignment: Alignment.centerLeft,
@@ -195,12 +196,12 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                         'verificationCode'.tr + " :",
                         style: TextStyle(
                           fontWeight: medium,
-                          fontSize: 15.sp,
+                          fontSize: 13.sp,
                           color: SecondaryTextColor,
                         ),
                       )),
                   SizedBox(
-                    height: 25.h,
+                    height: 5.h,
                   ),
                   PinCodeTextField(
                     onSubmitted: (s) {},
@@ -233,9 +234,9 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                       activeFillColor: GreyColor,
                       inactiveFillColor: GreyColor,
                       shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(5.r),
-                      fieldHeight: 48.h,
-                      fieldWidth: 40.w,
+                      borderRadius: BorderRadius.circular(5.sp),
+                      fieldHeight: 34.sp,
+                      fieldWidth: 34.sp,
                     ),
                     onCompleted: (v) async {},
                     onChanged: (value) {
@@ -248,11 +249,11 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                     },
                   ),
                   SizedBox(
-                    height: 139.h,
+                    height: 21.h,
                   ),
                   button('confirm'.tr, () {}),
                   SizedBox(
-                    height: 28.h,
+                    height: 3.h,
                   ),
                   GetBuilder<ConfirmatioController>(builder: (controller) {
                     if (controller.start == 0) {
@@ -263,7 +264,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                         child: Text(
                           'resend'.tr,
                           style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 10.sp,
                             color: ButtonColor,
                           ),
                         ),
@@ -275,17 +276,17 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                         Text(
                           'resendAfter'.tr,
                           style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             color: SecondaryTextColor,
                           ),
                         ),
                         SizedBox(
-                          width: 5.w,
+                          width: 2.w,
                         ),
                         Text(
                           controller.start.toString() + ' Seconds',
                           style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             color: ButtonColor,
                           ),
                         )
