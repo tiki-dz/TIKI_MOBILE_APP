@@ -4,6 +4,9 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiki/views/Authentification/widget.signup.dart';
+import 'package:tiki/views/Profile/widget.profile.dart';
+import 'package:tiki/views/onBoarding/widget.onBoarding.dart';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:sizer/sizer.dart';
 import 'data/translation.data.dart';
