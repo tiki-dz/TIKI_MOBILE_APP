@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:sizer/sizer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../data/pallete.data.dart';
 
 Widget button(String title, VoidCallback? function) {
   return SizedBox(
     width: double.infinity,
-    height: 57.h,
+    height: 7.h,
     child: InkWell(
       onTap: function,
       child: Card(
