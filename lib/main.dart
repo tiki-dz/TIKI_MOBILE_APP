@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tiki/views/Authentification/widget.forgetPassword.dart';
 import 'package:tiki/views/Authentification/widget.signup.dart';
 import 'package:tiki/views/Profile/widget.profile.dart';
 import 'package:tiki/views/splash/widget.splash.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               debugShowCheckedModeBanner: false,
-              home: SplashScreen(),
+              home: forgotPwWidget(),
             ));
   }
 }
