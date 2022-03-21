@@ -19,7 +19,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       body: Column(
         children: [
           Container(
-              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+              padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 5.w),
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -38,8 +38,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    height: 70.0,
-                    width: 70.0,
+                    height: 45.sp,
+                    width: 45.sp,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
@@ -53,38 +53,53 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       Text(
                         "djellali fouad",
                         style: GoogleFonts.poppins(
-                            fontSize: 20.sp,
+                            fontSize: 12.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w600),
                       ),
                       Text("0669301478",
                           style: GoogleFonts.poppins(
-                              fontSize: 15.sp,
+                              fontSize: 10.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w500))
                     ],
                   ),
-                  const SizedBox(
-                    width: 20,
+                  SizedBox(
+                    width: 25.w,
                   ),
-                  SvgPicture.asset(
-                    "assets/icons/edit.svg",
-                    height: 20,
-                    width: 20,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 3.w),
+                    child: SvgPicture.asset(
+                      "assets/icons/edit.svg",
+                      height: 15.sp,
+                      width: 15.sp,
+                    ),
                   ),
                 ],
               )),
-          SizedBox(height: 30.h),
+          SizedBox(
+            height: 1.h,
+          ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            padding: EdgeInsets.symmetric(vertical: 3.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                myContainer("2600", "score"),
+                myContainer("2600", "wallet"),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 3.w),
             child: Column(
               children: [
-                myList("Score", "score"),
-                myList("Settings", "settings"),
-                myList("Share", "share"),
-                myList("Rate", "rate"),
-                myList("Contacter nous", "cnous"),
-                myList("F&Q", "FQ")
+                myListTile("Score", "score"),
+                myListTile("Settings", "settings"),
+                myListTile("Share", "share"),
+                myListTile("Rate", "rate"),
+                myListTile("Contacter nous", "cnous"),
+                myListTile("F&Q", "FQ")
               ],
             ),
           )
@@ -94,14 +109,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   }
 }
 
-Widget myList(String title, String icon) => Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.5.h),
+Widget myListTile(String title, String icon) => Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.5.h),
       child: ListTile(
         leading: Container(
-          width: 50.h,
-          height: 50.h,
+          width: 35.sp,
+          height: 35.sp,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.sp),
+            borderRadius: BorderRadius.circular(7.sp),
             color: Colors.white,
             boxShadow: [
               BoxShadow(
@@ -112,7 +127,7 @@ Widget myList(String title, String icon) => Padding(
               ),
             ],
           ),
-          padding: EdgeInsets.all(15.sp),
+          padding: EdgeInsets.all(11.sp),
           child: SvgPicture.asset(
             "assets/icons/$icon.svg",
             height: 20,
@@ -125,7 +140,7 @@ Widget myList(String title, String icon) => Padding(
           child: Text(
             title,
             style: GoogleFonts.poppins(
-                fontSize: 16.sp,
+                fontSize: 11.sp,
                 color: Colors.black,
                 fontWeight: FontWeight.w500),
           ),
@@ -133,6 +148,40 @@ Widget myList(String title, String icon) => Padding(
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
           color: Colors.black,
+          size: 12.sp,
         ),
+      ),
+    );
+
+Widget myContainer(String title, String icon) => Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(7.sp),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(0, 1), // changes position of shadow
+          ),
+        ],
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.5.h),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            "assets/icons/$icon.svg",
+            height: 20,
+            width: 20,
+            color: Orange,
+          ),
+          SizedBox(
+            width: 4.w,
+          ),
+          Text(
+            title,
+            style: TextStyle(color: Orange),
+          )
+        ],
       ),
     );

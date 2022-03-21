@@ -8,6 +8,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+<<<<<<< Updated upstream
+=======
+  archive:
+    dependency: transitive
+    description:
+      name: archive
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.2"
+>>>>>>> Stashed changes
   async:
     dependency: transitive
     description:
@@ -43,6 +53,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  carousel_slider:
+    dependency: "direct dev"
+    description:
+      name: carousel_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   characters:
     dependency: transitive
     description:
@@ -127,6 +144,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.4"
+  dotted_line:
+    dependency: "direct dev"
+    description:
+      name: dotted_line
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   email_validator:
     dependency: "direct dev"
     description:

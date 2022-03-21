@@ -66,6 +66,8 @@ dev_dependencies:
   intl_phone_field: ^3.0.1
   geolocator: ^8.2.0
   device_preview: ^1.0.0
+  carousel_slider: ^4.0.0
+  dotted_line: ^3.1.0
   get_storage:
 
 # For information on the generic Dart part of this file, see the

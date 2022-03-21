@@ -24,7 +24,7 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
     var regular;
     return TextFormField(
       showCursor: false,
-      obscureText: showPassword,
+      obscureText: !showPassword,
       cursorColor: ButtonColor,
       controller: widget.textEditingController,
       style: TextStyle(fontSize: 10.sp, fontWeight: regular),
@@ -40,7 +40,7 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
           ),
           Container(
             height: 3.h,
-            width: 0.5.w,
+            width: 0.2.w,
             color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
           ),
           SizedBox(
@@ -62,7 +62,7 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
               padding: EdgeInsets.only(
                 right: 4.2.w,
               ),
-              child: showPassword
+              child: !showPassword
                   ? SvgPicture.asset(
                       'assets/icons/fi-rr-eye-crossed.svg',
                       height: 8.sp,
