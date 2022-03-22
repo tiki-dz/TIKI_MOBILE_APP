@@ -44,7 +44,11 @@ class MyApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
         home: forgetPasswordWidget(),
+=======
+        home: forgotPwWidget(),
+>>>>>>> e7302a80f72ad2b13be455700b2a38fe46fe3441
       );
     });
 
