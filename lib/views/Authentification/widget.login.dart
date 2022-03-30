@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiki/views/Authentification/widget.forgetPassword.dart';
+import 'package:tiki/views/Authentification/widget.signup.dart';
+import 'package:tiki/views/Home/widget.home.dart';
+import '../../constWidgets/progressIndicator.dart';
 import '../../controllers/LogInController.dart';
 import '../../data/font.data.dart';
 import '../../data/pallete.data.dart';
@@ -24,6 +28,7 @@ class _LogInWidgetState extends State<LogInWidget> {
     final controller = Get.put(LogInController());
     return SafeArea(
         child: Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 3.h),
         child: Column(
@@ -35,12 +40,13 @@ class _LogInWidgetState extends State<LogInWidget> {
                   children: [
                     Align(
                       alignment: Alignment.topRight,
-                      child: SvgPicture.asset('assets/icons/fi-rr-cross-small.svg'),
+                      child: SvgPicture.asset(
+                          'assets/icons/fi-rr-cross-small.svg'),
                     ),
                     const Expanded(child: SizedBox()),
                     Text(
                       "Sing up to your account\nto can buy ticket",
-                      style: TextStyle(fontSize: 10.sp,fontWeight: medium),
+                      style: TextStyle(fontSize: 10.sp, fontWeight: medium),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
@@ -55,14 +61,26 @@ class _LogInWidgetState extends State<LogInWidget> {
                       hintText: 'password'.tr,
                       textEditingController: controller.passwordController,
                     ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Text("Forget password ?",style: TextStyle(fontSize: 10.sp,fontWeight: regular),),
+                    InkWell(
+                      onTap: (){
+                        Get.to(ForgetPasswordWidget());
+                      },
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Forget password ?",
+                          style: TextStyle(fontSize: 10.sp, fontWeight: regular),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 4.h,
                     ),
-                    button("Log In", () {}),
+                    Obx(() => controller.isUpdating.value == false
+                        ? button("Log In", () async {
+                            await controller.login();
+                          })
+                        : circularProgressModel()),
                   ],
                 ),
               ),
@@ -72,7 +90,7 @@ class _LogInWidgetState extends State<LogInWidget> {
             ),
             Row(
               children: [
-                Expanded(child: dottedLine),
+                Expanded(child: Divider(thickness: 0.1.h)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 2.w),
                   child: Text(
@@ -80,7 +98,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                     style: TextStyle(fontSize: 12.sp, fontWeight: medium),
                   ),
                 ),
-                Expanded(child: dottedLine),
+                Expanded(child: Divider(thickness: 0.1.h,)),
               ],
             ),
             SizedBox(
@@ -107,22 +125,29 @@ class _LogInWidgetState extends State<LogInWidget> {
             SizedBox(
               height: 3.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "you don't have account ?",
-                  style: TextStyle(
-                      fontSize: 10.sp,
-                      fontWeight: medium,
-                      color: SecondaryTextColor),
-                ),
-                Text(
-                  ' Sign up',
-                  style: TextStyle(
-                      fontSize: 10.sp, fontWeight: semiBold, color: ButtonColor),
-                ),
-              ],
+            InkWell(
+              onTap: (){
+                Get.to(const SignUpWidget());
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "you don't have account ?",
+                    style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: medium,
+                        color: SecondaryTextColor),
+                  ),
+                  Text(
+                    ' Sign up',
+                    style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: semiBold,
+                        color: ButtonColor),
+                  ),
+                ],
+              ),
             )
           ],
         ),
@@ -134,14 +159,14 @@ class _LogInWidgetState extends State<LogInWidget> {
 Widget containerConnectWith(String icon) => Container(
       padding: EdgeInsets.all(12.sp),
       decoration: BoxDecoration(
-        border: Border.all(color: Orange),
+        border: Border.all(color: KOrange),
         shape: BoxShape.circle,
       ),
       child: SvgPicture.asset(
         "assets/icons/$icon.svg",
         height: 20,
         width: 20,
-        color: Orange,
+        color: KOrange,
       ),
     );
 

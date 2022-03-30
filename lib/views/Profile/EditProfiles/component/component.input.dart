@@ -1,39 +1,37 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-import '../../../data/font.data.dart';
-import '../../../data/pallete.data.dart';
-import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
+import 'package:tiki/data/pallete.data.dart';
 
-class InputComponentPassword extends StatefulWidget {
-  String hintText;
+import '../../../../data/font.data.dart';
+
+class InputComponentEditProfile  extends StatelessWidget {
+  String leadingIcon;
   TextEditingController textEditingController;
+  bool readOnly ;
 
-  InputComponentPassword(
-      {required this.textEditingController, required this.hintText});
+  InputComponentEditProfile(
+      {required this.leadingIcon,
+        required this.textEditingController,
+        required this.readOnly});
 
-  @override
-  State<InputComponentPassword> createState() => _InputComponentPasswordState();
-}
 
-class _InputComponentPasswordState extends State<InputComponentPassword> {
-  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: !showPassword,
-      cursorColor: ButtonColor,
-      controller: widget.textEditingController,
+      readOnly: readOnly,
+      cursorColor: KOrange,
+      controller: textEditingController,
       style: TextStyle(fontSize: 10.sp, fontWeight: regular),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 1.0.h, horizontal: 0.0),
+        contentPadding: EdgeInsets.symmetric(vertical: 0.05.h, horizontal: 0.0),
         prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(
             width: 5.w,
           ),
-          SvgPicture.asset("assets/icons/fi-rr-unlock.svg"),
+          SvgPicture.asset(leadingIcon),
           SizedBox(
             width: 5.w,
           ),
@@ -49,33 +47,10 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
         prefixIconConstraints: BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
         suffixIconConstraints: BoxConstraints(
           maxHeight: 12.sp,
-          maxWidth: 10.w,
-        ),
-        suffixIcon: InkWell(
-          onTap: () {
-            setState(() {
-              showPassword = !showPassword;
-            });
-          },
-          child: Padding(
-              padding: EdgeInsets.only(
-                right: 4.2.w,
-              ),
-              child: !showPassword
-                  ? SvgPicture.asset(
-                      'assets/icons/fi-rr-eye-crossed.svg',
-                      height: 8.sp,
-                      width: 8.sp,
-                    )
-                  : SvgPicture.asset(
-                      'assets/icons/fi-rr-eye.svg',
-                      height: 8.sp,
-                      width: 8.sp,
-                    )),
+          maxWidth: 50.w,
         ),
         filled: true,
         fillColor: GreyColor,
-        hintText: widget.hintText,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: GreyColor),
           borderRadius: BorderRadius.circular(8.sp),
@@ -96,3 +71,4 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
     );
   }
 }
+

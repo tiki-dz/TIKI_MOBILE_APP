@@ -1,27 +1,14 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tiki/views/Authentification/widget.login.dart';
-import 'package:tiki/views/Authentification/widget.signup.dart';
-import 'package:tiki/views/Home/widget.home.dart';
-
-<<<<<<< Updated upstream
-=======
-import 'package:tiki/views/Profile/widget.profile.dart';
-import 'package:tiki/views/onBoarding/widget.onBoarding.dart';
-
->>>>>>> Stashed changes
-import 'package:device_preview/device_preview.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tiki/views/Authentification/widget.resetPassword.dart';
 
-import 'package:tiki/views/Profile/widget.profile.dart';
-import 'package:tiki/views/splash/widget.splash.dart';
 
 import 'data/translation.data.dart';
 
-/*  void main() async {
+ /*void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
 
@@ -57,7 +44,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: LogInWidget(),
+        home: ResetPasswordWidget(),
       );
     });
   }

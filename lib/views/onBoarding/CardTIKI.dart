@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../Authentification/components/component.button.dart';
 import 'package:get/get.dart';
-import '../Profile/widget.profile.dart';
+import '../Profile/Profile/widget.profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 

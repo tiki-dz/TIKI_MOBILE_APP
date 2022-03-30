@@ -41,15 +41,19 @@ class _HomeWidgetState extends State<HomeWidget> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(12.sp),topLeft: Radius.circular(12.sp)),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(12.sp),
+                      topLeft: Radius.circular(12.sp)),
                   color: Colors.white),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 2.h,),
+                    SizedBox(
+                      height: 2.h,
+                    ),
                     Padding(
-                      padding: EdgeInsets.only(left: 3.w,bottom: 1.h),
+                      padding: EdgeInsets.only(left: 3.w, bottom: 1.h),
                       child: Text(
                         "Popular",
                         style: GoogleFonts.poppins(
@@ -74,7 +78,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ),
                     ),
                     SizedBox(height: 1.h),
-
                     SizedBox(
                         height: 27.h,
                         child: ListView.builder(
@@ -83,7 +86,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                             scrollDirection: Axis.horizontal,
                             itemCount: 4,
                             itemBuilder: (context, index) => eventModel())),
-
                   ],
                 ),
               ),

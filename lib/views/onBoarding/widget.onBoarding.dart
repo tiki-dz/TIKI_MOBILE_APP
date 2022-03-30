@@ -1,5 +1,4 @@
-<<<<<<< Updated upstream
-=======
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:concentric_transition/concentric_transition.dart';
@@ -82,4 +81,4 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget>{
   }
 
 }
->>>>>>> Stashed changes
+

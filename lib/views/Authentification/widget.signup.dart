@@ -7,7 +7,10 @@ import "package:flutter_svg/flutter_svg.dart";
 import 'package:get/get.dart';
 import 'package:tiki/views/Authentification/widget.confirmation.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tiki/views/Authentification/widget.login.dart';
+import '../../constWidgets/progressIndicator.dart';
 import '../../controllers/registration.controller.dart';
+import 'components/component.inputDate.dart';
 import 'components/component.inputPassword.dart';
 
 class SignUpWidget extends StatelessWidget {
@@ -55,14 +58,18 @@ class SignUpWidget extends StatelessWidget {
           InputComponent(
               leadingIcon: 'assets/icons/fi-rr-user.svg',
               hintText: 'lastname'.tr,
-              textEditingController: controller.nameController),
+              textEditingController: controller.lastNameController),
           SizedBox(
             height: 2.h,
           ),
-          InputComponent(
-              leadingIcon: 'assets/icons/fi-rr-calendar.svg',
-              hintText: 'birthDate'.tr,
-              textEditingController: controller.birthDateController),
+          Obx(()=>
+              InputDateComponent(
+                leadingIcon: 'assets/icons/fi-rr-calendar.svg',
+                hintText:controller.birthDateController.value == "" ?  'birthDate'.tr : controller.birthDateController.value,
+                controller: controller,
+                function: controller.changeDate,
+              ),),
+
           SizedBox(
             height: 2.h,
           ),
@@ -82,33 +89,40 @@ class SignUpWidget extends StatelessWidget {
           ),
           InputComponentPassword(
             hintText: 'confirmPassword'.tr,
-            textEditingController: controller.confimPasswordController,
+            textEditingController: controller.confirmPasswordController,
           ),
           SizedBox(
             height: 7.h,
           ),
-          button("signup".tr, () {
-            Get.to(ConfirmationWidget());
-          }),
+          Obx(() => controller.isUpdating.value == false
+              ? button("Sign up", () async {
+            await controller.signUp();
+          })
+              : circularProgressModel()),
           SizedBox(
             height: 3.h,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'you_already_have_account'.tr,
-                style: TextStyle(
-                    fontSize: 10.sp,
-                    fontWeight: medium,
-                    color: SecondaryTextColor),
-              ),
-              Text(
-                'login'.tr,
-                style: TextStyle(
-                    fontSize: 10.sp, fontWeight: semiBold, color: ButtonColor),
-              ),
-            ],
+          InkWell(
+            onTap: (){
+              Get.to(const LogInWidget());
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'you_already_have_account'.tr,
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: medium,
+                      color: SecondaryTextColor),
+                ),
+                Text(
+                  'login'.tr,
+                  style: TextStyle(
+                      fontSize: 10.sp, fontWeight: semiBold, color: ButtonColor),
+                ),
+              ],
+            ),
           )
         ]),
       )),

@@ -1,39 +1,63 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-import '../../../data/font.data.dart';
-import '../../../data/pallete.data.dart';
-import 'package:sizer/sizer.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
-class InputComponentPassword extends StatefulWidget {
+import '../../../../data/font.data.dart';
+import '../../../../data/pallete.data.dart';
+
+class InputDateComponentEditProfile extends StatefulWidget {
+  String leadingIcon;
   String hintText;
-  TextEditingController textEditingController;
-
-  InputComponentPassword(
-      {required this.textEditingController, required this.hintText});
+  var controller;
+  Function(DateTime) function ;
+  InputDateComponentEditProfile(
+      {Key? key, required this.leadingIcon,
+        required this.hintText,required this.controller,required this.function}) : super(key: key);
 
   @override
-  State<InputComponentPassword> createState() => _InputComponentPasswordState();
+  State<InputDateComponentEditProfile> createState() => _InputDateComponentEditProfileState();
 }
 
-class _InputComponentPasswordState extends State<InputComponentPassword> {
-  bool showPassword = false;
+class _InputDateComponentEditProfileState extends State<InputDateComponentEditProfile> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: !showPassword,
+      onTap: (){
+        Get.bottomSheet(
+          Container(height: 40.h,color: Colors.white,child : Column(
+            children: [
+              Expanded(
+                child: CupertinoDatePicker(
+                  initialDateTime: DateTime.now(),
+                  mode: CupertinoDatePickerMode.date,
+                  onDateTimeChanged: widget.function,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 1.h),
+                child: TextButton(onPressed: (){
+                  Get.back();
+                }, child: Text("Save",style: TextStyle(fontWeight: medium,fontSize: 13.sp, color: KOrange),)),
+              )
+            ],
+          ))
+
+        );
+      },
+      readOnly: true,
       cursorColor: ButtonColor,
-      controller: widget.textEditingController,
       style: TextStyle(fontSize: 10.sp, fontWeight: regular),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 1.0.h, horizontal: 0.0),
+        contentPadding: EdgeInsets.symmetric(vertical: 0.05.h, horizontal: 0.0),
         prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(
             width: 5.w,
           ),
-          SvgPicture.asset("assets/icons/fi-rr-unlock.svg"),
+          SvgPicture.asset(widget.leadingIcon),
           SizedBox(
             width: 5.w,
           ),
@@ -49,29 +73,7 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
         prefixIconConstraints: BoxConstraints(maxHeight: 24.h, maxWidth: 70.w),
         suffixIconConstraints: BoxConstraints(
           maxHeight: 12.sp,
-          maxWidth: 10.w,
-        ),
-        suffixIcon: InkWell(
-          onTap: () {
-            setState(() {
-              showPassword = !showPassword;
-            });
-          },
-          child: Padding(
-              padding: EdgeInsets.only(
-                right: 4.2.w,
-              ),
-              child: !showPassword
-                  ? SvgPicture.asset(
-                      'assets/icons/fi-rr-eye-crossed.svg',
-                      height: 8.sp,
-                      width: 8.sp,
-                    )
-                  : SvgPicture.asset(
-                      'assets/icons/fi-rr-eye.svg',
-                      height: 8.sp,
-                      width: 8.sp,
-                    )),
+          maxWidth: 50.w,
         ),
         filled: true,
         fillColor: GreyColor,

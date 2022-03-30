@@ -79,7 +79,7 @@ Widget eventModel() => Container(
                               style: TextStyle(
                                   fontSize: 12.sp,
                                   fontWeight: semiBold,
-                                  color: Orange),
+                                  color: KOrange),
                             )
                           ],
                         ),

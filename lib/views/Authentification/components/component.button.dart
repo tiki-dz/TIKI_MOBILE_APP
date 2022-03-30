@@ -7,7 +7,7 @@ import '../../../data/pallete.data.dart';
 Widget button(String title, VoidCallback? function) {
   return SizedBox(
     width: double.infinity,
-    height: 7.h,
+    height: 50.sp,
     child: InkWell(
       onTap: function,
       child: Card(

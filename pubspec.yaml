@@ -68,6 +68,9 @@ dev_dependencies:
   device_preview: ^1.0.0
   carousel_slider: ^4.0.0
   dotted_line: ^3.1.0
+  lottie: ^1.2.2
+  concentric_transition: ^1.0.1
+  http: ^0.13.4
   get_storage:
 
 # For information on the generic Dart part of this file, see the
