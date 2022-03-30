@@ -31,8 +31,8 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
               children: [],
             ),
             Obx(() => controller.isSending.value == false
-                ? button("Send", () async {
-              await controller.forgetPassword();
+                ? button("Send", ()  {
+             // await controller.forgetPassword();
             })
                 : circularProgressModel())
 
