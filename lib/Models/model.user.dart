@@ -1,4 +1,3 @@
-import 'dart:math';
 
 class UserModel {
   String firstName;
@@ -6,30 +5,31 @@ class UserModel {
   String? phoneNumber;
   String birthDate;
   String email;
-  String? sexe;
+  int? sexe;
   String? city;
   String? picture;
+  static var sexeEnum = ["Homme","Femme"];
 
   UserModel(
       {required this.firstName,
        required this.lastName,
-       required this.phoneNumber,
+        this.phoneNumber,
        required this.birthDate,
        required this.email,
-       required this.sexe,
-       required this.city,
-       required this.picture});
+       this.sexe,
+       this.city,
+       this.picture});
 
   factory UserModel.fromJson(Map<String, dynamic> item) {
     return UserModel(
         firstName: item["firstName"].toString(),
         lastName: item["lastName"].toString(),
-        phoneNumber: item["phoneNumber"].toString(),
+        phoneNumber: item["phoneNumber"].toString()=="null" ? null : item["phoneNumber"].toString(),
         email: item["AccountEmail"].toString(),
         birthDate: item["birthDate"].toString(),
-        picture: item["profilePicture"].toString(),
-        city: item["city"].toString(),
-        sexe: item["sexe"] == 1 ? "Homme" : "Femme");
+        picture: item["profilePicture"].toString() =="null" ? null : item["profilePicture"].toString(),
+        city: item["city"].toString()=="null" ? null : item["city"].toString(),
+        sexe: item["sexe"].toString()=="null" ? null : item["sexe"]);
   }
 
   Map<String, dynamic> toJson() {

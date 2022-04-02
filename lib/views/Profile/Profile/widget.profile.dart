@@ -54,7 +54,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         image: DecorationImage(
                             image: NetworkImage(
 "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXQlMjBtYW58ZW58MHx8MHx8&w=1000&q=80"                            ),
-                            fit: BoxFit.cover),
+                            fit: BoxFit.fill),
                         shape: BoxShape.circle),
                   ),
                   Column(
@@ -79,7 +79,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   InkWell(
                     onTap: (){
-                     EditProfileController().toScreen(controller.userProfile);
+                     Get.to(EditProfileWidget());
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 3.w),

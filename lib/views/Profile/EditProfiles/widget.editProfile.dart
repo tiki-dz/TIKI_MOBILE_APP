@@ -1,7 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tiki/Models/model.user.dart';
 import 'package:tiki/data/font.data.dart';
+import 'package:tiki/data/pallete.data.dart';
+import '../../../constWidgets/progressIndicator.dart';
 import '../../../controllers/EditProfileController.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
@@ -55,26 +58,41 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       height: 3.h,
                     ),
                     Center(
-                      child: Container(
-                        height: 90.sp,
-                        width: 90.sp,
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                spreadRadius: 2,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                            shape: BoxShape.circle,
-                            image: const DecorationImage(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXQlMjBtYW58ZW58MHx8MHx8&w=1000&q=80"),
-                            )),
-                      ),
+                      child: GetBuilder<EditProfileController>(
+                          init: controller,
+                          // no need to initialize Controller ever again, just mention the type
+                          builder: (value) => InkWell(
+                                onTap: () {
+                                  controller.takePick();
+                                },
+                                child: Container(
+                                  height: 90.sp,
+                                  width: 90.sp,
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                          spreadRadius: 2,
+                                          blurRadius: 7,
+                                          offset: const Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                      shape: BoxShape.circle,
+                                      image: controller.imageFromNetwork
+                                          ? DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(controller
+                                                      .user.picture ??
+                                                  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXQlMjBtYW58ZW58MHx8MHx8&w=1000&q=80"),
+                                            )
+                                          : DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: FileImage(
+                                                  controller.imageFile),
+                                            )),
+                                ),
+                              )),
                     ),
                     SizedBox(
                       height: 7.h,
@@ -87,55 +105,105 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             leadingIcon: 'assets/icons/fi-rr-envelope.svg',
                             textEditingController: controller.emailController,
                             readOnly: true,
+                            hint: "",
                           ),
                           SizedBox(
                             height: 2.h,
                           ),
                           InputComponentEditProfile(
-                            leadingIcon: 'assets/icons/fi-rr-user.svg',
-                            textEditingController: controller.nameController,
-                            readOnly: false,
-                          ),
+                              leadingIcon: 'assets/icons/fi-rr-user.svg',
+                              textEditingController: controller.nameController,
+                              readOnly: false,
+                              hint: "add your name"),
                           SizedBox(
                             height: 2.h,
                           ),
                           InputComponentEditProfile(
-                            leadingIcon: 'assets/icons/fi-rr-user.svg',
-                            textEditingController:
-                                controller.lastNameController,
-                            readOnly: false,
-                          ),
+                              leadingIcon: 'assets/icons/fi-rr-user.svg',
+                              textEditingController:
+                                  controller.lastNameController,
+                              readOnly: false,
+                              hint: "add your last name"),
                           SizedBox(
                             height: 2.h,
                           ),
                           Obx(
-                            () => InputDateComponentEditProfile(
-                              leadingIcon: 'assets/icons/fi-rr-calendar.svg',
-                              hintText: controller.birthDate.value,
-                              controller: controller,
-                              function: controller.changeDate,
-                            ),
+                            () {
+                            return InputDateComponentEditProfile(
+                                leadingIcon: 'assets/icons/fi-rr-calendar.svg',
+                                hintText: controller.birthDate.value,
+                                controller: controller,
+                                function: controller.changeDate,
+                              );
+
+                            }
                           ),
                           SizedBox(
                             height: 2.h,
                           ),
                           InputComponentEditProfile(
-                            leadingIcon: 'assets/icons/fi-rr-envelope.svg',
+                            leadingIcon: 'assets/icons/city.svg',
                             textEditingController: controller.cityController,
                             readOnly: false,
+                            hint: "add your city",
                           ),
                           SizedBox(
                             height: 2.h,
                           ),
                           InputComponentEditProfile(
-                            leadingIcon: 'assets/icons/fi-rr-envelope.svg',
-                            textEditingController: controller.phoneNumberController,
+                            leadingIcon: 'assets/icons/phone.svg',
+                            textEditingController:
+                                controller.phoneNumberController,
                             readOnly: true,
+                            hint: "add your phone number",
                           ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          GetBuilder<EditProfileController>(
+                              init: controller,
+                              // no need to initialize Controller ever again, just mention the type
+                              builder: (value) => Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Radio(
+                                            activeColor: KOrange,
+                                            value: 0,
+                                            groupValue: controller.radioSexe,
+                                            onChanged: controller.changeRadio,
+                                          ),
+                                          Text(
+                                            "Homme",
+                                            style: TextStyle(fontSize: 11.sp),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Radio(
+                                            activeColor: KOrange,
+                                            value: 1,
+                                            groupValue: controller.radioSexe,
+                                            onChanged: controller.changeRadio,
+                                          ),
+                                          Text('Femme',
+                                              style:
+                                                  TextStyle(fontSize: 11.sp)),
+                                        ],
+                                      ),
+                                    ],
+                                  )),
                         ],
                       ),
                     )),
-                    button("Save", () {}),
+                    Obx(() => controller.isUpdating.value == false
+                        ? button("Save", () async {
+                            await controller.updateProfile();
+                          })
+                        : circularProgressModel()),
                     SizedBox(
                       height: 3.h,
                     )

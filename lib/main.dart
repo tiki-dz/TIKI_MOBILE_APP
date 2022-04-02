@@ -3,7 +3,11 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tiki/views/Authentification/widget.login.dart';
 import 'package:tiki/views/Authentification/widget.resetPassword.dart';
+import 'package:tiki/views/Authentification/widget.signup.dart';
+import 'package:tiki/views/Profile/EditProfiles/widget.editProfile.dart';
+import 'package:tiki/views/Profile/Profile/widget.profile.dart';
 
 
 import 'data/translation.data.dart';
@@ -44,7 +48,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: ResetPasswordWidget(),
+        home: ProfileWidget(),
       );
     });
   }

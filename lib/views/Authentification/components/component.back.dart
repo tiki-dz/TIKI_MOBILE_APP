@@ -14,7 +14,7 @@ Widget backWidget =Align(
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.07),
-            spreadRadius: 0.1,
+            spreadRadius: 0.03,
             blurRadius: 7,
             offset: Offset(0, 1), // changes position of shadow
           ),

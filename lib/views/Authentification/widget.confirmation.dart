@@ -10,22 +10,27 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tiki/views/Authentification/components/component.button.dart';
 
+import '../../constWidgets/progressIndicator.dart';
 import '../../controllers/confirmation.controller.dart';
 import '../../controllers/registration.controller.dart';
 
 class ConfirmationWidget extends StatefulWidget {
-  ConfirmationWidget({Key? key}) : super(key: key);
+  ConfirmationWidget(
+      {Key? key, required this.email, required this.token, required this.cas})
+      : super(key: key);
+  String email;
+  String? token;
+  int cas;
 
   @override
   State<ConfirmationWidget> createState() => _ConfirmationWidgetState();
 }
 
 class _ConfirmationWidgetState extends State<ConfirmationWidget> {
-
   @override
   Widget build(BuildContext context) {
-    final controller =
-        Get.put<ConfirmationController>(ConfirmationController());
+    final controller = Get.put<ConfirmationController>(ConfirmationController(
+        email: widget.email, cas: widget.cas, token: widget.token));
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: BackGroundColor,
@@ -243,9 +248,11 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    button('confirm'.tr, () {
-                      controller.sendCode();
-                    }),
+                    Obx(() => controller.isProcessing.value == false
+                        ? button("Confirme", () async {
+                      await controller.sendCode();
+                    })
+                        : circularProgressModel()),
                     SizedBox(
                       height: 3.h,
                     ),

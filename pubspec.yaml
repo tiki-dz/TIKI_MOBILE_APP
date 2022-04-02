@@ -71,6 +71,8 @@ dev_dependencies:
   lottie: ^1.2.2
   concentric_transition: ^1.0.1
   http: ^0.13.4
+  image_picker: ^0.8.4+11
+  path: ^1.8.0
   get_storage:
 
 # For information on the generic Dart part of this file, see the

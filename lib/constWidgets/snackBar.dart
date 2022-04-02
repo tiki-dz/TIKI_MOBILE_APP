@@ -16,7 +16,7 @@ void snackBarModel(String title,String message, bool isError) {
     dismissDirection: DismissDirection.horizontal,
     colorText: Colors.white,
     backgroundColor:  isError ? Colors.red : Colors.green,
-    icon: Icon(Icons.warning, color: Colors.white),
+    icon: Icon(isError ?Icons.warning  : Icons.done, color: Colors.white),
     snackPosition: SnackPosition.BOTTOM,
   );
 }

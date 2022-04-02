@@ -1,10 +1,7 @@
 import 'dart:convert';
-
-import 'package:tiki/Models/model.user.dart';
 import 'package:tiki/Models/model.registration.dart';
 import 'package:tiki/data/server.data.dart';
 import 'package:http/http.dart' as http;
-
 import '../data/server.data.dart';
 import 'general/general.dart';
 
@@ -18,9 +15,9 @@ class AuthService {
         return General<String>(
             data: response.body, token: jsonData["data"]["token"]);
       }
-      return General<String>(error: true);
+      return General<String>(data: "", error: true);
     } on Exception catch (e) {
-      return General<String>(error: true);
+      return General<String>(data: "", error: true);
     }
   }
 
@@ -38,41 +35,75 @@ class AuthService {
         var jsonData = jsonDecode(response.body);
         return General<String>(data: jsonData["data"]["token"]);
       }
-      return General<String>(error: true);
+      return General<String>(data: "", error: true);
     } on Exception catch (e) {
-      return General<String>(error: true);
+      return General<String>(data: "", error: true);
     }
   }
 
-  //cas = 0 pour send code en validation , et cas =1 pour send code en forgetPassword
   static Future<General<String>> verifyCode(
-      String email, String token, String code, int cas) async {
+      String email, String? token, String code) async {
     try {
-      http.Response response = await http.post(Uri.parse(cas == 0 ? urlVerifyCode : urlForgetPasswordValidateAccount),
-          headers: {'x-access-token': token},
+      http.Response response = await http.post(Uri.parse(urlVerifyCode),
+          headers: {'x-access-token': token ?? ""},
+          body: {'email': email, 'code': code});
+      if (response.statusCode == 200) {
+        var jsonData = jsonDecode(response.body);
+        return General<String>(
+            data: response.body, token: jsonData["data"]["token"]);
+      }
+      return General<String>(data: "", error: true);
+    } on Exception catch (e) {
+      return General<String>(data: "", error: true);
+    }
+  }
+
+  static Future<General<String>> forgetPasswordValidateAccount(
+      String email, String? token, String code) async {
+    try {
+      http.Response response = await http.post(
+          Uri.parse(urlForgetPasswordValidateAccount),
+          headers: {'x-access-token': token ?? ""},
           body: {'email': email, 'code': code});
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         return General<String>(data: jsonData["data"]["token"]);
       }
-      return General<String>(error: true);
+      return General<String>(data: "", error: true);
     } on Exception catch (e) {
-      return General<String>(error: true);
+      return General<String>(data: "", error: true);
     }
   }
 
-
-  static Future<General<String>> forgetPasswordSendVerificationAccount(String email) async {
+  static Future<General<String>> forgetPasswordSendVerificationAccount(
+      String email) async {
     try {
-      http.Response response = await http.post(Uri.parse(urlForgetPasswordSendVerificationAccount));
+      http.Response response = await http.post(
+          Uri.parse(urlForgetPasswordSendVerificationAccount),
+          body: {"email": email});
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         return General<String>(data: jsonData["data"]["token"]);
       }
-      return General<String>(error: true);
+      return General<String>(data: "", error: true);
     } on Exception catch (e) {
-      return General<String>(error: true);
+      return General<String>(data: "", error: true);
     }
+  }
 
+  static Future<General<String>> forgetPasswordChangePasswordAccount(
+      String email, String password , String? token) async {
+    try {
+      http.Response response =
+          await http.put(Uri.parse(urlForgetPasswordChangePasswordAccount),
+              headers: {'x-access-token': token ?? ""},
+              body: {'email': email, 'password': password});
+      if (response.statusCode == 200) {
+        return General<String>(data: "");
+      }
+      return General<String>(data: "", error: true);
+    } on Exception catch (e) {
+      return General<String>(data: "", error: true);
+    }
   }
 }

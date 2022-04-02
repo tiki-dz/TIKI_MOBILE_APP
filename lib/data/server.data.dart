@@ -1,6 +1,9 @@
-String urlLogin = "192.168.1.104/api/common/login";
-String urlVerifyCode= "192.168.1.104/api/client/verifyCode";
+String urlLogin = "http://192.168.1.104:5001/api/common/login";
+String urlVerifyCode= "http://192.168.1.104:5001/api/client/verifyCode";
 String urlProfile= "192.168.1.104/api/client/profile";
-String urlSignup = "192.168.1.104/api/client/signup";
-String urlForgetPasswordSendVerificationAccount ="api/common/forgetPasswordSendVerificationAccount";
-String urlForgetPasswordValidateAccount ="api/common/forgetPasswordValidateAccount";
+String urlSignup = "http://192.168.1.104:5001/api/client/signup";
+String urlForgetPasswordSendVerificationAccount ="http://192.168.1.104:5001/api/common/forgetPasswordSendVerificationAccount";
+String urlForgetPasswordValidateAccount ="http://192.168.1.104:5001/api/common/forgetPasswordValidateAccount";
+String urlForgetPasswordChangePasswordAccount ="http://192.168.1.104:5001/api/common/forgetPasswordChangePasswordAccount";
+String urlUpdateProfile = "http://192.168.1.104:5001/api/client";
+String urlUpdatePicProfile = "http://192.168.1.104:5001/api/client/updateimage";

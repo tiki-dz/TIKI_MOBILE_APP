@@ -32,7 +32,10 @@ class _InputDateComponentEditProfileState extends State<InputDateComponentEditPr
             children: [
               Expanded(
                 child: CupertinoDatePicker(
-                  initialDateTime: DateTime.now(),
+                  maximumYear:
+                  DateTime.now().subtract(const Duration(days: 2190)).year,
+                  initialDateTime:
+                  DateTime.now().subtract(const Duration(days: 2190)),
                   mode: CupertinoDatePickerMode.date,
                   onDateTimeChanged: widget.function,
                 ),
@@ -51,7 +54,10 @@ class _InputDateComponentEditProfileState extends State<InputDateComponentEditPr
       readOnly: true,
       cursorColor: ButtonColor,
       style: TextStyle(fontSize: 10.sp, fontWeight: regular),
+
       decoration: InputDecoration(
+        hintText:  widget.hintText,
+        hintStyle: TextStyle(color: Colors.black),
         contentPadding: EdgeInsets.symmetric(vertical: 0.05.h, horizontal: 0.0),
         prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(
@@ -77,7 +83,6 @@ class _InputDateComponentEditProfileState extends State<InputDateComponentEditPr
         ),
         filled: true,
         fillColor: GreyColor,
-        hintText: widget.hintText,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: GreyColor),
           borderRadius: BorderRadius.circular(8.sp),

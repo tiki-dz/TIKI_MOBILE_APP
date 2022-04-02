@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tiki/Models/model.registration.dart';
 import 'package:tiki/controllers/confirmation.controller.dart';
 import 'package:intl/intl.dart';
+import 'package:tiki/views/Authentification/widget.confirmation.dart';
 import '../constWidgets/snackBar.dart';
 import '../services/AuthService.dart';
 
@@ -14,6 +15,13 @@ class SignUpController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  var radioSexe = 0;
+
+  changeRadio(int? value){
+
+    radioSexe = value?? 0;
+    update();
+  }
 
   void changeDate(DateTime dateTime) {
     final DateTime date= dateTime;
@@ -57,14 +65,9 @@ class SignUpController extends GetxController {
       snackBarModel("error","check your information" , true);
       switchBool();
     } else {
-      ConfirmationController().toScreen(emailController.text, response.data ?? "" , 1);
+      Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 0));
       switchBool();
     }
   }
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
 }

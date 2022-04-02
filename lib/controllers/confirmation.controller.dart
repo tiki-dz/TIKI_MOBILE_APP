@@ -6,31 +6,28 @@ import 'package:tiki/views/Home/widget.home.dart';
 import '../constWidgets/snackBar.dart';
 import '../services/AuthService.dart';
 import '../views/Authentification/widget.confirmation.dart';
+import '../views/Authentification/widget.resetPassword.dart';
+import 'localController.dart';
 
 class ConfirmationController extends GetxController {
 
   //cas = 0 pour send code en validation , et cas =1 pour send code en forgetPassword
   late int cas ;
   late String email;
-  late String token;
+  late String? token;
 
 
-  void toScreen(String email , String token,int cas){
-    this.cas = cas;
-    this.email = email;
-    this.token = token;
-    Get.to(ConfirmationWidget());
-  }
+  ConfirmationController({required this.cas,required this.email,required this.token});
 
   final TextEditingController codePinController = TextEditingController();
   var sendFirst = false;
-  var isSending = false.obs;
+  var isProcessing = false.obs;
   late Timer timer;
   int start = 50;
 
 
   void switchBool() {
-    isSending.value = !isSending.value;
+    isProcessing.value = !isProcessing.value;
   }
 
   void startTimer() {
@@ -59,12 +56,20 @@ class ConfirmationController extends GetxController {
       return "";
     }
     startTimer();
-    var response = await AuthService.verifyCode(email, token,codePinController.text ,cas);
+    late dynamic response;
+    if(cas == 0){
+      response = await AuthService.verifyCode(email, token,codePinController.text );
+      LocalController.setToken(response.token);
+      LocalController.setProfile(response.data);
+    } else{
+      response = await AuthService.forgetPasswordValidateAccount(email, token, codePinController.text);
+    }
+
     if (response.error) {
       snackBarModel("Echek","check your information" , true);
       switchBool();
     } else {
-     cas ==0 ?   Get.off(() => const HomeWidget()) : ResetPasswordController().toScreen(email);
+       cas ==0 ?   Get.off(() => const HomeWidget()) : Get.off(() => ResetPasswordWidget(email: email,token: response.data,));
     }
   }
 }

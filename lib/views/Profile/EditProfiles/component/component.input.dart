@@ -11,11 +11,12 @@ class InputComponentEditProfile  extends StatelessWidget {
   String leadingIcon;
   TextEditingController textEditingController;
   bool readOnly ;
+  String hint ;
 
   InputComponentEditProfile(
       {required this.leadingIcon,
         required this.textEditingController,
-        required this.readOnly});
+        required this.readOnly,required this.hint});
 
 
   @override
@@ -51,6 +52,7 @@ class InputComponentEditProfile  extends StatelessWidget {
         ),
         filled: true,
         fillColor: GreyColor,
+        hintText: hint,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: GreyColor),
           borderRadius: BorderRadius.circular(8.sp),

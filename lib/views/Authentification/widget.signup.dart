@@ -29,7 +29,7 @@ class SignUpWidget extends StatelessWidget {
         ),
         child: Column(children: [
           SizedBox(
-            height: 3.h,
+            height: 1.h,
           ),
           Align(
             alignment: Alignment.topRight,
@@ -83,6 +83,13 @@ class SignUpWidget extends StatelessWidget {
           InputComponentPassword(
             hintText: 'password'.tr,
             textEditingController: controller.passwordController,
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          InputComponentPassword(
+            hintText: 'confirmPassword'.tr,
+            textEditingController: controller.confirmPasswordController,
           ),
           SizedBox(
             height: 2.h,

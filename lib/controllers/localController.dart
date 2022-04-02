@@ -16,9 +16,10 @@ class LocalController{
     box.write('profile', profile);
   }
 
+  // 0 for login  , 1 for edit profile
   static UserModel getProfile(){
     var data = jsonDecode(box.read("profile"));
-    return UserModel.fromJson(data["data"]["account"]["User"]);
+    return UserModel.fromJson(data["data"]["User"]);
   }
 
 }
