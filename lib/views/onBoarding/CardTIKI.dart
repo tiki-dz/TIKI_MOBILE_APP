@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:tiki/views/ButtomBar/widget.bottomBar.dart';
 import '../Authentification/components/component.button.dart';
 import 'package:get/get.dart';
-import '../Profile/Profile/widget.profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
@@ -87,7 +87,7 @@ class CardTIKI extends StatelessWidget {
           Spacer(),
           InkWell(
             onTap: () {
-              Get.off(() => ProfileWidget(),
+              Get.off(() => BottomBarWidget(),
                   transition: Transition.rightToLeft);
             },
             child: Text(

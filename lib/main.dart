@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tiki/views/Authentification/widget.login.dart';
 import 'package:tiki/views/Authentification/widget.resetPassword.dart';
 import 'package:tiki/views/Authentification/widget.signup.dart';
+import 'package:tiki/views/ButtomBar/widget.bottomBar.dart';
+import 'package:tiki/views/DetailEvent/widget.eventDetail.dart';
 import 'package:tiki/views/Profile/EditProfiles/widget.editProfile.dart';
 import 'package:tiki/views/Profile/Profile/widget.profile.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:tiki/views/Wrapper/widget.wrapperOnBoarding.dart';
+import 'package:tiki/views/onBoarding/widget.onBoarding.dart';
 
 
 import 'data/translation.data.dart';
@@ -21,7 +27,7 @@ import 'data/translation.data.dart';
       builder: (context) => MyApp(), // Wrap your app
     ),
   );
-} */
+}*/
 
  void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,8 +53,13 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme,
           ),
         ),
+        initialRoute: '/',
+        getPages: [
+          GetPage(name: '/', page: () => WrapperOnBoardingWidget()),
+          GetPage(name: '/bottomBar', page: () => BottomBarWidget()),
+        ],
         debugShowCheckedModeBanner: false,
-        home: ProfileWidget(),
+        home: WrapperOnBoardingWidget(),
       );
     });
   }

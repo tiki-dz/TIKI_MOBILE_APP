@@ -92,13 +92,6 @@ class SignUpWidget extends StatelessWidget {
             textEditingController: controller.confirmPasswordController,
           ),
           SizedBox(
-            height: 2.h,
-          ),
-          InputComponentPassword(
-            hintText: 'confirmPassword'.tr,
-            textEditingController: controller.confirmPasswordController,
-          ),
-          SizedBox(
             height: 7.h,
           ),
           Obx(() => controller.isUpdating.value == false

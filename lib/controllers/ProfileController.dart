@@ -2,8 +2,19 @@ import 'package:tiki/Models/model.user.dart';
 import 'package:tiki/controllers/localController.dart';
 import 'package:get/get.dart';
 
+import '../views/ButtomBar/widget.bottomBar.dart';
+
 class ProfileController extends GetxController{
   late UserModel userProfile = LocalController.getProfile();
+
+
+
+  logOut(){
+    LocalController.logOut();
+    Get.offAll(()=>BottomBarWidget());
+  }
+
+
 
 
 }

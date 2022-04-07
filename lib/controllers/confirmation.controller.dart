@@ -2,11 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiki/controllers/resetPasswordController.dart';
+import 'package:tiki/controllers/wrapperProfileController.dart';
 import 'package:tiki/views/Home/widget.home.dart';
 import '../constWidgets/snackBar.dart';
 import '../services/AuthService.dart';
 import '../views/Authentification/widget.confirmation.dart';
 import '../views/Authentification/widget.resetPassword.dart';
+import '../views/ButtomBar/widget.bottomBar.dart';
 import 'localController.dart';
 
 class ConfirmationController extends GetxController {
@@ -61,6 +63,8 @@ class ConfirmationController extends GetxController {
       response = await AuthService.verifyCode(email, token,codePinController.text );
       LocalController.setToken(response.token);
       LocalController.setProfile(response.data);
+      WrapperProfileController controller = Get.find<WrapperProfileController>();
+      controller.updateSign();
     } else{
       response = await AuthService.forgetPasswordValidateAccount(email, token, codePinController.text);
     }
@@ -69,7 +73,7 @@ class ConfirmationController extends GetxController {
       snackBarModel("Echek","check your information" , true);
       switchBool();
     } else {
-       cas ==0 ?   Get.off(() => const HomeWidget()) : Get.off(() => ResetPasswordWidget(email: email,token: response.data,));
+       cas ==0 ?   Get.off(() => const BottomBarWidget()) : Get.off(() => ResetPasswordWidget(email: email,token: response.data,));
     }
   }
 }

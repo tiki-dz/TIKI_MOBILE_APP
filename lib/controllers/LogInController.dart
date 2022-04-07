@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:tiki/controllers/wrapperProfileController.dart';
+import 'package:tiki/views/ButtomBar/widget.bottomBar.dart';
 import '../constWidgets/snackBar.dart';
 import '../services/AuthService.dart';
-import '../views/Profile/Profile/widget.profile.dart';
 import 'localController.dart';
 
 class LogInController extends GetxController {
@@ -30,13 +29,18 @@ class LogInController extends GetxController {
     }
     var response = await AuthService.login(emailController.text, passwordController.text);
     if (response.error) {
-      snackBarModel("error","check your information" , true);
+      snackBarModel("Echec","check your information" , true);
       switchBool();
     } else {
       LocalController.setToken(response.token);
       LocalController.setProfile(response.data);
-      Get.off(() => ProfileWidget(),
+      WrapperProfileController controller = Get.find<WrapperProfileController>();
+      controller.updateSign();
+      Get.offAll(() => BottomBarWidget(),
           transition: Transition.rightToLeft);
+
+      //BottomBarController controller = Get.find<BottomBarController>();
+      //controller.changeIndex(3);
     }
 
   }

@@ -12,6 +12,11 @@ class LocalController{
   static String getToken(){
     return box.read("token");
   }
+
+  static logOut(){
+    box.remove("token");
+  }
+
   static setProfile(String? profile){
     box.write('profile', profile);
   }
@@ -20,6 +25,19 @@ class LocalController{
   static UserModel getProfile(){
     var data = jsonDecode(box.read("profile"));
     return UserModel.fromJson(data["data"]["User"]);
+  }
+
+  // first time for onboarding
+  static bool getFirst(){
+    return box.read("first") ?? true ;
+  }
+
+  static setFirst(bool first){
+    return box.write("first",first) ;
+  }
+
+  static bool getSign(){
+    return box.read("token")==null ? false : true;
   }
 
 }

@@ -109,7 +109,7 @@ class EditProfileController extends GetxController {
       LocalController.setProfile(response.data);
       switchBool();
       snackBarModel("Succes", "operation done", false);
-      Get.offAll(ProfileWidget());
+      Get.offAll(()=>ProfileWidget());
     }
   }
 }

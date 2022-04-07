@@ -40,10 +40,15 @@ class _LogInWidgetState extends State<LogInWidget> {
                   children: [
                     Align(
                       alignment: Alignment.topRight,
-                      child: SvgPicture.asset(
-                          'assets/icons/fi-rr-cross-small.svg'),
+                      child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: SvgPicture.asset(
+                            'assets/icons/fi-rr-cross-small.svg'),
+                      ),
                     ),
-                    const Expanded(child: SizedBox()),
+                    Expanded(child: Image.asset('assets/logo/logo.png')),
                     Text(
                       "Sing up to your account\nto can buy ticket",
                       style: TextStyle(fontSize: 10.sp, fontWeight: medium),
@@ -62,14 +67,15 @@ class _LogInWidgetState extends State<LogInWidget> {
                       textEditingController: controller.passwordController,
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         Get.to(ForgetPasswordWidget());
                       },
                       child: Align(
                         alignment: Alignment.topRight,
                         child: Text(
                           "Forget password ?",
-                          style: TextStyle(fontSize: 10.sp, fontWeight: regular),
+                          style:
+                              TextStyle(fontSize: 10.sp, fontWeight: regular),
                         ),
                       ),
                     ),
@@ -78,6 +84,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                     ),
                     Obx(() => controller.isUpdating.value == false
                         ? button("Log In", () async {
+                            FocusManager.instance.primaryFocus?.unfocus();
                             await controller.login();
                           })
                         : circularProgressModel()),
@@ -98,7 +105,10 @@ class _LogInWidgetState extends State<LogInWidget> {
                     style: TextStyle(fontSize: 12.sp, fontWeight: medium),
                   ),
                 ),
-                Expanded(child: Divider(thickness: 0.1.h,)),
+                Expanded(
+                    child: Divider(
+                  thickness: 0.1.h,
+                )),
               ],
             ),
             SizedBox(
@@ -126,7 +136,7 @@ class _LogInWidgetState extends State<LogInWidget> {
               height: 3.h,
             ),
             InkWell(
-              onTap: (){
+              onTap: () {
                 Get.to(const SignUpWidget());
               },
               child: Row(
@@ -169,6 +179,3 @@ Widget containerConnectWith(String icon) => Container(
         color: KOrange,
       ),
     );
-
-Widget dottedLine =
-    DottedLine(lineThickness: 0.1.h, dashColor: Color(0xff707070));
