@@ -33,7 +33,7 @@ class InputComponent extends StatelessWidget {
           ),
           Container(
             height: 3.h,
-            width: 0.5.w,
+            width: 0.2.w,
             color: Color.fromRGBO(112, 112, 112, 1).withOpacity(0.3),
           ),
           SizedBox(

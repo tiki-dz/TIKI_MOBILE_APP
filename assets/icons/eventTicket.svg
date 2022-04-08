@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33">
+  <g id="Group_87" data-name="Group 87" transform="translate(0 0.106)">
+    <g id="Group_82" data-name="Group 82">
+      <ellipse id="Ellipse_74" data-name="Ellipse 74" cx="16" cy="16.5" rx="16" ry="16.5" transform="translate(0 -0.106)" fill="#e8a86d" opacity="0.3"/>
+    </g>
+    <g id="fi-rr-receipt" transform="translate(11.126 9.302)">
+      <path id="Path_206" data-name="Path 206" d="M10.169,0H5.757A2.76,2.76,0,0,0,3,2.757v9.926a.551.551,0,0,0,.862.455l1.161-.794,1.161.794a.551.551,0,0,0,.623,0l1.158-.794,1.158.794a.551.551,0,0,0,.624,0l1.158-.793,1.158.792a.551.551,0,0,0,.862-.454V2.757A2.76,2.76,0,0,0,10.169,0Zm1.654,11.635-.607-.415a.551.551,0,0,0-.624,0l-1.158.794L8.276,11.22a.551.551,0,0,0-.624,0l-1.158.794L5.336,11.22a.551.551,0,0,0-.623,0l-.611.415V2.757A1.654,1.654,0,0,1,5.757,1.1h4.411a1.654,1.654,0,0,1,1.654,1.654Z" transform="translate(-3)" fill="#f39947"/>
+      <rect id="Rectangle_7" data-name="Rectangle 7" width="5.514" height="1.103" rx="0.551" transform="translate(2.206 4.411)" fill="#f39947"/>
+      <rect id="Rectangle_8" data-name="Rectangle 8" width="4.411" height="1.103" rx="0.551" transform="translate(2.206 6.617)" fill="#f39947"/>
+    </g>
+  </g>
+</svg>

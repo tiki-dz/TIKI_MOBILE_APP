@@ -34,16 +34,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   animated_splash_screen: ^1.2.0
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   sizer: ^2.0.15
   flutter_lints: ^1.0.0
   cloud_firestore: ^3.1.8
@@ -66,7 +56,39 @@ dev_dependencies:
   intl_phone_field: ^3.0.1
   geolocator: ^8.2.0
   device_preview: ^1.0.0
+  carousel_slider: ^4.0.0
+  dotted_line: ^3.1.0
+  lottie: ^1.2.2
+  concentric_transition: ^1.0.1
+  http: ^0.13.4
+  image_picker: ^0.8.4+11
+  path: ^1.8.0
+  bottom_navy_bar: ^6.0.0
   get_storage:
+
+dev_dependencies:
+  flutter_native_splash: ^1.2.4
+  flutter_test:
+    sdk: flutter
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/logo/logo.png
+  android_gravity: center
+  android: true
+  ios: true
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -76,6 +98,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/
+    - assets/animation/
+    - assets/logo/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
