@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiki/views/Authentification/widget.forgetPassword.dart';
 import 'package:tiki/views/Authentification/widget.signup.dart';
+import 'package:tiki/views/ButtomBar/widget.bottomBar.dart';
 import 'package:tiki/views/Home/widget.home.dart';
 import '../../constWidgets/progressIndicator.dart';
 import '../../controllers/LogInController.dart';
@@ -42,7 +43,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                       alignment: Alignment.topRight,
                       child: InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.offAll(const BottomBarWidget());
                         },
                         child: SvgPicture.asset(
                             'assets/icons/fi-rr-cross-small.svg'),

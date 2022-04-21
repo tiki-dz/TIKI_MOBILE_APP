@@ -9,16 +9,16 @@ import 'package:get/get.dart';
 import 'components/component.button.dart';
 import 'components/component.inputPassword.dart';
 
-class ResetPasswordWidget extends StatefulWidget {
-  ResetPasswordWidget({required this.email,required this.token,Key? key}) : super(key: key);
+class ResetPasswordForgetWidget extends StatefulWidget {
+  ResetPasswordForgetWidget({required this.email,required this.token,Key? key}) : super(key: key);
   String email;
   String? token ;
 
   @override
-  _ResetPasswordWidgetState createState() => _ResetPasswordWidgetState();
+  _ResetPasswordForgetWidgetState createState() => _ResetPasswordForgetWidgetState();
 }
 
-class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
+class _ResetPasswordForgetWidgetState extends State<ResetPasswordForgetWidget> {
   @override
   Widget build(BuildContext context) {
     final controller =

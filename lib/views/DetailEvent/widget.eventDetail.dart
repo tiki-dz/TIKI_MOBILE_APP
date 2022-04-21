@@ -3,12 +3,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tiki/data/font.data.dart';
 import 'package:tiki/views/DetailEvent/widget.comments.dart';
-
+import 'package:get/get.dart';
+import '../../Models/model.event.dart';
 import 'component/component.button.dart';
 import 'component/component.info.dart';
 
 class EventDetailWidget extends StatefulWidget {
-  const EventDetailWidget({Key? key}) : super(key: key);
+  EventDetailWidget({required this.event, Key? key}) : super(key: key);
+  EventModel? event;
 
   @override
   _EventDetailWidgetState createState() => _EventDetailWidgetState();
@@ -25,11 +27,10 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
             children: [
               Container(
                 height: 30.h,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: NetworkImage(
-                      "https://www.nabeulvoyages.com//medias/g_custom_v1519627962_vltlogy23k1iid9pjffx.jpg"),
+                  image: NetworkImage(widget.event?.eventImage ?? ""),
                 )),
               ),
               const Expanded(child: SizedBox())
@@ -37,14 +38,19 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
           ),
           Column(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 2.w),
-                child: SizedBox(
-                  height: 25.h,
-                  child: Align(
-                      alignment: Alignment.topLeft,
-                      child: SvgPicture.asset(
-                          "assets/icons/goBackEventDetail.svg")),
+              InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 2.w),
+                  child: SizedBox(
+                    height: 25.h,
+                    child: Align(
+                        alignment: Alignment.topLeft,
+                        child: SvgPicture.asset(
+                            "assets/icons/goBackEventDetail.svg")),
+                  ),
                 ),
               ),
               Expanded(
@@ -78,7 +84,7 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                           ],
                         ),
                         eventInfoMode(
-                          "Mar, Jan 30 ,2020",
+                          widget.event?.startDateFormat() ?? "",
                           "12:00 AM - 12:00 PM",
                           "eventCalandrier",
                         ),
@@ -106,10 +112,10 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                         ),
                         Expanded(
                             child: SingleChildScrollView(
-
                           child: Text(
-                            "loLe Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.",
-                          style: TextStyle(fontSize: 10.sp),),
+                            widget.event?.description ?? "",
+                            style: TextStyle(fontSize: 10.sp),
+                          ),
                         )),
                         buttonEvent("Acheter ticker", 'gishet', () {}),
                         SizedBox(

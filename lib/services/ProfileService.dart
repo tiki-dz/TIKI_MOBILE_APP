@@ -63,13 +63,33 @@ class ProfileService {
       request.headers.addAll(headers);
       http.StreamedResponse streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);
+      print(response.statusCode);
+      print("//////////");
       if (response.statusCode == 200) {
-        var jsonData = jsonDecode(response.body);
         return General<String>(data:"");
       }
       return General<String>(error: true);
     } on Exception catch (e) {
       return General<String>(error: true);
+    }
+  }
+
+
+  static Future<General<bool>> resetPassword(String currentPassword , String newPassword)async {
+    try {
+      http.Response response = await http.put(Uri.parse(urlResetPassword),
+          body: {
+            "password" : currentPassword,
+            "newPassword" :newPassword,
+          }
+          , headers: {'x-access-token': LocalController.getToken()});
+      if (response.statusCode == 200) {
+        return General<bool>();
+      }
+      return General<bool>(error: true);
+    } on Exception catch (e) {
+
+      return General<bool>(error: true);
     }
   }
 }

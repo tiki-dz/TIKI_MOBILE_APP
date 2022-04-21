@@ -5,13 +5,15 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tiki/views/Authentification/widget.login.dart';
-import 'package:tiki/views/Authentification/widget.resetPassword.dart';
+import 'package:tiki/views/Authentification/widget.resetPasswordForget.dart';
 import 'package:tiki/views/Authentification/widget.signup.dart';
 import 'package:tiki/views/ButtomBar/widget.bottomBar.dart';
 import 'package:tiki/views/DetailEvent/widget.eventDetail.dart';
+import 'package:tiki/views/Filter/widget.filter.dart';
 import 'package:tiki/views/Profile/EditProfiles/widget.editProfile.dart';
 import 'package:tiki/views/Profile/Profile/widget.profile.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:tiki/views/Search/widget.search.dart';
 import 'package:tiki/views/Wrapper/widget.wrapperOnBoarding.dart';
 import 'package:tiki/views/onBoarding/widget.onBoarding.dart';
 
@@ -52,11 +54,14 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.poppinsTextTheme(
             Theme.of(context).textTheme,
           ),
+          backgroundColor: Colors.white
         ),
         initialRoute: '/',
         getPages: [
           GetPage(name: '/', page: () => WrapperOnBoardingWidget()),
           GetPage(name: '/bottomBar', page: () => BottomBarWidget()),
+          GetPage(name: '/search', page: () => SearchWidget()),
+          GetPage(name: '/filter', page: () => FilterWidget()),
         ],
         debugShowCheckedModeBanner: false,
         home: WrapperOnBoardingWidget(),

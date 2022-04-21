@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiki/constWidgets/snackBar.dart';
 import 'package:tiki/views/Authentification/widget.login.dart';
-import 'package:tiki/views/Authentification/widget.resetPassword.dart';
+import 'package:tiki/views/Authentification/widget.resetPasswordForget.dart';
 
 import '../services/AuthService.dart';
 

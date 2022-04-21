@@ -1,6 +1,7 @@
 import 'package:tiki/Models/model.user.dart';
 import 'package:tiki/controllers/localController.dart';
 import 'package:get/get.dart';
+import 'package:tiki/controllers/wrapperProfileController.dart';
 
 import '../views/ButtomBar/widget.bottomBar.dart';
 
@@ -11,9 +12,12 @@ class ProfileController extends GetxController{
 
   logOut(){
     LocalController.logOut();
-    Get.offAll(()=>BottomBarWidget());
+    WrapperProfileController controller = Get.find<WrapperProfileController>();
+    controller.updateSign();
+    Get.offAll(()=>const BottomBarWidget());
   }
 
+  
 
 
 
