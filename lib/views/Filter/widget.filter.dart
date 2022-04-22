@@ -92,8 +92,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                             Text(
                               "From",
                               style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w600,
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.w500,
                                   color: const Color(0Xff7A7A7A).withOpacity(0.7)),
                             ),
                             Obx(
@@ -110,8 +110,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                             Text(
                               "To",
                               style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w600,
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.w500,
                                   color: const Color(0Xff7A7A7A).withOpacity(0.7)),
                             ),
                             Obx(
@@ -123,13 +123,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                               ),
                             ),
                             SizedBox(
-                              height: 2.h,
+                              height: 4.h,
                             ),
                             Text(
                               "Price",
                               style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
                                   color: Colors.black),
                             ),
                             GetBuilder(
