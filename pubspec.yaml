@@ -65,6 +65,7 @@ dependencies:
   path: ^1.8.0
   bottom_navy_bar: ^6.0.0
   get_storage:
+  mime: ^1.0.1
 
 dev_dependencies:
   flutter_native_splash: ^1.2.4

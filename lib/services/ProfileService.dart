@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:mime/mime.dart';
 import 'package:tiki/Models/model.user.dart';
 import 'package:tiki/Models/model.registration.dart';
 import 'package:tiki/controllers/localController.dart';
@@ -8,6 +9,8 @@ import 'package:tiki/data/server.data.dart';
 import 'package:http/http.dart' as http;
 
 import 'general/general.dart';
+
+import 'package:http_parser/http_parser.dart';
 
 class ProfileService {
   static Future<General<UserModel>> profile() async {
@@ -54,11 +57,14 @@ class ProfileService {
       Map<String, String> headers = {
         'x-access-token': LocalController.getToken()
       };
+      final mime = lookupMimeType(image.path).toString(); //<- get mime type
+
       request.files.add(http.MultipartFile(
         'updateimage',
         image.readAsBytes().asStream(),
         image.lengthSync(),
         filename: image.path,
+          contentType:   MediaType("image",mime.split("/")[1])
       ));
       request.headers.addAll(headers);
       http.StreamedResponse streamedResponse = await request.send();
