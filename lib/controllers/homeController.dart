@@ -1,3 +1,5 @@
+import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tiki/Models/model.categoris.dart';
 import 'package:tiki/Models/model.event.dart';
@@ -16,6 +18,28 @@ class HomeController extends GetxController{
   bool processing = false;
 
   bool error = false;
+
+  late AnimationController animationController ;
+
+  ScrollController scrollController = ScrollController();
+
+  var animation = 0.0.obs;
+
+
+
+  iniAnimation(TickerProvider tickerProvider){
+    animationController = AnimationController(vsync: tickerProvider,duration: const Duration(seconds: 1));
+    animationController.addListener(() {
+      animation.value = animationController.value;
+    });
+    scrollController.addListener(() {
+      if(scrollController.offset > 20){
+        animationController.forward();
+      }
+    });
+  }
+
+
 
   switchBool(){
     processing = !processing;
@@ -53,22 +77,13 @@ class HomeController extends GetxController{
             map[category.name] =eventsCategory;
             events?.add(map);
             eventsCategory =[];
+            update();
           }
         }
       }
     }
-    update();
     switchBool();
   }
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getEvents();
-  }
-
-
 
 
 }

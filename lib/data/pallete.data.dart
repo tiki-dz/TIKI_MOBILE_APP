@@ -14,3 +14,12 @@ var linear = LinearGradient(
     Color(0xfff39947),
   ],
 );
+
+var verticalLinear = LinearGradient(
+  begin: Alignment.bottomCenter,
+  end: Alignment.topCenter,
+  colors: [
+    Color(0xffcc6A11),
+    Color(0xfff39947),
+  ],
+);

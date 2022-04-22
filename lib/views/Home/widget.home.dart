@@ -18,13 +18,21 @@ class HomeWidget extends StatefulWidget {
   _HomeWidgetState createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _HomeWidgetState extends State<HomeWidget> with SingleTickerProviderStateMixin {
+  final controller = Get.put(HomeController());
+
   Color grey = Color(0Xff7A7A7A);
   List myList = [1, 2, 3];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.getEvents();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
     return Container(
       height: 100.h,
       width: 100.w,
@@ -50,6 +58,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 topLeft: Radius.circular(12.sp)),
                             color: Colors.white),
                         child: ListView.builder(
+                            controller: controller.scrollController,
                             itemCount: controller.events?.length,
                             itemBuilder: (context, indexFirst) => Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,50 +93,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   ],
                                 )));
                   })
-              /*SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 3.w, bottom: 1.h),
-                      child: Text(
-                        "Popular",
-                        style: GoogleFonts.poppins(
-                            fontSize: 14.sp, fontWeight: semiBold),
-                      ),
-                    ),
-                    SizedBox(
-                        height: 27.h,
-                        child: ListView.builder(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 1.h, horizontal: 4.w),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 4,
-                            itemBuilder: (context, index) => eventModel())),
-                    SizedBox(height: 2.h),
-                    Padding(
-                      padding: EdgeInsets.only(left: 3.w),
-                      child: Text(
-                        "Sport",
-                        style: GoogleFonts.poppins(
-                            fontSize: 16.sp, fontWeight: semiBold),
-                      ),
-                    ),
-                    SizedBox(height: 1.h),
-                    SizedBox(
-                        height: 27.h,
-                        child: ListView.builder(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 1.h, horizontal: 4.w),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 4,
-                            itemBuilder: (context, index) => eventModel())),
-                  ],
-                ),
-              ),)*/
 
               ),
         ],

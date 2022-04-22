@@ -5,6 +5,8 @@ import 'package:tiki/controllers/SearchController.dart';
 import 'package:tiki/data/font.data.dart';
 import 'package:tiki/data/pallete.data.dart';
 import 'package:get/get.dart';
+import '../../constWidgets/progressIndicator.dart';
+import '../Home/component/widget.eventMode.dart';
 import '../Home/component/widget.searchBar.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -43,6 +45,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 children: [
                   Expanded(
                     child: TextField(
+                      onSubmitted: controller.onSubmit,
                       focusNode: controller.focusNode,
                       decoration: InputDecoration(
                         suffixIcon: Padding(
@@ -68,7 +71,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ),
                   SizedBox(width: 4.w),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Get.back();
                     },
                     child: Text(
@@ -84,13 +87,64 @@ class _SearchWidgetState extends State<SearchWidget> {
             ),
             Expanded(
               child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(12.sp),
-                        topLeft: Radius.circular(12.sp)),
-                    color: Colors.white),
-              ),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(12.sp),
+                          topLeft: Radius.circular(12.sp)),
+                      color: Colors.white),
+                  child: GetBuilder(
+                      init: controller,
+                      builder: (context) {
+                        return controller.isFetching
+                            ? circularProgressModel()
+                            : controller.events.isNotEmpty
+                                ? ListView.builder(
+                                    itemCount: controller.events.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Column(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(vertical: 2.h),
+                                            child: eventModel(controller.events[index]),
+                                          ),
+                                          index == controller.events.length - 1
+                                              ? Column(
+                                                  children: [
+                                                    if (controller.haveNext)
+                                                      !controller.isFetchingPage
+                                                          ? InkWell(
+                                                              onTap: () async {
+                                                                await controller
+                                                                    .getEvents();
+                                                              },
+                                                              child:
+                                                                  pagination(),
+                                                            )
+                                                          : Padding(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          2.h),
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            )
+                                                    else
+                                                      SizedBox(),
+                                                  ],
+                                                )
+                                              : SizedBox(),
+                                        ],
+                                      );
+                                    })
+                                : ListView(
+                                    children: [
+                                      SizedBox(height: 25.h),
+                                      Center(child: Text("there are no result"))
+                                    ],
+                                  );
+                      })),
             )
           ],
         ),

@@ -1,4 +1,4 @@
-String ip = "192.168.1.103";
+String ip = "192.168.1.104";
 
 String urlLogin = "http://$ip:5001/api/common/login";
 String urlVerifyCode= "http://$ip:5001/api/client/verifyCode";
@@ -14,3 +14,7 @@ String urlResetPassword = "http://$ip:5001/api/client/resetPassword";
 ////home
 String urlCategories = "http://$ip:5002/api/admin/category";
 String urlEvents = "http://$ip:5002/api/admin/event?category=";
+
+
+////search
+
