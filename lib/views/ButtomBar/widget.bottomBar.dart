@@ -30,12 +30,12 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
     return SafeArea(
         child:GetBuilder<BottomBarController>( // no need to initialize Controller ever again, just mention the type
           builder: (value) =>  Scaffold(
-            backgroundColor: Color(0xffF9F9F9),
+            backgroundColor: Colors.white,
             body: controller.current,
             bottomNavigationBar: BottomNavyBar(
               containerHeight: 7.h,
               selectedIndex: controller.selectedIndex,
-              showElevation: false, // use this to remove appBar's elevation
+              showElevation: true, // use this to remove appBar's elevation
               onItemSelected: controller.changeIndex,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               items: [

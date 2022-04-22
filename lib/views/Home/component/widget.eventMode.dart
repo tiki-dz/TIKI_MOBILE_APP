@@ -7,19 +7,27 @@ import 'package:sizer/sizer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:tiki/Models/model.event.dart';
 import 'package:tiki/data/font.data.dart';
+import 'package:tiki/views/DetailEvent/widget.eventDetail.dart';
 
+import '../../../data/const.dart';
 import '../../../data/pallete.data.dart';
-
-Widget eventModel() => Container(
+import 'package:get/get.dart';
+Widget eventModel(EventModel? event) {
+  return InkWell(
+    onTap: (){
+      Get.to(()=> EventDetailWidget(event: event));
+    },
+    child: Container(
       height: 27.h,
       width: 70.w,
       margin: EdgeInsets.only(right: 5.w),
       decoration: BoxDecoration(
-        image: const DecorationImage(
+        image: DecorationImage(
             fit: BoxFit.fill,
             image: NetworkImage(
-              "https://horreurqc.b-cdn.net/wp-content/uploads/2019/11/MV5BNDM2NTBiOWYtN2E3Mi00MDdjLTk2MjMtZjlmMWE2N2QxNjdjXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_SY1000_CR0014991000_AL_-1155x770.jpg",
+              event?.eventImage ?? "",
             )),
         color: Colors.white,
         boxShadow: [
@@ -27,7 +35,7 @@ Widget eventModel() => Container(
             color: Colors.black.withOpacity(0.2),
             spreadRadius: 1,
             blurRadius: 4,
-            offset: Offset(0, 1), // changes position of shadow
+            offset: const Offset(0, 1), // changes position of shadow
           ),
         ],
         borderRadius: BorderRadius.circular(7.sp),
@@ -38,8 +46,8 @@ Widget eventModel() => Container(
             children: [
               Expanded(
                   child: Container(
-                color: Colors.transparent,
-              )),
+                    color: Colors.transparent,
+                  )),
               Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -48,7 +56,7 @@ Widget eventModel() => Container(
                           bottomRight: Radius.circular(7.sp))),
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+                    EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
                     child: Column(
                       children: [
                         SizedBox(
@@ -61,12 +69,12 @@ Widget eventModel() => Container(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Knives out",
+                                  event?.name ?? "",
                                   style: TextStyle(
                                       fontWeight: semiBold, fontSize: 13.sp),
                                 ),
                                 Text(
-                                  "Oran ,7:30 pm",
+                                  "${event?.address},7:30 pm",
                                   style: GoogleFonts.poppins(
                                       fontWeight: medium,
                                       fontSize: 9.sp,
@@ -107,12 +115,12 @@ Widget eventModel() => Container(
                 height: 35.sp,
                 width: 35.sp,
                 child: Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 1.h,horizontal: 3.w),
-                  child: const FittedBox(
+                  padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.w),
+                  child: FittedBox(
                     fit: BoxFit.fill,
                     child: Text(
-                  "08\nJAN",
-                  style: TextStyle(fontWeight: semiBold),
+                      "${event?.startDate.day}\n${monthsAn[event?.startDate.month ?? 0]}",
+                      style: const TextStyle(fontWeight: semiBold),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -120,4 +128,6 @@ Widget eventModel() => Container(
               ))
         ],
       ),
-    );
+    ),
+  );
+}

@@ -82,7 +82,6 @@ class EditProfileController extends GetxController {
       return;
     }
     if(!imageFromNetwork){
-      print('hahahahha');
       var response = await ProfileService.updatePicProfile(imageFile);
       switchBool();
       if(response.error){

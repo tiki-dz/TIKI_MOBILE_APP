@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiki/controllers/EditProfileController.dart';
 import 'package:tiki/views/Profile/EditProfiles/widget.editProfile.dart';
+import 'package:tiki/views/Profile/ResetPassword/widget.resetPassword.dart';
 import '../../../controllers/ProfileController.dart';
 import '../../../data/pallete.data.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,7 +68,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                     Text(controller.userProfile.email,
                         style: GoogleFonts.poppins(
-                            fontSize: 10.sp,
+                            fontSize: 7.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w500))
                   ],
@@ -111,6 +112,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
               }),
               myListTile("Settings", "settings",(){
+                Get.to(()=>ResetPasswordWidget());
 
               }),
               myListTile("Share", "share",(){

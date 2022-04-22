@@ -10,3 +10,11 @@ Widget circularProgressModel([Color color = KOrange,double height=7 ] ) => Sized
       child: CircularProgressIndicator(
           color: color),
     ));
+
+Widget pagination() => Container(
+    margin: EdgeInsets.symmetric(vertical: 3.h),
+    child: Text(
+      "more",
+      style: TextStyle(
+          color: KOrange, fontSize: 13.sp, fontWeight: FontWeight.w600),
+    ));

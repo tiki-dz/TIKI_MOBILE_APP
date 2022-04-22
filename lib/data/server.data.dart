@@ -1,9 +1,20 @@
-String urlLogin = "http://192.168.1.104:5001/api/common/login";
-String urlVerifyCode= "http://192.168.1.104:5001/api/client/verifyCode";
+String ip = "192.168.1.104";
+
+String urlLogin = "http://$ip:5001/api/common/login";
+String urlVerifyCode= "http://$ip:5001/api/client/verifyCode";
 String urlProfile= "192.168.1.104/api/client/profile";
-String urlSignup = "http://192.168.1.104:5001/api/client/signup";
-String urlForgetPasswordSendVerificationAccount ="http://192.168.1.104:5001/api/common/forgetPasswordSendVerificationAccount";
-String urlForgetPasswordValidateAccount ="http://192.168.1.104:5001/api/common/forgetPasswordValidateAccount";
-String urlForgetPasswordChangePasswordAccount ="http://192.168.1.104:5001/api/common/forgetPasswordChangePasswordAccount";
-String urlUpdateProfile = "http://192.168.1.104:5001/api/client";
-String urlUpdatePicProfile = "http://192.168.1.104:5001/api/client/updateimage";
+String urlSignup = "http://$ip:5001/api/client/signup";
+String urlForgetPasswordSendVerificationAccount ="http://$ip:5001/api/common/forgetPasswordSendVerificationAccount";
+String urlForgetPasswordValidateAccount ="http://$ip:5001/api/common/forgetPasswordValidateAccount";
+String urlForgetPasswordChangePasswordAccount ="http://$ip:5001/api/common/forgetPasswordChangePasswordAccount";
+String urlUpdateProfile = "http://$ip:5001/api/client";
+String urlUpdatePicProfile = "http://$ip:5001/api/client/updateimage";
+String urlResetPassword = "http://$ip:5001/api/client/resetPassword";
+
+////home
+String urlCategories = "http://$ip:5002/api/admin/category";
+String urlEvents = "http://$ip:5002/api/admin/event?category=";
+
+
+////search
+

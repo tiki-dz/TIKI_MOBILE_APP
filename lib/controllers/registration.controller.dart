@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tiki/Models/model.registration.dart';
 import 'package:tiki/controllers/confirmation.controller.dart';
 import 'package:intl/intl.dart';
+import 'package:tiki/controllers/wrapperProfileController.dart';
 import 'package:tiki/views/Authentification/widget.confirmation.dart';
 import '../constWidgets/snackBar.dart';
 import '../services/AuthService.dart';
@@ -62,9 +63,11 @@ class SignUpController extends GetxController {
         emailController.text,
         passwordController.text));
     if (response.error) {
-      snackBarModel("error","check your information" , true);
+      snackBarModel("Echeck","check your information" , true);
       switchBool();
     } else {
+      WrapperProfileController controller = Get.find<WrapperProfileController>();
+      controller.updateSign();
       Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 0));
       switchBool();
     }

@@ -10,11 +10,13 @@ import 'package:sizer/sizer.dart';
 import 'package:tiki/views/Authentification/widget.login.dart';
 import '../../constWidgets/progressIndicator.dart';
 import '../../controllers/registration.controller.dart';
+import '../ButtomBar/widget.bottomBar.dart';
 import 'components/component.inputDate.dart';
 import 'components/component.inputPassword.dart';
 
 class SignUpWidget extends StatelessWidget {
   const SignUpWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
@@ -33,7 +35,13 @@ class SignUpWidget extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.topRight,
-            child: SvgPicture.asset('assets/icons/fi-rr-cross-small.svg'),
+            child: InkWell(
+              onTap: () {
+                Get.offAll(const BottomBarWidget());
+              },
+              child: SvgPicture.asset(
+                  'assets/icons/fi-rr-cross-small.svg'),
+            ),
           ),
           SizedBox(
             height: 3.h,
@@ -62,14 +70,16 @@ class SignUpWidget extends StatelessWidget {
           SizedBox(
             height: 2.h,
           ),
-          Obx(()=>
-              InputDateComponent(
-                leadingIcon: 'assets/icons/fi-rr-calendar.svg',
-                hintText:controller.birthDateController.value == "" ?  'birthDate'.tr : controller.birthDateController.value,
-                controller: controller,
-                function: controller.changeDate,
-              ),),
-
+          Obx(
+            () => InputDateComponent(
+              leadingIcon: 'assets/icons/fi-rr-calendar.svg',
+              hintText: controller.birthDateController.value == ""
+                  ? 'birthDate'.tr
+                  : controller.birthDateController.value,
+              controller: controller,
+              function: controller.changeDate,
+            ),
+          ),
           SizedBox(
             height: 2.h,
           ),
@@ -96,14 +106,14 @@ class SignUpWidget extends StatelessWidget {
           ),
           Obx(() => controller.isUpdating.value == false
               ? button("Sign up", () async {
-            await controller.signUp();
-          })
+                  await controller.signUp();
+                })
               : circularProgressModel()),
           SizedBox(
             height: 3.h,
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               Get.to(const LogInWidget());
             },
             child: Row(
@@ -119,7 +129,9 @@ class SignUpWidget extends StatelessWidget {
                 Text(
                   'login'.tr,
                   style: TextStyle(
-                      fontSize: 10.sp, fontWeight: semiBold, color: ButtonColor),
+                      fontSize: 10.sp,
+                      fontWeight: semiBold,
+                      color: ButtonColor),
                 ),
               ],
             ),

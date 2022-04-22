@@ -7,7 +7,7 @@ import 'package:tiki/views/Home/widget.home.dart';
 import '../constWidgets/snackBar.dart';
 import '../services/AuthService.dart';
 import '../views/Authentification/widget.confirmation.dart';
-import '../views/Authentification/widget.resetPassword.dart';
+import '../views/Authentification/widget.resetPasswordForget.dart';
 import '../views/ButtomBar/widget.bottomBar.dart';
 import 'localController.dart';
 
@@ -73,7 +73,7 @@ class ConfirmationController extends GetxController {
       snackBarModel("Echek","check your information" , true);
       switchBool();
     } else {
-       cas ==0 ?   Get.off(() => const BottomBarWidget()) : Get.off(() => ResetPasswordWidget(email: email,token: response.data,));
+       cas ==0 ?   Get.off(() => const BottomBarWidget()) : Get.off(() => ResetPasswordForgetWidget(email: email,token: response.data,));
     }
   }
 }
