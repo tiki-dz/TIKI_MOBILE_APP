@@ -27,6 +27,7 @@ class ConfirmationWidget extends StatefulWidget {
 }
 
 class _ConfirmationWidgetState extends State<ConfirmationWidget> {
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put<ConfirmationController>(ConfirmationController(
@@ -257,9 +258,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                       height: 3.h,
                     ),
                     GetBuilder<ConfirmationController>(builder: (controller) {
-                      if (!controller.sendFirst) {
-                        return SizedBox(height: 2.h);
-                      } else if (controller.start == 0) {
+                      if (controller.start == 0) {
                         return InkWell(
                           onTap: () {
                             controller.startTimer();

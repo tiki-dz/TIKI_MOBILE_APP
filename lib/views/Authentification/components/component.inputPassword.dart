@@ -10,9 +10,10 @@ import 'package:get/get.dart';
 class InputComponentPassword extends StatefulWidget {
   String hintText;
   TextEditingController textEditingController;
+  String? Function(String?) validate;
 
   InputComponentPassword(
-      {required this.textEditingController, required this.hintText});
+      {required this.textEditingController, required this.hintText,required this.validate});
 
   @override
   State<InputComponentPassword> createState() => _InputComponentPasswordState();
@@ -23,6 +24,7 @@ class _InputComponentPasswordState extends State<InputComponentPassword> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: widget.validate,
       obscureText: !showPassword,
       cursorColor: ButtonColor,
       controller: widget.textEditingController,

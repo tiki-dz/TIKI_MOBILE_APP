@@ -8,6 +8,13 @@ import '../services/HomeService.dart';
 
 class HomeController extends GetxController{
 
+
+  @override
+  void onInit() async {
+    getEvents();
+    super.onInit();
+  }
+
   List<CategoriesModel>? categories;
   int? categoriesNumber ;
 
@@ -24,6 +31,7 @@ class HomeController extends GetxController{
   ScrollController scrollController = ScrollController();
 
   var animation = 0.0.obs;
+
 
 
 
@@ -66,6 +74,7 @@ class HomeController extends GetxController{
   }
 
   getEvents()async {
+
     switchBool();
     await getCategories();
     if(!error){

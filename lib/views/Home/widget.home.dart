@@ -19,20 +19,16 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> with SingleTickerProviderStateMixin {
-  final controller = Get.put(HomeController());
+
 
   Color grey = Color(0Xff7A7A7A);
   List myList = [1, 2, 3];
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    controller.getEvents();
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeController());
     return Container(
       height: 100.h,
       width: 100.w,

@@ -73,7 +73,7 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Knives Out",
+                              widget.event?.name ?? "",
                               style: TextStyle(
                                   fontSize: 18.sp, fontWeight: semiBold),
                             ),

@@ -1,14 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiki/constWidgets/snackBar.dart';
+import 'package:tiki/views/Authentification/widget.login.dart';
+import 'package:tiki/views/Authentification/widget.resetPasswordForget.dart';
 
-import '../constWidgets/snackBar.dart';
-import '../services/ProfileService.dart';
+import '../services/AuthService.dart';
 
-class ResetPasswordController extends GetxController{
+class ResetPasswordForgetController extends GetxController {
   TextEditingController passwordController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
-
+  TextEditingController confirmPasswordController = TextEditingController();
+  String email;
+  String? token;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  ResetPasswordForgetController({required this.email, required this.token});
 
   String? validatePassword(String? password) {
     if (passwordController.text.isEmpty) {
@@ -23,12 +29,12 @@ class ResetPasswordController extends GetxController{
 
   String? validateConfirmPassword(String? password) {
     if(validatePassword("") == null){
-      if (newPasswordController.text.isEmpty) {
+      if (confirmPasswordController.text.isEmpty) {
         return 'confirmation password is required';
       }
 
-      if (newPasswordController.text == passwordController.text) {
-        return 'password are the same';
+      if (confirmPasswordController.text != passwordController.text) {
+        return 'password are not the same';
       }
     }
 
@@ -45,16 +51,14 @@ class ResetPasswordController extends GetxController{
     if (formKey.currentState?.validate() ?? true) {
       switchBool();
 
-      var response = await ProfileService.resetPassword(passwordController.text, newPasswordController.text);
+      var response = await AuthService.forgetPasswordChangePasswordAccount(
+          email, passwordController.text, token);
       if (response.error) {
         snackBarModel("Echec", "try after afiew minute", true);
       } else {
-
-        snackBarModel("Succes", "operation done", false);
-
+        Get.to(()=>LogInWidget());
       }
       switchBool();
-
     }
   }
 }

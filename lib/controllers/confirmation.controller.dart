@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tiki/controllers/resetPasswordController.dart';
+import 'package:tiki/controllers/resetPasswordForgetController.dart';
 import 'package:tiki/controllers/wrapperProfileController.dart';
 import 'package:tiki/views/Home/widget.home.dart';
 import '../constWidgets/snackBar.dart';
@@ -22,10 +22,16 @@ class ConfirmationController extends GetxController {
   ConfirmationController({required this.cas,required this.email,required this.token});
 
   final TextEditingController codePinController = TextEditingController();
-  var sendFirst = false;
   var isProcessing = false.obs;
   late Timer timer;
   int start = 50;
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    startTimer();
+  }
 
 
   void switchBool() {
@@ -33,7 +39,6 @@ class ConfirmationController extends GetxController {
   }
 
   void startTimer() {
-    sendFirst = true;
     start = 50;
     update();
     const oneSec = Duration(seconds: 1);

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import '../../../data/font.data.dart';
 import '../../../data/pallete.data.dart';
@@ -10,14 +11,16 @@ class InputComponent extends StatelessWidget {
   String leadingIcon;
   String hintText;
   TextEditingController textEditingController;
+  String? Function(String?) validate;
   InputComponent(
       {required this.leadingIcon,
       required this.textEditingController,
-      required this.hintText});
+      required this.hintText,required this.validate});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validate,
       cursorColor: ButtonColor,
       controller: textEditingController,
       style: TextStyle(fontSize: 10.sp, fontWeight: regular),

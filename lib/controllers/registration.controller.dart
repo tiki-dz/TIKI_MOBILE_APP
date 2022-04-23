@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiki/Models/model.registration.dart';
@@ -16,13 +17,82 @@ class SignUpController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   var radioSexe = 0;
 
   changeRadio(int? value){
-
     radioSexe = value?? 0;
     update();
   }
+
+  String? validatePassword(String? password) {
+    if(validateName("") == null && (validateLastName("")) == null && (validateEmail("")) == null) {
+      if (passwordController.text.isEmpty) {
+        return 'password is required';
+      }
+
+      if (passwordController.text.length < 8) {
+        return 'password must have 8 lettre';
+      }
+      return null;
+    }
+  }
+
+  String? validateConfirmPassword(String? password) {
+    if (validateName("") == null && (validateLastName("")) == null &&
+        (validateEmail("")) == null && (validatePassword("")) == null ) {
+      if (confirmPasswordController.text.isEmpty) {
+        return 'confirmation password is required';
+      }
+
+      if (confirmPasswordController.text != passwordController.text) {
+        return 'password are not the same';
+      }
+      return null;
+    }
+  }
+
+  String? validateEmail(String? email){
+    if(validateName("") == null && (validateLastName("")) == null){
+      if(emailController.text.isEmpty){
+        return "email is required";
+      }
+
+      if(!EmailValidator.validate(emailController.text)){
+        return "please verify your email";
+      }
+    }
+    return null;
+
+  }
+
+  String? validateName(String? name){
+    if(nameController.text.isEmpty){
+      return "name is required";
+    }
+
+    if(nameController.text.length<2){
+      return "please enter a valid name";
+    }
+    return null;
+  }
+
+  String? validateLastName(String? email){
+    if(validateName("") == null){
+      if(lastNameController.text.isEmpty){
+        return "last name is required";
+      }
+
+      if(lastNameController.text.length<2){
+        return "please enter a valid last nname";
+      }
+    }
+    return null;
+
+  }
+
 
   void changeDate(DateTime dateTime) {
     final DateTime date= dateTime;
@@ -38,30 +108,16 @@ class SignUpController extends GetxController {
   }
 
   signUp() async {
-    switchBool();
-    if (nameController.text.isEmpty ||
-        lastNameController.text.isEmpty ||
-        emailController.text.isEmpty ||
-        birthDateController.value.isEmpty ||
-        passwordController.text.isEmpty ||
-        confirmPasswordController.text.isEmpty) {
+
+    if(formKey.currentState?.validate() ?? true ){
       switchBool();
-      return;
-    }
-    if (passwordController.text.length < 8) {
-      switchBool();
-      return;
-    }
-    if (passwordController.text != confirmPasswordController.text) {
-      switchBool();
-      return;
-    }
     var response = await AuthService.signUp(RegistrationModel(
         nameController.text,
         lastNameController.text,
         birthDateController.value,
         emailController.text,
         passwordController.text));
+
     if (response.error) {
       snackBarModel("Echeck","check your information" , true);
       switchBool();
@@ -70,7 +126,7 @@ class SignUpController extends GetxController {
       controller.updateSign();
       Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 0));
       switchBool();
-    }
+    }}
   }
 
 }

@@ -30,30 +30,33 @@ class _ForgetPasswordWidgetState extends State<ForgetPasswordWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             backWidget,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Reénitialision mot de passe",
-                  style: TextStyle(fontSize: 17.sp, fontWeight: semiBold),
-                ),
-                SizedBox(
-                  height: 2.h,
-                ),
-                Text(
-                  "Entrez votre email et vous allez recevoir \nun code dans votre boite",
-                  style: TextStyle(fontSize: 11.sp, fontWeight: regular),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: 8.h,
-                ),
-                InputComponent(
-                    leadingIcon: 'assets/icons/fi-rr-envelope.svg',
-                    hintText: 'email'.tr,
-                    textEditingController: controller.emailController),
-              ],
+            Form(
+              key: controller.formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Reénitialision mot de passe",
+                    style: TextStyle(fontSize: 17.sp, fontWeight: semiBold),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Text(
+                    "Entrez votre email et vous allez recevoir \nun code dans votre boite",
+                    style: TextStyle(fontSize: 11.sp, fontWeight: regular),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  InputComponent(
+                      leadingIcon: 'assets/icons/fi-rr-envelope.svg',
+                      hintText: 'email'.tr,
+                      textEditingController: controller.emailController,validate: controller.validateEmail,),
+                ],
+              ),
             ),
             Obx(() => controller.isSending.value == false
                 ? button("Send", () async {

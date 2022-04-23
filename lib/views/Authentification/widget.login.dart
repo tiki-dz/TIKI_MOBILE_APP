@@ -37,59 +37,64 @@ class _LogInWidgetState extends State<LogInWidget> {
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 7.w),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: InkWell(
-                        onTap: () {
-                          Get.offAll(const BottomBarWidget());
-                        },
-                        child: SvgPicture.asset(
-                            'assets/icons/fi-rr-cross-small.svg'),
-                      ),
-                    ),
-                    Expanded(child: Image.asset('assets/logo/logo.png')),
-                    Text(
-                      "Sing up to your account\nto can buy ticket",
-                      style: TextStyle(fontSize: 10.sp, fontWeight: medium),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(
-                      height: 4.h,
-                    ),
-                    InputComponent(
-                        leadingIcon: 'assets/icons/fi-rr-envelope.svg',
-                        hintText: 'email'.tr,
-                        textEditingController: controller.emailController),
-                    SizedBox(height: 2.h),
-                    InputComponentPassword(
-                      hintText: 'password'.tr,
-                      textEditingController: controller.passwordController,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(ForgetPasswordWidget());
-                      },
-                      child: Align(
+                child: Form(
+                  key: controller.formKey,
+                  child: Column(
+                    children: [
+                      Align(
                         alignment: Alignment.topRight,
-                        child: Text(
-                          "Forget password ?",
-                          style:
-                              TextStyle(fontSize: 10.sp, fontWeight: regular),
+                        child: InkWell(
+                          onTap: () {
+                            Get.offAll(const BottomBarWidget());
+                          },
+                          child: SvgPicture.asset(
+                              'assets/icons/fi-rr-cross-small.svg'),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 4.h,
-                    ),
-                    Obx(() => controller.isUpdating.value == false
-                        ? button("Log In", () async {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            await controller.login();
-                          })
-                        : circularProgressModel()),
-                  ],
+                      Expanded(child: Image.asset('assets/logo/logo.png')),
+                      Text(
+                        "Sing up to your account\nto can buy ticket",
+                        style: TextStyle(fontSize: 10.sp, fontWeight: medium),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 4.h,
+                      ),
+                      InputComponent(
+                          leadingIcon: 'assets/icons/fi-rr-envelope.svg',
+                          hintText: 'email'.tr,
+                          textEditingController: controller.emailController,validate: controller.validateEmail,),
+                      SizedBox(height: 2.h),
+                      InputComponentPassword(
+                        hintText: 'password'.tr,
+                        textEditingController: controller.passwordController,
+                        validate: controller.validatePassword,
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(ForgetPasswordWidget());
+                          },
+                          child: Text(
+                            "Forget password ?",
+                            style:
+                                TextStyle(fontSize: 10.sp, fontWeight: regular),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 4.h,
+                      ),
+                      Obx(() => controller.isUpdating.value == false
+                          ? button("Log In", () async {
+                              FocusManager.instance.primaryFocus?.unfocus();
+
+                              await controller.login();
+                            })
+                          : circularProgressModel()),
+                    ],
+                  ),
                 ),
               ),
             ),
