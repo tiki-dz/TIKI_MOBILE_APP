@@ -44,4 +44,9 @@ class UserModel {
       "picture":picture
     };
   }
+
+  @override
+  String toString() {
+    return 'UserModel{firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, birthDate: $birthDate, email: $email, sexe: $sexe, city: $city, picture: $picture}';
+  }
 }

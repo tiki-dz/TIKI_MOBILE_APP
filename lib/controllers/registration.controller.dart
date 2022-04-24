@@ -18,6 +18,8 @@ class SignUpController extends GetxController {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   var radioSexe = 0;
@@ -28,7 +30,7 @@ class SignUpController extends GetxController {
   }
 
   String? validatePassword(String? password) {
-    if(validateName("") == null && (validateLastName("")) == null && (validateEmail("")) == null) {
+    if(validateName("") == null && (validateLastName("")) == null && (validateEmail("")) == null  && validateDate("")==null) {
       if (passwordController.text.isEmpty) {
         return 'password is required';
       }
@@ -38,11 +40,12 @@ class SignUpController extends GetxController {
       }
       return null;
     }
+    return null;
   }
 
   String? validateConfirmPassword(String? password) {
     if (validateName("") == null && (validateLastName("")) == null &&
-        (validateEmail("")) == null && (validatePassword("")) == null ) {
+        (validateEmail("")) == null && (validatePassword("")) == null  && validateDate("")==null ) {
       if (confirmPasswordController.text.isEmpty) {
         return 'confirmation password is required';
       }
@@ -52,10 +55,11 @@ class SignUpController extends GetxController {
       }
       return null;
     }
+    return null;
   }
 
   String? validateEmail(String? email){
-    if(validateName("") == null && (validateLastName("")) == null){
+    if(validateName("") == null && validateLastName("") == null && validateDate("")==null ){
       if(emailController.text.isEmpty){
         return "email is required";
       }
@@ -65,7 +69,6 @@ class SignUpController extends GetxController {
       }
     }
     return null;
-
   }
 
   String? validateName(String? name){
@@ -90,7 +93,15 @@ class SignUpController extends GetxController {
       }
     }
     return null;
+  }
 
+  String? validateDate(String? date){
+    if(validateName("") == null && validateLastName("") == null){
+      if(birthDateController.isEmpty){
+        return "birthdate name is required";
+      }
+    }
+    return null;
   }
 
 

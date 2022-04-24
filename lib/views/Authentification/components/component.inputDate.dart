@@ -11,6 +11,7 @@ class InputDateComponent extends StatefulWidget {
   String leadingIcon;
   String hintText;
   var controller;
+  String? Function(String?) validate;
   Function(DateTime) function;
 
   InputDateComponent(
@@ -18,7 +19,7 @@ class InputDateComponent extends StatefulWidget {
       required this.leadingIcon,
       required this.hintText,
       required this.controller,
-      required this.function})
+      required this.function,required this.validate})
       : super(key: key);
 
   @override
@@ -29,6 +30,7 @@ class _InputDateComponentState extends State<InputDateComponent> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: widget.validate,
       onTap: () {
         Get.bottomSheet(Container(
             height: 40.h,

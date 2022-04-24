@@ -12,16 +12,18 @@ class InputComponentEditProfile  extends StatelessWidget {
   TextEditingController textEditingController;
   bool readOnly ;
   String hint ;
+  String? Function(String?) validate;
 
   InputComponentEditProfile(
       {required this.leadingIcon,
         required this.textEditingController,
-        required this.readOnly,required this.hint});
+        required this.readOnly,required this.hint,required this.validate});
 
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validate,
       readOnly: readOnly,
       cursorColor: KOrange,
       controller: textEditingController,

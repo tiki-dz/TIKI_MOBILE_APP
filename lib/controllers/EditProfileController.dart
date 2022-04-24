@@ -5,11 +5,13 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
 import 'package:tiki/Models/model.user.dart';
+import 'package:tiki/controllers/ProfileController.dart';
 import 'package:tiki/views/Profile/EditProfiles/widget.editProfile.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tiki/views/Profile/Profile/widget.profile.dart';
 import '../constWidgets/snackBar.dart';
 import '../services/ProfileService.dart';
+import '../views/ButtomBar/widget.bottomBar.dart';
 import 'localController.dart';
 
 class EditProfileController extends GetxController {
@@ -26,10 +28,13 @@ class EditProfileController extends GetxController {
   String? picture;
   late int radioSexe;
 
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    print(user.sexe);
     radioSexe = user.sexe?? 0;
     picture = user.picture;
     lastNameController = TextEditingController(text: user.lastName);
@@ -72,43 +77,81 @@ class EditProfileController extends GetxController {
     }
   }
 
-  updateProfile() async {
-    switchBool();
-    if (nameController.text.isEmpty ||
-        lastNameController.text.isEmpty ||
-        emailController.text.isEmpty ||
-        birthDate.value.isEmpty) {
-      switchBool();
-      return;
+  String? validateDate(String? date){
+    if(validateName("") == null && validateLastName("") == null){
+      if(birthDate.isEmpty){
+        return "birthdate name is required";
+      }
     }
-    if(!imageFromNetwork){
-      var response = await ProfileService.updatePicProfile(imageFile);
-      switchBool();
-      if(response.error){
-        snackBarModel("Echec", "try after afiew minute", true);
-        return;
+    return null;
+  }
+
+  String? validateCity(String? city){
+    return null;
+  }
+
+  String? validateEmail(String? email){
+    return null;
+  }
+
+
+
+  String? validateName(String? name){
+    if(nameController.text.isEmpty){
+      return "name is required";
+    }
+
+    if(nameController.text.length<2){
+      return "please enter a valid name";
+    }
+    return null;
+  }
+
+  String? validateLastName(String? email){
+    if(validateName("") == null){
+      if(lastNameController.text.isEmpty){
+        return "last name is required";
       }
 
+      if(lastNameController.text.length<2){
+        return "please enter a valid last nname";
+      }
     }
+    return null;
+  }
 
-    var response = await ProfileService.updateProfile(UserModel(
+  updateProfile() async {
+    if (formKey.currentState?.validate() ?? true) {
+      switchBool();
+      if (!imageFromNetwork) {
+        var response = await ProfileService.updatePicProfile(imageFile);
+        if (response.error) {
+          snackBarModel("Echec", "try after afiew minute", true);
+          switchBool();
+          return;
+        }
+      }
+
+      var response = await ProfileService.updateProfile(UserModel(
         firstName: nameController.text,
         lastName: lastNameController.text,
-        phoneNumber: phoneNumberController.text,
         birthDate: birthDate.value,
         email: emailController.text,
         sexe: radioSexe,
         city: cityController.text,
       ));
 
-    if (response.error) {
-      snackBarModel("Echec", "try after afiew minute", true);
-      switchBool();
-    } else {
-      LocalController.setProfile(response.data);
-      switchBool();
-      snackBarModel("Succes", "operation done", false);
-      Get.offAll(()=>ProfileWidget());
+      if (response.error) {
+        snackBarModel("Echec", "try after afiew minute", true);
+        switchBool();
+      } else {
+        LocalController.setProfile(response.data);
+        switchBool();
+        snackBarModel("Succes", "operation done", false);
+        final controller = Get.find<ProfileController>();
+        controller.getUpdatedProfile();
+        Get.offAll(() => const BottomBarWidget());
+      }
     }
   }
 }

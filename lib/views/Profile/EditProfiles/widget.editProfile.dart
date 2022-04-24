@@ -99,104 +99,111 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                     ),
                     Expanded(
                         child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          InputComponentEditProfile(
-                            leadingIcon: 'assets/icons/fi-rr-envelope.svg',
-                            textEditingController: controller.emailController,
-                            readOnly: true,
-                            hint: "",
-                          ),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          InputComponentEditProfile(
-                              leadingIcon: 'assets/icons/fi-rr-user.svg',
-                              textEditingController: controller.nameController,
-                              readOnly: false,
-                              hint: "add your name"),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          InputComponentEditProfile(
-                              leadingIcon: 'assets/icons/fi-rr-user.svg',
-                              textEditingController:
-                                  controller.lastNameController,
-                              readOnly: false,
-                              hint: "add your last name"),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          Obx(
-                            () {
-                            return InputDateComponentEditProfile(
-                                leadingIcon: 'assets/icons/fi-rr-calendar.svg',
-                                hintText: controller.birthDate.value,
-                                controller: controller,
-                                function: controller.changeDate,
-                              );
+                      child: Form(
+                        key: controller.formKey,
+                        child: Column(
+                          children: [
+                            InputComponentEditProfile(
+                              leadingIcon: 'assets/icons/fi-rr-envelope.svg',
+                              textEditingController: controller.emailController,
+                              readOnly: true,
+                              hint: "",
+                              validate: controller.validateEmail,
+                            ),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            InputComponentEditProfile(
+                                leadingIcon: 'assets/icons/fi-rr-user.svg',
+                                textEditingController: controller.nameController,
+                                readOnly: false,
+                                hint: "add your name",validate: controller.validateName,),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            InputComponentEditProfile(
+                                leadingIcon: 'assets/icons/fi-rr-user.svg',
+                                textEditingController:
+                                    controller.lastNameController,
+                                readOnly: false,
+                                hint: "add your last name",validate: controller.validateLastName,),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            Obx(
+                              () {
+                              return InputDateComponentEditProfile(
+                                  leadingIcon: 'assets/icons/fi-rr-calendar.svg',
+                                  hintText: controller.birthDate.value,
+                                  controller: controller,
+                                  function: controller.changeDate,
+                                validate: controller.validateDate,
+                                );
 
-                            }
-                          ),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          InputComponentEditProfile(
-                            leadingIcon: 'assets/icons/city.svg',
-                            textEditingController: controller.cityController,
-                            readOnly: false,
-                            hint: "add your city",
-                          ),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          InputComponentEditProfile(
-                            leadingIcon: 'assets/icons/phone.svg',
-                            textEditingController:
-                                controller.phoneNumberController,
-                            readOnly: true,
-                            hint: "add your phone number",
-                          ),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          GetBuilder<EditProfileController>(
-                              init: controller,
-                              // no need to initialize Controller ever again, just mention the type
-                              builder: (value) => Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Radio(
-                                            activeColor: KOrange,
-                                            value: 0,
-                                            groupValue: controller.radioSexe,
-                                            onChanged: controller.changeRadio,
-                                          ),
-                                          Text(
-                                            "Homme",
-                                            style: TextStyle(fontSize: 11.sp),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                            activeColor: KOrange,
-                                            value: 1,
-                                            groupValue: controller.radioSexe,
-                                            onChanged: controller.changeRadio,
-                                          ),
-                                          Text('Femme',
-                                              style:
-                                                  TextStyle(fontSize: 11.sp)),
-                                        ],
-                                      ),
-                                    ],
-                                  )),
-                        ],
+
+                              }
+                            ),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            InputComponentEditProfile(
+                              leadingIcon: 'assets/icons/city.svg',
+                              textEditingController: controller.cityController,
+                              readOnly: false,
+                              hint: "add your city",
+                              validate: controller.validateCity,
+                            ),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                           /* InputComponentEditProfile(
+                              leadingIcon: 'assets/icons/phone.svg',
+                              textEditingController:
+                                  controller.phoneNumberController,
+                              readOnly: true,
+                              hint: "add your phone number",
+                            ), */
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            GetBuilder<EditProfileController>(
+                                init: controller,
+                                // no need to initialize Controller ever again, just mention the type
+                                builder: (value) => Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Radio(
+                                              activeColor: KOrange,
+                                              value: 0,
+                                              groupValue: controller.radioSexe,
+                                              onChanged: controller.changeRadio,
+                                            ),
+                                            Text(
+                                              "Homme",
+                                              style: TextStyle(fontSize: 11.sp),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Radio(
+                                              activeColor: KOrange,
+                                              value: 1,
+                                              groupValue: controller.radioSexe,
+                                              onChanged: controller.changeRadio,
+                                            ),
+                                            Text('Femme',
+                                                style:
+                                                    TextStyle(fontSize: 11.sp)),
+                                          ],
+                                        ),
+                                      ],
+                                    )),
+                          ],
+                        ),
                       ),
                     )),
                     Obx(() => controller.isUpdating.value == false

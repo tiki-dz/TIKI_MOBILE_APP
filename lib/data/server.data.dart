@@ -1,4 +1,4 @@
-String ip = "192.168.1.104";
+String ip = "192.168.1.2";
 
 String urlLogin = "http://$ip:5001/api/common/login";
 String urlVerifyCode= "http://$ip:5001/api/client/verifyCode";

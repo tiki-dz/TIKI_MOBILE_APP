@@ -9,6 +9,12 @@ class ProfileController extends GetxController{
   late UserModel userProfile = LocalController.getProfile();
 
 
+  getUpdatedProfile(){
+    userProfile = LocalController.getProfile();
+    update();
+  }
+
+
 
   logOut(){
     LocalController.logOut();
@@ -16,9 +22,5 @@ class ProfileController extends GetxController{
     controller.updateSign();
     Get.offAll(()=>const BottomBarWidget());
   }
-
-  
-
-
 
 }

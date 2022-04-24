@@ -13,10 +13,11 @@ class InputDateComponentEditProfile extends StatefulWidget {
   String leadingIcon;
   String hintText;
   var controller;
+  String? Function(String?) validate;
   Function(DateTime) function ;
   InputDateComponentEditProfile(
       {Key? key, required this.leadingIcon,
-        required this.hintText,required this.controller,required this.function}) : super(key: key);
+        required this.hintText,required this.controller,required this.function,required this.validate}) : super(key: key);
 
   @override
   State<InputDateComponentEditProfile> createState() => _InputDateComponentEditProfileState();
@@ -26,6 +27,7 @@ class _InputDateComponentEditProfileState extends State<InputDateComponentEditPr
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: widget.validate,
       onTap: (){
         Get.bottomSheet(
           Container(height: 40.h,color: Colors.white,child : Column(

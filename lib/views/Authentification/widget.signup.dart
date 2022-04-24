@@ -80,6 +80,7 @@ class SignUpWidget extends StatelessWidget {
                     : controller.birthDateController.value,
                 controller: controller,
                 function: controller.changeDate,
+                validate: controller.validateDate,
               ),
             ),
             SizedBox(

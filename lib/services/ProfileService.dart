@@ -28,23 +28,31 @@ class ProfileService {
   }
 
   static Future<General<String>> updateProfile(UserModel user) async {
-    //hh
+    Map<String, String?> body ;
+    if(user.city?.isEmpty ?? true){
+    body = {
+      "firstName": user.firstName,
+      "lastName": user.lastName,
+      "sexe": user.sexe == 0 ? "Homme" : "Femme",
+      "birthDate": user.birthDate
+    };
+    }else {
+      body = {
+        "city" : user.city,
+        "firstName": user.firstName,
+        "lastName": user.lastName,
+        "sexe": user.sexe == 0 ? "Homme" : "Femme",
+        "birthDate": user.birthDate
+      };
+    }
     try {
       http.Response response = await http.put(Uri.parse(urlUpdateProfile),
-          body: {
-             "firstName" : user.firstName,
-            "lastName" : user.lastName,
-            "city" : user.city,
-            "sexe" : user.sexe ==0 ? "Homme" :"Femme",
-            "birthDate" : user.birthDate
-          }
-          , headers: {'x-access-token': LocalController.getToken()});
+          body: body, headers: {'x-access-token': LocalController.getToken()});
       if (response.statusCode == 200) {
         return General<String>(data: response.body);
       }
       return General<String>(error: true);
     } on Exception catch (e) {
-
       return General<String>(error: true);
     }
   }
@@ -61,19 +69,16 @@ class ProfileService {
       final mime = lookupMimeType(image.path).toString(); //<- get mime type
 
       request.files.add(http.MultipartFile(
-        'updateimage',
-        image.readAsBytes().asStream(),
-        image.lengthSync(),
-        filename: image.path,
-          contentType:   MediaType("image",mime.split("/")[1])
-      ));
+          'updateimage', image.readAsBytes().asStream(), image.lengthSync(),
+          filename: image.path,
+          contentType: MediaType("image", mime.split("/")[1])));
       request.headers.addAll(headers);
       http.StreamedResponse streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);
       print(response.statusCode);
       print("//////////");
       if (response.statusCode == 200) {
-        return General<String>(data:"");
+        return General<String>(data: "");
       }
       return General<String>(error: true);
     } on Exception catch (e) {
@@ -81,21 +86,21 @@ class ProfileService {
     }
   }
 
-
-  static Future<General<bool>> resetPassword(String currentPassword , String newPassword)async {
+  static Future<General<bool>> resetPassword(
+      String currentPassword, String newPassword) async {
     try {
-      http.Response response = await http.put(Uri.parse(urlResetPassword),
-          body: {
-            "password" : currentPassword,
-            "newPassword" :newPassword,
-          }
-          , headers: {'x-access-token': LocalController.getToken()});
+      http.Response response =
+          await http.put(Uri.parse(urlResetPassword), body: {
+        "password": currentPassword,
+        "newPassword": newPassword,
+      }, headers: {
+        'x-access-token': LocalController.getToken()
+      });
       if (response.statusCode == 200) {
         return General<bool>();
       }
       return General<bool>(error: true);
     } on Exception catch (e) {
-
       return General<bool>(error: true);
     }
   }

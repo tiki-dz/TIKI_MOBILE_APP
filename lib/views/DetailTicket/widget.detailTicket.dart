@@ -16,23 +16,22 @@ class _DetailTicketWidgetState extends State<DetailTicketWidget> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          backgroundColor: KOrange,
             appBar: AppBar(
-              leading: Icon(
-                Icons.arrow_back_ios_rounded,
-                color: Colors.black,
-                size: 14.sp,
-              ),
-              backgroundColor: Colors.white,
-              title: const Text(
+              backgroundColor: KOrange,
+              title:  Text(
                 "Détail ticket",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(fontSize: 13.sp),
               ),
               centerTitle: true,
+              elevation: 0,
             ),
             body: Container(
               height: 100.h,
               width: 100.w,
-              decoration: BoxDecoration(gradient: verticalLinear),
+              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(12.sp),
+                  topLeft: Radius.circular(12.sp)),),
               child: CarouselDetailsTickets(),
             )));
   }
