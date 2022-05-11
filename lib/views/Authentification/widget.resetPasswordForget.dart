@@ -36,7 +36,7 @@ class _ResetPasswordForgetWidgetState extends State<ResetPasswordForgetWidget> {
               backWidget,
               Column(
                 children: [
-                  Text("Enter your new password" , style: TextStyle(fontSize: 15.sp, fontWeight: bold),),
+                  Text("Enter_your_new_password".tr , style: TextStyle(fontSize: 15.sp, fontWeight: bold),),
                   SizedBox(height: 7.h),
                   InputComponentPassword(
                     hintText: 'Password'.tr,
@@ -52,7 +52,7 @@ class _ResetPasswordForgetWidgetState extends State<ResetPasswordForgetWidget> {
                 ],
               ),
               Obx(() => controller.isSending.value == false
-                  ? button("Confirm", () async {
+                  ? button("confirm".tr, () async {
                       await controller.resetPassword();
                     })
                   : circularProgressModel())

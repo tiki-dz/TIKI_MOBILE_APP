@@ -59,7 +59,7 @@ class ConfirmationController extends GetxController {
   sendCode() async {
     switchBool();
     if(codePinController.text.length<6){
-      snackBarModel("Echek","code pin must have 6 chiffres" , true);
+      snackBarModel("echek".tr,"code_pin_error".tr , true);
       return "";
     }
     startTimer();
@@ -75,7 +75,7 @@ class ConfirmationController extends GetxController {
     }
 
     if (response.error) {
-      snackBarModel("Echek","check your information" , true);
+      snackBarModel("echek".tr,"check_informations".tr , true);
       switchBool();
     } else {
        cas ==0 ?   Get.off(() => const BottomBarWidget()) : Get.off(() => ResetPasswordForgetWidget(email: email,token: response.data,));

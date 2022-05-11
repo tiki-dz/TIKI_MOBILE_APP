@@ -3,5 +3,6 @@ class General<T>{
   String? token ;
   bool error = false;
   bool haveNext = false;
-  General({this.data,this.error = false,this.token,this.haveNext = false});
+  String errorMessage ="";
+  General({this.data,this.error = false,this.token,this.haveNext = false, this.errorMessage =""});
 }

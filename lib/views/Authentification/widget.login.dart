@@ -53,7 +53,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                       ),
                       Expanded(child: Image.asset('assets/logo/logo.png')),
                       Text(
-                        "Sing up to your account\nto can buy ticket",
+                        "sing_up_to".tr,
                         style: TextStyle(fontSize: 10.sp, fontWeight: medium),
                         textAlign: TextAlign.center,
                       ),
@@ -77,7 +77,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                             Get.to(ForgetPasswordWidget());
                           },
                           child: Text(
-                            "Forget password ?",
+                            "forget_password_?".tr,
                             style:
                                 TextStyle(fontSize: 10.sp, fontWeight: regular),
                           ),
@@ -87,7 +87,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                         height: 4.h,
                       ),
                       Obx(() => controller.isUpdating.value == false
-                          ? button("Log In", () async {
+                          ? button("login".tr, () async {
                               FocusManager.instance.primaryFocus?.unfocus();
 
                               await controller.login();
@@ -107,7 +107,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 2.w),
                   child: Text(
-                    'Ou',
+                    "or".tr,
                     style: TextStyle(fontSize: 12.sp, fontWeight: medium),
                   ),
                 ),
@@ -121,7 +121,7 @@ class _LogInWidgetState extends State<LogInWidget> {
               height: 1.h,
             ),
             Text(
-              'log in with',
+              "log_in_with".tr,
               style: TextStyle(fontSize: 12.sp, fontWeight: medium),
             ),
             SizedBox(
@@ -149,14 +149,14 @@ class _LogInWidgetState extends State<LogInWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "you don't have account ?",
+                    "not_account".tr,
                     style: TextStyle(
                         fontSize: 10.sp,
                         fontWeight: medium,
                         color: SecondaryTextColor),
                   ),
                   Text(
-                    ' Sign up',
+                    'signup'.tr,
                     style: TextStyle(
                         fontSize: 10.sp,
                         fontWeight: semiBold,

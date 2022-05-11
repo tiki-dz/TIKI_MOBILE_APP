@@ -6,7 +6,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class CarouselHome extends StatefulWidget {
-  CarouselHome({Key? key}) : super(key: key);
+  CarouselHome({required this.height,Key? key}) : super(key: key);
+
+  double height ;
 
   @override
   _CarouselHomeState createState() => _CarouselHomeState();
@@ -21,7 +23,7 @@ class _CarouselHomeState extends State<CarouselHome> {
     return CarouselSlider(
       options: CarouselOptions(
         enlargeCenterPage: true,
-        height: 20.h,
+        height: widget.height,
         autoPlay: true,
         reverse: true,
         autoPlayAnimationDuration: const Duration(milliseconds: 700),

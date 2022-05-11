@@ -51,7 +51,7 @@ class _InputDateComponentFilterState extends State<InputDateComponentFilter> {
                         Get.back();
                       },
                       child: Text(
-                        "Save",
+                        "save".tr,
                         style: TextStyle(
                             fontWeight: medium,
                             fontSize: 13.sp,

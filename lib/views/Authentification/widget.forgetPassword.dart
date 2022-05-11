@@ -37,14 +37,14 @@ class _ForgetPasswordWidgetState extends State<ForgetPasswordWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Reénitialision mot de passe",
+                    "reset_password".tr,
                     style: TextStyle(fontSize: 17.sp, fontWeight: semiBold),
                   ),
                   SizedBox(
                     height: 2.h,
                   ),
                   Text(
-                    "Entrez votre email et vous allez recevoir \nun code dans votre boite",
+                    "forget_password_description".tr,
                     style: TextStyle(fontSize: 11.sp, fontWeight: regular),
                     textAlign: TextAlign.center,
                   ),
@@ -59,7 +59,7 @@ class _ForgetPasswordWidgetState extends State<ForgetPasswordWidget> {
               ),
             ),
             Obx(() => controller.isSending.value == false
-                ? button("Send", () async {
+                ? button("send".tr, () async {
                     await controller.forgetPassword();
                   })
                 : circularProgressModel()),

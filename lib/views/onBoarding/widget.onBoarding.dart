@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:concentric_transition/concentric_transition.dart';
+import 'package:get/get.dart';
 import 'package:tiki/views/onBoarding/CardTIKI.dart';
 import 'package:lottie/lottie.dart';
 
@@ -14,55 +15,55 @@ class OnBoardingWidget extends StatefulWidget {
 }
 final data = [
   CardData(
-  title: "Online Store",
+  title: "s1title".tr,
   subtitle:
-  "Service Available 24 Hours a Day,\n 7 Days a Week",
+  "s1stitle".tr,
   image: LottieBuilder.asset("assets/animation/52995-emergency-helpline.json"),
   backgroundColor: const Color(0xfff39947),
   titleColor: Colors.white,
   subtitleColor: Colors.white,
-  skipContu: "Skip",
+  skipContu: "skip".tr,
   //background: LottieBuilder.asset("assets/animation/bg-1.json"),
 ),
   CardData(
-  title: "Find Your Favourite Event",
-  subtitle: "A Long List of Events That \n You Can Choose From",
+  title: "s2title".tr,
+  subtitle: "s2stitle".tr,
   image: LottieBuilder.asset("assets/animation/63570-expenses-calculation.json"),
   backgroundColor: Colors.white,
   titleColor: Color(0xfff39947),
   subtitleColor: const Color.fromRGBO(0, 10, 56, 1),
-  skipContu: "Skip",
+  skipContu: "skip".tr,
 
 ),
 
   CardData(
-    title: "Easy & Safe Payment",
-    subtitle: "Easy and Secure Online Payment Method",
+    title: "s3title".tr,
+    subtitle: "s3stitle".tr,
     image: LottieBuilder.asset("assets/animation/92142-mobile-banking.json"),
     backgroundColor: const Color(0xfff39947),
     titleColor: Colors.white,
     subtitleColor: Colors.white,
-    skipContu: "Skip",
+    skipContu:  "skip".tr,
   ),
 
   CardData(
-    title: "Easy Qr Code Verification",
-    subtitle: "An Easy And Secure Verification \n Methode To Avoid Counterfeiting",
+    title: "s4title".tr,
+    subtitle: "s4stitle".tr,
     image: LottieBuilder.asset("assets/animation/95381-qrcode.json"),
     backgroundColor: Colors.white,
     titleColor: Color(0xfff39947),
     subtitleColor: const Color.fromRGBO(0, 10, 56, 1),
-    skipContu: "Continue",
+    skipContu: "continue".tr,
 
   ),
   CardData(
-    title: "Easy Qr Code Verification",
-    subtitle: "an easy and Secure Verification methode to avoid counterfeiting",
+    title:"s5title".tr,
+    subtitle:"s5stitle".tr,
     image: LottieBuilder.asset("assets/animation/95381-qrcode.json"),
     backgroundColor: Colors.white,
     titleColor: Color(0xfff39947),
     subtitleColor: const Color.fromRGBO(0, 10, 56, 1),
-    skipContu: "Continue",
+    skipContu: "continue".tr,
 
   ),
 ];

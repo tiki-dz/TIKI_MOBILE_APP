@@ -30,7 +30,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Reset password",
+            "reset_password".tr,
           style: TextStyle(fontSize: 15.sp, fontWeight: medium),
         ),
       ),
@@ -58,13 +58,13 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                           "assets/animation/85012-password-security.json")),
                   SizedBox(height: 2.h),
                   InputComponentPassword(
-                    hintText: 'current password',
+                    hintText:  "current_password".tr,
                     textEditingController: controller.passwordController,
                     validate: controller.validatePassword,
                   ),
                   SizedBox(height: 3.h),
                   InputComponentPassword(
-                    hintText: 'new password',
+                    hintText: 'new_password',
                     textEditingController: controller.newPasswordController,
                     validate: controller.validateConfirmPassword,
                   ),
@@ -72,7 +72,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                     height: 12.h,
                   ),
                   Obx(() => controller.isSending.value == false
-                      ? button("Reset", () async {
+                      ? button("reset".tr, () async {
                           await controller.resetPassword();
                         })
                       : circularProgressModel()),

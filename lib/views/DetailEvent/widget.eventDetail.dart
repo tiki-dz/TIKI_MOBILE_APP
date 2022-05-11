@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tiki/data/font.data.dart';
+import 'package:tiki/data/pallete.data.dart';
 import 'package:tiki/views/DetailEvent/widget.comments.dart';
 import 'package:get/get.dart';
+import 'package:tiki/views/Wrapper/widget.wrapperPurchase.dart';
+import 'package:tiki/views/payment/purshace.dart';
 import '../../Models/model.event.dart';
 import 'component/component.button.dart';
 import 'component/component.info.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 class EventDetailWidget extends StatefulWidget {
   EventDetailWidget({required this.event, Key? key}) : super(key: key);
   EventModel? event;
@@ -25,32 +28,35 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
         children: [
           Column(
             children: [
-              Container(
+              SizedBox(
+                width: double.infinity,
                 height: 30.h,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
+                child: CachedNetworkImage(
+                  imageUrl: widget.event?.eventImage ?? "",
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Image.asset('assets/logo/logo.png',fit: BoxFit.fill,),
+                  errorWidget: (context, url, error) =>  Image.asset('assets/icons/default.jpg',fit: BoxFit.fill,),
                   fit: BoxFit.fill,
-                  image: NetworkImage(widget.event?.eventImage ?? ""),
-                )),
+                ),
               ),
               const Expanded(child: SizedBox())
             ],
           ),
           Column(
             children: [
-              InkWell(
-                onTap: () {
-                  Get.back();
-                },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 2.w),
-                  child: SizedBox(
-                    height: 25.h,
-                    child: Align(
-                        alignment: Alignment.topLeft,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: SizedBox(
+                  height: 25.h,
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
                         child: SvgPicture.asset(
-                            "assets/icons/goBackEventDetail.svg")),
-                  ),
+                            "assets/icons/goBackEventDetail.svg"),
+                      )),
                 ),
               ),
               Expanded(
@@ -73,7 +79,7 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              widget.event?.name ?? "",
+                              widget.event?.nameDetailEvent()??"",
                               style: TextStyle(
                                   fontSize: 18.sp, fontWeight: semiBold),
                             ),
@@ -94,14 +100,14 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                           "eventPlace",
                         ),
                         eventInfoMode(
-                          "1200 da",
+                          widget.event?.price??""+" da",
                           "par place",
                           "eventTicket",
                         ),
                         SizedBox(
                           height: 0.5.h,
                         ),
-                        CommentEventWidget(),
+                        const CommentEventWidget(),
                         SizedBox(
                           height: 1.h,
                         ),
@@ -117,7 +123,9 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                             style: TextStyle(fontSize: 10.sp),
                           ),
                         )),
-                        buttonEvent("Acheter ticker", 'gishet', () {}),
+                        buttonEvent("buy_ticket".tr,  "gishet", () {
+                          Get.to(()=>WrapperPurchase(event: widget.event,));
+                        }),
                         SizedBox(
                           height: 2.h,
                         ),

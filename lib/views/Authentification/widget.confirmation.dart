@@ -250,7 +250,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Obx(() => controller.isProcessing.value == false
-                        ? button("Confirme", () async {
+                        ? button("confirm".tr, () async {
                       await controller.sendCode();
                     })
                         : circularProgressModel()),
@@ -286,7 +286,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               width: 2.w,
                             ),
                             Text(
-                              controller.start.toString() + ' Seconds',
+                              controller.start.toString() + 'seconds'.tr,
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 color: ButtonColor,

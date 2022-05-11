@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../data/pallete.data.dart';
@@ -20,7 +21,7 @@ class _DetailTicketWidgetState extends State<DetailTicketWidget> {
             appBar: AppBar(
               backgroundColor: KOrange,
               title:  Text(
-                "Détail ticket",
+                "detail_ticket".tr,
                 style: TextStyle(fontSize: 13.sp),
               ),
               centerTitle: true,

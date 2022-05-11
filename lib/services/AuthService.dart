@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:tiki/Models/model.registration.dart';
 import 'package:tiki/data/server.data.dart';
 import 'package:http/http.dart' as http;
@@ -34,10 +35,14 @@ class AuthService {
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         return General<String>(data: jsonData["data"]["token"]);
+      } else if (response.statusCode == 409){
+        return General<String>(data: "", error: true,errorMessage: "account_exist".tr);
+      }else if (response.statusCode == 422){
+        return General<String>(data: "", error: true,errorMessage: "check_informations".tr);
       }
-      return General<String>(data: "", error: true);
+      return General<String>(data: "", error: true,errorMessage: "try".tr);
     } on Exception catch (e) {
-      return General<String>(data: "", error: true);
+      return General<String>(data: "", error: true,errorMessage: "try".tr);
     }
   }
 

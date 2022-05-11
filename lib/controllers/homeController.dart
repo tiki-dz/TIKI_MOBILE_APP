@@ -30,7 +30,8 @@ class HomeController extends GetxController{
 
   ScrollController scrollController = ScrollController();
 
-  var animation = 0.0.obs;
+  var animation = 1.0.obs ;
+
 
 
 
@@ -38,11 +39,12 @@ class HomeController extends GetxController{
   iniAnimation(TickerProvider tickerProvider){
     animationController = AnimationController(vsync: tickerProvider,duration: const Duration(seconds: 1));
     animationController.addListener(() {
-      animation.value = animationController.value;
+      animation.value = 1-animationController.value;
     });
     scrollController.addListener(() {
       if(scrollController.offset > 20){
         animationController.forward();
+        animation.value=1-animationController.value;
       }
     });
   }
@@ -74,7 +76,6 @@ class HomeController extends GetxController{
   }
 
   getEvents()async {
-
     switchBool();
     await getCategories();
     if(!error){
@@ -93,6 +94,4 @@ class HomeController extends GetxController{
     }
     switchBool();
   }
-
-
 }

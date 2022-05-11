@@ -63,7 +63,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                       Get.back();
                     },
                     child: Text(
-                      "Cancel",
+                      "cancel".tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12.sp,
@@ -90,7 +90,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "From",
+                              "from".tr,
                               style: TextStyle(
                                   fontSize: 11.sp,
                                   fontWeight: FontWeight.w500,
@@ -108,7 +108,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               height: 2.h,
                             ),
                             Text(
-                              "To",
+                              "to".tr,
                               style: TextStyle(
                                   fontSize: 11.sp,
                                   fontWeight: FontWeight.w500,
@@ -126,7 +126,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               height: 4.h,
                             ),
                             Text(
-                              "Price",
+                              "price".tr,
                               style: TextStyle(
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.w500,
@@ -154,7 +154,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 2.h,horizontal: 3.w),
-                          child: button("Show result",(){}),
+                          child: button("show_result".tr,(){}),
                         ),
                       ],
                     )

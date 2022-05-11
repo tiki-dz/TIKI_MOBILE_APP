@@ -25,6 +25,7 @@ class HomeService{
       }
       return General<List<CategoriesModel>>(error: true);
     } on Exception catch (e) {
+      print(e);
       return General<List<CategoriesModel>>(error: true);
     }
   }
@@ -43,6 +44,7 @@ class HomeService{
       }
       return General<List<EventModel>>(error: true);
     } on Exception catch (e) {
+
       return General<List<EventModel>>(error: true);
     }
   }

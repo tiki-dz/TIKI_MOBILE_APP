@@ -110,7 +110,7 @@ class SignUpWidget extends StatelessWidget {
               height: 7.h,
             ),
             Obx(() => controller.isUpdating.value == false
-                ? button("Sign up", () async {
+                ? button("signup".tr, () async {
                     await controller.signUp();
                   })
                 : circularProgressModel()),

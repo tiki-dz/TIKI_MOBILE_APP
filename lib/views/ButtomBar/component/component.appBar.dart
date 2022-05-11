@@ -6,7 +6,7 @@ AppBar appBarModel(String title, String icon1, String icon2) => AppBar(
       centerTitle: true,
       title: Text(
         title,
-        style: TextStyle(fontWeight: semiBold),
+        style: const TextStyle(fontWeight: semiBold),
       ),
       leading: SvgPicture.asset("icons/assets/$icon2.svg"),
       actions: [

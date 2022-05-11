@@ -111,26 +111,26 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           padding: EdgeInsets.symmetric(horizontal: 3.w),
           child: Column(
             children: [
-              myListTile("Score", "score",(){
+              myListTile("score".tr, "score",(){
 
               }),
-              myListTile("Settings", "settings",(){
+              myListTile("settings".tr, "settings",(){
                 Get.to(()=>ResetPasswordWidget());
 
               }),
-              myListTile("Share", "share",(){
+              myListTile("share".tr, "share",(){
 
               }),
-              myListTile("Rate", "rate",(){
+              myListTile("rate".tr, "rate",(){
 
               }),
-              myListTile("Contacter nous", "cnous",(){
+              myListTile("contact_us".tr, "cnous",(){
 
               }),
-              myListTile("F&Q", "FQ",(){
+              myListTile("F&Q".tr, "FQ",(){
 
               }),
-              myListTile("Log out", "logout",(){
+              myListTile("log_out".tr, "logout",(){
                 controller.logOut();
               })
             ],

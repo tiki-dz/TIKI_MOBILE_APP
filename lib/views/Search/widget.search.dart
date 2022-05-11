@@ -75,7 +75,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                       Get.back();
                     },
                     child: Text(
-                      "Cancel",
+                      "cancel".tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12.sp,
@@ -141,7 +141,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                 : ListView(
                                     children: [
                                       SizedBox(height: 25.h),
-                                      Center(child: Text("there are no result"))
+                                      Center(child: Text("no_result".tr))
                                     ],
                                   );
                       })),

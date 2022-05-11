@@ -8,8 +8,8 @@ void snackBarModel(String title,String message, bool isError) {
   Get.snackbar(
     title,
     message,
-    titleText: Text(title,style: TextStyle(fontSize: 14.sp,color: Colors.white,fontWeight: semiBold),),
-    messageText:  Text(message,style: TextStyle(fontSize: 9.sp,color: Colors.white,fontWeight: regular),),
+    titleText: Text(title,style: TextStyle(fontSize: 12.sp,color: Colors.white,fontWeight: semiBold),),
+    messageText:  Text(message,style: TextStyle(fontSize: 12.sp,color: Colors.white,fontWeight: regular),),
     padding: EdgeInsets.symmetric(vertical: 2.h,horizontal: 10.w),
     margin: EdgeInsets.all(15.sp),
     isDismissible: true,

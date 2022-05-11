@@ -18,11 +18,11 @@ class ResetPasswordForgetController extends GetxController {
 
   String? validatePassword(String? password) {
     if (passwordController.text.isEmpty) {
-      return 'password is required';
+      return 'password_req';
     }
 
     if (passwordController.text.length < 8) {
-      return 'password must have 8 lettre';
+      return 'password_valid'.tr;
     }
     return null;
   }
@@ -30,11 +30,11 @@ class ResetPasswordForgetController extends GetxController {
   String? validateConfirmPassword(String? password) {
     if(validatePassword("") == null){
       if (confirmPasswordController.text.isEmpty) {
-        return 'confirmation password is required';
+        return 'confirmation_password_req'.tr;
       }
 
       if (confirmPasswordController.text != passwordController.text) {
-        return 'password are not the same';
+        return 'password_not_same'.tr;
       }
     }
 
@@ -54,9 +54,9 @@ class ResetPasswordForgetController extends GetxController {
       var response = await AuthService.forgetPasswordChangePasswordAccount(
           email, passwordController.text, token);
       if (response.error) {
-        snackBarModel("Echec", "try after afiew minute", true);
+        snackBarModel("echec".tr, "try".tr, true);
       } else {
-        Get.to(()=>LogInWidget());
+        Get.to(()=>const LogInWidget());
       }
       switchBool();
     }

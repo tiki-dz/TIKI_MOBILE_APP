@@ -1,4 +1,4 @@
-String ip = "192.168.1.2";
+String ip = "192.168.28.61";
 
 String urlLogin = "http://$ip:5001/api/common/login";
 String urlVerifyCode= "http://$ip:5001/api/client/verifyCode";
@@ -18,3 +18,6 @@ String urlEvents = "http://$ip:5002/api/admin/event?category=";
 
 ////search
 
+////
+String urlCheckCode ="http://$ip:5003/api/admin/codepromo/check";
+String urlPurchase  = "http://$ip:5003/api/payment/purchase";

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import '../../../data/const.dart';
 import '../../../data/pallete.data.dart';
 import 'package:get/get.dart';
 Widget eventModel(EventModel? event) {
+
   return InkWell(
     onTap: (){
       Get.to(()=> EventDetailWidget(event: event));
@@ -24,11 +26,6 @@ Widget eventModel(EventModel? event) {
       width: 70.w,
       margin: EdgeInsets.only(right: 5.w),
       decoration: BoxDecoration(
-        image: DecorationImage(
-            fit: BoxFit.fill,
-            image: NetworkImage(
-              event?.eventImage ?? "",
-            )),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
@@ -42,6 +39,28 @@ Widget eventModel(EventModel? event) {
       ),
       child: Stack(
         children: [
+          Column(
+            children: [
+              Expanded(
+                child: Container(
+                  width: 70.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(7.sp),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: event?.eventImage ?? "",
+                    progressIndicatorBuilder: (context, url, downloadProgress) =>
+                        Image.asset('assets/logo/logo.png', fit: BoxFit.fill,),
+                    errorWidget: (context, url, error) =>ClipRRect(borderRadius:  BorderRadius.circular(7.sp),child: Image.asset('assets/icons/default.jpg',fit: BoxFit.fill,)),
+                    fit: BoxFit.fill,
+                  ), ),
+              ),
+              SizedBox(
+                height: 7.h,
+              )
+            ],
+          ),
           Column(
             children: [
               Expanded(
@@ -69,7 +88,7 @@ Widget eventModel(EventModel? event) {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  event?.name ?? "",
+                                  event?.nameHome()??"" ,
                                   style: TextStyle(
                                       fontWeight: semiBold, fontSize: 13.sp),
                                 ),
@@ -83,7 +102,7 @@ Widget eventModel(EventModel? event) {
                               ],
                             ),
                             Text(
-                              "1200 DA",
+                               event?.price?? "" +" DA",
                               style: TextStyle(
                                   fontSize: 12.sp,
                                   fontWeight: semiBold,

@@ -32,11 +32,11 @@ class SignUpController extends GetxController {
   String? validatePassword(String? password) {
     if(validateName("") == null && (validateLastName("")) == null && (validateEmail("")) == null  && validateDate("")==null) {
       if (passwordController.text.isEmpty) {
-        return 'password is required';
+        return 'password_req'.tr;
       }
 
       if (passwordController.text.length < 8) {
-        return 'password must have 8 lettre';
+        return 'password_valid'.tr;
       }
       return null;
     }
@@ -47,11 +47,11 @@ class SignUpController extends GetxController {
     if (validateName("") == null && (validateLastName("")) == null &&
         (validateEmail("")) == null && (validatePassword("")) == null  && validateDate("")==null ) {
       if (confirmPasswordController.text.isEmpty) {
-        return 'confirmation password is required';
+        return  "confirmation_password_req".tr;
       }
 
       if (confirmPasswordController.text != passwordController.text) {
-        return 'password are not the same';
+        return  "password_not_same".tr;
       }
       return null;
     }
@@ -61,11 +61,11 @@ class SignUpController extends GetxController {
   String? validateEmail(String? email){
     if(validateName("") == null && validateLastName("") == null && validateDate("")==null ){
       if(emailController.text.isEmpty){
-        return "email is required";
+        return "email_req".tr;
       }
 
       if(!EmailValidator.validate(emailController.text)){
-        return "please verify your email";
+        return "email_valid".tr;
       }
     }
     return null;
@@ -73,11 +73,11 @@ class SignUpController extends GetxController {
 
   String? validateName(String? name){
     if(nameController.text.isEmpty){
-      return "name is required";
+      return "name_req".tr;
     }
 
     if(nameController.text.length<2){
-      return "please enter a valid name";
+      return "name_valid".tr;
     }
     return null;
   }
@@ -85,11 +85,11 @@ class SignUpController extends GetxController {
   String? validateLastName(String? email){
     if(validateName("") == null){
       if(lastNameController.text.isEmpty){
-        return "last name is required";
+        return "last_name_req".tr;
       }
 
       if(lastNameController.text.length<2){
-        return "please enter a valid last nname";
+        return "last_name_valid".tr;
       }
     }
     return null;
@@ -98,7 +98,7 @@ class SignUpController extends GetxController {
   String? validateDate(String? date){
     if(validateName("") == null && validateLastName("") == null){
       if(birthDateController.isEmpty){
-        return "birthdate name is required";
+        return "birthdate_req".tr;
       }
     }
     return null;
@@ -130,7 +130,7 @@ class SignUpController extends GetxController {
         passwordController.text));
 
     if (response.error) {
-      snackBarModel("Echeck","check your information" , true);
+      snackBarModel("echec".tr,response.errorMessage , true);
       switchBool();
     } else {
       WrapperProfileController controller = Get.find<WrapperProfileController>();

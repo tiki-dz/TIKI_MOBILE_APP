@@ -66,6 +66,7 @@ dependencies:
   bottom_navy_bar: ^6.0.0
   get_storage:
   mime: ^1.0.1
+  webview_flutter: ^3.0.3
 
 dev_dependencies:
   flutter_native_splash: ^1.2.4

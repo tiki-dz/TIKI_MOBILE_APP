@@ -1,5 +1,7 @@
 
 class UserModel {
+  int idUser ;
+  int idClient;
   String firstName;
   String lastName;
   String? phoneNumber;
@@ -11,7 +13,7 @@ class UserModel {
   static var sexeEnum = ["Homme","Femme"];
 
   UserModel(
-      {required this.firstName,
+      {required this.idClient,required this.idUser,required this.firstName,
        required this.lastName,
         this.phoneNumber,
        required this.birthDate,
@@ -22,6 +24,8 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> item) {
     return UserModel(
+      idUser: item["idUser"],
+        idClient: item["Client"]["idClient"],
         firstName: item["firstName"].toString(),
         lastName: item["lastName"].toString(),
         phoneNumber: item["phoneNumber"].toString()=="null" ? null : item["phoneNumber"].toString(),

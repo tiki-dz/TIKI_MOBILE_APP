@@ -48,7 +48,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       height: 2.h,
                     ),
                     Text(
-                      "Edit Profile",
+                      "edit_Profile".tr,
                       style: TextStyle(
                           fontSize: 15.sp,
                           color: Colors.white,
@@ -117,7 +117,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 leadingIcon: 'assets/icons/fi-rr-user.svg',
                                 textEditingController: controller.nameController,
                                 readOnly: false,
-                                hint: "add your name",validate: controller.validateName,),
+                                hint: "add_your".tr + "name".tr,validate: controller.validateName,),
                             SizedBox(
                               height: 2.h,
                             ),
@@ -126,7 +126,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 textEditingController:
                                     controller.lastNameController,
                                 readOnly: false,
-                                hint: "add your last name",validate: controller.validateLastName,),
+                                hint: "add_your".tr + "last_name".tr,validate: controller.validateLastName,),
                             SizedBox(
                               height: 2.h,
                             ),
@@ -139,8 +139,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   function: controller.changeDate,
                                 validate: controller.validateDate,
                                 );
-
-
                               }
                             ),
                             SizedBox(
@@ -150,7 +148,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               leadingIcon: 'assets/icons/city.svg',
                               textEditingController: controller.cityController,
                               readOnly: false,
-                              hint: "add your city",
+                              hint: "add_your".tr + "city".tr,
                               validate: controller.validateCity,
                             ),
                             SizedBox(
@@ -182,7 +180,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                               onChanged: controller.changeRadio,
                                             ),
                                             Text(
-                                              "Homme",
+                                              "homme".tr,
                                               style: TextStyle(fontSize: 11.sp),
                                             ),
                                           ],
@@ -195,7 +193,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                               groupValue: controller.radioSexe,
                                               onChanged: controller.changeRadio,
                                             ),
-                                            Text('Femme',
+                                            Text('femme'.tr,
                                                 style:
                                                     TextStyle(fontSize: 11.sp)),
                                           ],
@@ -207,7 +205,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       ),
                     )),
                     Obx(() => controller.isUpdating.value == false
-                        ? button("Save", () async {
+                        ? button("save".tr, () async {
                             await controller.updateProfile();
                           })
                         : circularProgressModel()),

@@ -69,13 +69,13 @@ class _TicketsWidgetState extends State<TicketsWidget> {
                           children: [
                             Expanded(
                                 child: animatedContainerModel(
-                                    "Next", 0, controller.selected.value)),
+                                    "next".tr, 0, controller.selected.value)),
                             SizedBox(
                               width: 1.w,
                             ),
                             Expanded(
                                 child: animatedContainerModel(
-                                    "Historique", 1, controller.selected.value))
+                                    "historique".tr, 1, controller.selected.value))
                           ],
                         ),
                       )),

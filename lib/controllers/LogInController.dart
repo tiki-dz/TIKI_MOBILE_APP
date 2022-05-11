@@ -21,11 +21,11 @@ class LogInController extends GetxController {
 
   String? validateEmail(String? email){
     if(emailController.text.isEmpty){
-      return "email is required";
+      return "email_req".tr;
     }
 
     if(!EmailValidator.validate(emailController.text)){
-      return "please verify your email";
+      return "email_valid".tr;
     }
     return null;
   }
@@ -33,14 +33,15 @@ class LogInController extends GetxController {
   String? validatePassword(String? password) {
     if (validateEmail("") == null) {
       if (passwordController.text.isEmpty) {
-        return "password is required";
+        return "password_req".tr;
       }
 
       if (passwordController.text.length < 8) {
-        return "password must be at least 8";
+        return "password_valid".tr;
       }
       return null;
     }
+    return null;
   }
   login() async {
 
@@ -48,14 +49,14 @@ class LogInController extends GetxController {
       switchBool();
       var response = await AuthService.login(emailController.text, passwordController.text);
       if (response.error) {
-        snackBarModel("Echec","check your information" , true);
+        snackBarModel("echec".tr,"check_informations".tr  , true);
         switchBool();
       } else {
         LocalController.setToken(response.token);
         LocalController.setProfile(response.data);
         WrapperProfileController controller = Get.find<WrapperProfileController>();
         controller.updateSign();
-        Get.offAll(() => BottomBarWidget(),
+        Get.offAll(() => const BottomBarWidget(),
             transition: Transition.rightToLeft);
 
         //BottomBarController controller = Get.find<BottomBarController>();

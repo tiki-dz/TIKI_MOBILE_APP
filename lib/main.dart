@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
     return Sizer(builder: (context, orientation, deviceType) {
       return GetMaterialApp(
         translations: LocalString(),
-        locale: Locale('en', 'EN'),
+        locale: const Locale('en', 'EN'),
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(
             Theme.of(context).textTheme,

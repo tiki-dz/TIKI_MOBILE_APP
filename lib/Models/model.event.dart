@@ -1,9 +1,10 @@
 import '../data/const.dart';
-
+import 'package:sizer/sizer.dart';
 class EventModel {
   int id;
   String name;
   String description;
+  String price;
   String organiser;
   String address;
   String eventImage;
@@ -22,10 +23,12 @@ class EventModel {
       required this.ticketImage,
       required this.ticketNb,
       required this.startDate,
-      required this.endDate});
+      required this.endDate,
+      required this.price});
 
   factory EventModel.fromJson(Map<String, dynamic> item) {
     return EventModel(
+        price: item["price"] == null ? "2300" : item["price"].toString(),
         id: item["idEvent"],
         name: item["name"],
         description: item["description"],
@@ -47,6 +50,21 @@ class EventModel {
         ", " +
         startDate.year.toString();
   }
+
+  String nameHome(){
+    var length = name.length;
+    return length > 20 ? (name).substring(0,16)+"..." : name ;
+  }
+  String nameDetailEvent(){
+    var length = name.length ;
+    return length > 20 ? name.substring(0,20)+"..." : name ;
+  }
+
+  double nameSizePurchase(){
+    var length = name.length ;
+    return length > 20 ? 10.sp :13.sp;
+  }
+
 
   @override
   String toString() {

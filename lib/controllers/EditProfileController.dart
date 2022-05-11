@@ -34,7 +34,6 @@ class EditProfileController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    print(user.sexe);
     radioSexe = user.sexe?? 0;
     picture = user.picture;
     lastNameController = TextEditingController(text: user.lastName);
@@ -80,7 +79,7 @@ class EditProfileController extends GetxController {
   String? validateDate(String? date){
     if(validateName("") == null && validateLastName("") == null){
       if(birthDate.isEmpty){
-        return "birthdate name is required";
+        return "birthdate_req".tr;
       }
     }
     return null;
@@ -98,11 +97,11 @@ class EditProfileController extends GetxController {
 
   String? validateName(String? name){
     if(nameController.text.isEmpty){
-      return "name is required";
+      return  "name_req".tr;
     }
 
     if(nameController.text.length<2){
-      return "please enter a valid name";
+      return  "name_valid".tr;
     }
     return null;
   }
@@ -110,11 +109,11 @@ class EditProfileController extends GetxController {
   String? validateLastName(String? email){
     if(validateName("") == null){
       if(lastNameController.text.isEmpty){
-        return "last name is required";
+        return  "last_name_req".tr;
       }
 
       if(lastNameController.text.length<2){
-        return "please enter a valid last nname";
+        return  "last_name_valid".tr;
       }
     }
     return null;
@@ -126,13 +125,15 @@ class EditProfileController extends GetxController {
       if (!imageFromNetwork) {
         var response = await ProfileService.updatePicProfile(imageFile);
         if (response.error) {
-          snackBarModel("Echec", "try after afiew minute", true);
+          snackBarModel("echec".tr, "try".tr, true);
           switchBool();
           return;
         }
       }
 
       var response = await ProfileService.updateProfile(UserModel(
+        idClient: user.idClient,
+        idUser: user.idUser,
         firstName: nameController.text,
         lastName: lastNameController.text,
         birthDate: birthDate.value,
@@ -142,12 +143,12 @@ class EditProfileController extends GetxController {
       ));
 
       if (response.error) {
-        snackBarModel("Echec", "try after afiew minute", true);
+        snackBarModel("echec".tr, "try".tr, true);
         switchBool();
       } else {
         LocalController.setProfile(response.data);
         switchBool();
-        snackBarModel("Succes", "operation done", false);
+        snackBarModel("succes".tr, "operation_done".tr, false);
         final controller = Get.find<ProfileController>();
         controller.getUpdatedProfile();
         Get.offAll(() => const BottomBarWidget());

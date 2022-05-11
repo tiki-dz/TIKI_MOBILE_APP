@@ -12,11 +12,11 @@ class ResetPasswordController extends GetxController{
 
   String? validatePassword(String? password) {
     if (passwordController.text.isEmpty) {
-      return 'password is required';
+      return 'password_req'.tr;
     }
 
     if (passwordController.text.length < 8) {
-      return 'password must have 8 lettre';
+      return 'password_valid'.tr;
     }
     return null;
   }
@@ -24,11 +24,11 @@ class ResetPasswordController extends GetxController{
   String? validateConfirmPassword(String? password) {
     if(validatePassword("") == null){
       if (newPasswordController.text.isEmpty) {
-        return 'confirmation password is required';
+        return 'confirmation_password_req'.tr;
       }
 
       if (newPasswordController.text == passwordController.text) {
-        return 'password are the same';
+        return 'password_same'.tr;
       }
     }
 
@@ -47,10 +47,10 @@ class ResetPasswordController extends GetxController{
 
       var response = await ProfileService.resetPassword(passwordController.text, newPasswordController.text);
       if (response.error) {
-        snackBarModel("Echec", "try after afiew minute", true);
+        snackBarModel("echec".tr, "try".tr, true);
       } else {
 
-        snackBarModel("Succes", "operation done", false);
+        snackBarModel("success".tr, "operation_done".tr, false);
 
       }
       switchBool();

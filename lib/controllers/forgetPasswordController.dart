@@ -20,11 +20,11 @@ class ForgetPasswordController extends GetxController{
   String? validateEmail(String? email){
     email ?? "";
     if(emailController.text.isEmpty){
-      return "email is required";
+      return "email_req".tr;
     }
 
     if(!EmailValidator.validate(email?? "")){
-      return "please verify your email";
+      return "email_valid".tr;
     }
   }
 
@@ -33,7 +33,7 @@ class ForgetPasswordController extends GetxController{
     switchBool();
     var response = await AuthService.forgetPasswordSendVerificationAccount(emailController.text);
     if (response.error) {
-      snackBarModel("Echec","check your information" , true);
+      snackBarModel("echec".tr,"check_informations".tr , true);
       switchBool();
     } else {
       Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 1));

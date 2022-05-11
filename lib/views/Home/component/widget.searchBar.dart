@@ -30,7 +30,7 @@ Widget SearchBar() => InkWell(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Search for an event',style: GoogleFonts.poppins(
+          Text( "search_for_an_event".tr,style: GoogleFonts.poppins(
               fontSize: 10.sp,color: grey
           ),),
           Row(

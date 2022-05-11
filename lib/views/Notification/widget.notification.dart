@@ -25,7 +25,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          "Notifications",
+          "notifications".tr,
           style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w700,
@@ -58,13 +58,13 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                     children: [
                       Expanded(
                           child: animatedContainerModel(
-                              "All", 0, controller.selected.value)),
+                              "all".tr, 0, controller.selected.value)),
                       SizedBox(
                         width: 1.w,
                       ),
                       Expanded(
                           child: animatedContainerModel(
-                              "For you", 1, controller.selected.value))
+                              "for_you".tr, 1, controller.selected.value))
                     ],
                   ),
                 )),

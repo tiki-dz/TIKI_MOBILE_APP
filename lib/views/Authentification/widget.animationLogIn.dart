@@ -25,13 +25,13 @@ class _AnimationLogInWidgetState extends State<AnimationLogInWidget> {
             "assets/animation/11067-registration-animation.json"),
         SizedBox(height: 5.h,),
         Text(
-          "you have to sign in with your account",
+          "animation_login".tr,
           style: TextStyle(color: Colors.black, fontSize: 12.sp,fontWeight: medium),
         ),
         SizedBox(height: 5.h,),
         Padding(
           padding:EdgeInsets.symmetric(horizontal: 7.w),
-          child: button("Sign In",(){
+          child: button("login".tr,(){
             Get.to(()=>LogInWidget());
           }),
         )
