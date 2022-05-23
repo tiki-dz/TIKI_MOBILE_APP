@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "511105571967",
+    "project_id": "plasti-d9fd7",
+    "storage_bucket": "plasti-d9fd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511105571967:android:1e2608788cecdda50d334a",
+        "android_client_info": {
+          "package_name": "com.tiki.tiki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511105571967-irto7mbt8hlpb9rq38rkbckk8f3rbi7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAm16_1gMCMULGiIAtj40xsVv0NrBj2mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511105571967-irto7mbt8hlpb9rq38rkbckk8f3rbi7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

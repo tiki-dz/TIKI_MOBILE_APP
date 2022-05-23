@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 Color GreyColor = Color(0XffF9F9F9);
 Color ButtonColor = Color(0xfff39947);
 Color greyColor = Color(0xFFF9F9F9);
@@ -14,7 +13,6 @@ var linear = LinearGradient(
     Color(0xfff39947),
   ],
 );
-
 var verticalLinear = LinearGradient(
   begin: Alignment.bottomCenter,
   end: Alignment.topCenter,

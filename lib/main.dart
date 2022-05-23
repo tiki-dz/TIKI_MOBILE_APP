@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -16,11 +18,8 @@ import 'package:device_preview/device_preview.dart';
 import 'package:tiki/views/Search/widget.search.dart';
 import 'package:tiki/views/Wrapper/widget.wrapperOnBoarding.dart';
 import 'package:tiki/views/onBoarding/widget.onBoarding.dart';
-
-
 import 'data/translation.data.dart';
-
- /*void main() async {
+/*void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
 
@@ -31,8 +30,12 @@ import 'data/translation.data.dart';
   );
 }*/
 
- void main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.instance.getToken().then((token) => {print(token)});
+  FirebaseMessaging.instance.subscribeToTopic('all');
+
   await GetStorage.init();
 
   runApp(
@@ -51,11 +54,10 @@ class MyApp extends StatelessWidget {
         translations: LocalString(),
         locale: const Locale('en', 'EN'),
         theme: ThemeData(
-          textTheme: GoogleFonts.poppinsTextTheme(
-            Theme.of(context).textTheme,
-          ),
-          backgroundColor: Colors.white
-        ),
+            textTheme: GoogleFonts.poppinsTextTheme(
+              Theme.of(context).textTheme,
+            ),
+            backgroundColor: Colors.white),
         initialRoute: '/',
         getPages: [
           GetPage(name: '/', page: () => WrapperOnBoardingWidget()),
