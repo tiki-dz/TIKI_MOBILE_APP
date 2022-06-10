@@ -13,8 +13,13 @@ class CategoriesModel {
   factory CategoriesModel.fromJson(Map<String, dynamic> item) {
     return CategoriesModel(
         id: item["idCategory"],
-        name: item["name"],
+        name:item["name"],
         description: item["description"],
         icon: item["icon"]);
+  }
+
+
+  String adjustName(){
+    return "${name[0].toUpperCase()}${name.substring(1).toLowerCase()}";
   }
 }

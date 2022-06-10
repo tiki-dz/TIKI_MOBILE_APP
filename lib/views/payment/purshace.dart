@@ -201,7 +201,7 @@ class _PurchaseWidgetState extends State<PurchaseWidget> {
                                 "Payer",
                                 controller.enableDiscountCode
                                     ? controller.priceAllAfter
-                                    : controller.priceOneBefore,
+                                    : controller.priceAllBefore,
                                 ()async {
                                  await controller.purchase();
                                 }))

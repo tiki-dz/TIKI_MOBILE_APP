@@ -5,9 +5,8 @@ import 'package:sizer/sizer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../data/pallete.data.dart';
 
-Widget buttonEvent(String title,String icon ,VoidCallback? function) {
+Widget buttonBuyEvent(String title,String icon ,VoidCallback? function) {
   return SizedBox(
-    width: double.infinity,
     height: 45.sp,
     child: InkWell(
       onTap: function,
@@ -19,7 +18,7 @@ Widget buttonEvent(String title,String icon ,VoidCallback? function) {
           ),
         ),
         color: ButtonColor,
-        elevation: 4,
+        elevation: 2,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

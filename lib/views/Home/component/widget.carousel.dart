@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
+import 'package:get/get.dart';
+import 'package:tiki/controllers/homeController.dart';
 class CarouselHome extends StatefulWidget {
-  CarouselHome({required this.height,Key? key}) : super(key: key);
+  CarouselHome({Key? key}) : super(key: key);
 
-  double height ;
 
   @override
   _CarouselHomeState createState() => _CarouselHomeState();
@@ -20,18 +20,25 @@ class _CarouselHomeState extends State<CarouselHome> {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      options: CarouselOptions(
-        enlargeCenterPage: true,
-        height: widget.height,
-        autoPlay: true,
-        reverse: true,
-        autoPlayAnimationDuration: const Duration(milliseconds: 700),
-        autoPlayCurve: Curves.fastOutSlowIn,
+    final controller = Get.find<HomeController>();
+    return Opacity(
+      opacity: controller.opacity /12,
+      child: Transform.scale(
+        scale: controller.opacity /12,
+        child: CarouselSlider(
+          options: CarouselOptions(
+            enlargeCenterPage: true,
+            height: controller.opacity/ 26 * 45.h,
+            autoPlay: true,
+            reverse: true,
+            autoPlayAnimationDuration: const Duration(milliseconds: 700),
+            autoPlayCurve: Curves.fastOutSlowIn,
+          ),
+          items: myList.map((wallet) {
+            return itemModel();
+          }).toList(),
+        ),
       ),
-      items: myList.map((wallet) {
-        return itemModel();
-      }).toList(),
     );
   }
 }

@@ -10,13 +10,14 @@ import 'package:tiki/views/Authentification/widget.signup.dart';
 import 'package:tiki/views/ButtomBar/widget.bottomBar.dart';
 import 'package:tiki/views/DetailEvent/widget.eventDetail.dart';
 import 'package:tiki/views/Filter/widget.filter.dart';
+import 'package:tiki/views/Home/hometest.dart';
 import 'package:tiki/views/Profile/EditProfiles/widget.editProfile.dart';
 import 'package:tiki/views/Profile/Profile/widget.profile.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:tiki/views/Search/widget.search.dart';
 import 'package:tiki/views/Wrapper/widget.wrapperOnBoarding.dart';
 import 'package:tiki/views/onBoarding/widget.onBoarding.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 
 import 'data/translation.data.dart';
 
@@ -34,9 +35,9 @@ import 'data/translation.data.dart';
  void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-
+  await Firebase.initializeApp();
   runApp(
-    MyApp(), // Wrap your app
+    const MyApp(), // Wrap your app
   );
 }
 
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/filter', page: () => FilterWidget()),
         ],
         debugShowCheckedModeBanner: false,
-        home: WrapperOnBoardingWidget(),
+        home: const WrapperOnBoardingWidget(),
       );
     });
   }

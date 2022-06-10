@@ -130,6 +130,7 @@ class EditProfileController extends GetxController {
           return;
         }
       }
+      print('cc');
 
       var response = await ProfileService.updateProfile(UserModel(
         idClient: user.idClient,

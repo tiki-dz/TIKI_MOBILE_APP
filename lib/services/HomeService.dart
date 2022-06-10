@@ -25,14 +25,13 @@ class HomeService{
       }
       return General<List<CategoriesModel>>(error: true);
     } on Exception catch (e) {
-      print(e);
       return General<List<CategoriesModel>>(error: true);
     }
   }
 
   static Future<General<List<EventModel>>> getEventsCategories(String categories) async {
     try {
-      http.Response response = await http.get(Uri.parse(urlEvents+categories));
+      http.Response response = await http.get(Uri.parse(urlEventsHome+categories));
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         List<EventModel> events =[];

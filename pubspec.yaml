@@ -67,6 +67,8 @@ dependencies:
   get_storage:
   mime: ^1.0.1
   webview_flutter: ^3.0.3
+  flutter_local_notifications: ^9.2.0
+
 
 dev_dependencies:
   flutter_native_splash: ^1.2.4

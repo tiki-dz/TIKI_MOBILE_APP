@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 import 'components/component.card.dart';
 import 'components/component.item.dart';
+import 'components/componentPicWidget.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({Key? key}) : super(key: key);
@@ -50,12 +51,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     Container(
                       height: 45.sp,
                       width: 45.sp,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  controller.userProfile.picture ??  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXQlMjBtYW58ZW58MHx8MHx8&w=1000&q=80"),
-                              fit: BoxFit.fill),
+                      decoration: const BoxDecoration(
+                         /* image: DecorationImage(
+                              image:
+                              picWidgetModel(controller.userProfile.picture),
+                              fit: BoxFit.fill),*/
                           shape: BoxShape.circle),
+                      child: picWidgetModel(controller.userProfile.picture),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

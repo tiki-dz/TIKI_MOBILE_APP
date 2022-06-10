@@ -60,7 +60,7 @@ Widget itemCarousel() {
                 topRight: Radius.circular(10.sp)),
             image: const DecorationImage(
                 image: NetworkImage(
-                    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXQlMjBtYW58ZW58MHx8MHx8&w=1000&q=80"),
+                    "https://www.lesuricate.org/wp-content/uploads/2019/11/knives-out.jpg"),
                 fit: BoxFit.fill),
           ),
         )),

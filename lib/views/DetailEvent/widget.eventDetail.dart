@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tiki/controllers/detailEventController.dart';
 import 'package:tiki/data/font.data.dart';
 import 'package:tiki/data/pallete.data.dart';
 import 'package:tiki/views/DetailEvent/widget.comments.dart';
@@ -9,6 +10,7 @@ import 'package:tiki/views/Wrapper/widget.wrapperPurchase.dart';
 import 'package:tiki/views/payment/purshace.dart';
 import '../../Models/model.event.dart';
 import 'component/component.button.dart';
+import 'component/component.buttonSave.dart';
 import 'component/component.info.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 class EventDetailWidget extends StatefulWidget {
@@ -20,8 +22,16 @@ class EventDetailWidget extends StatefulWidget {
 }
 
 class _EventDetailWidgetState extends State<EventDetailWidget> {
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Get.find<DetailEventController>().dispose();
+  }
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(DetailEventController());
     return SafeArea(
         child: Scaffold(
       body: Stack(
@@ -123,9 +133,18 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                             style: TextStyle(fontSize: 10.sp),
                           ),
                         )),
-                        buttonEvent("buy_ticket".tr,  "gishet", () {
-                          Get.to(()=>WrapperPurchase(event: widget.event,));
-                        }),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: buttonBuyEvent("buy_ticket".tr,  "gishet", () {
+                                Get.to(()=>WrapperPurchase(event: widget.event,));
+                                controller.saveOrUnSaved();
+                              }),
+                            ),
+                            SizedBox(width: 2.w,),
+                            buttonSaveEvent(),
+                          ],
+                        ),
                         SizedBox(
                           height: 2.h,
                         ),

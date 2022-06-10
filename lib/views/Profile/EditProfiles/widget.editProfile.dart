@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
 import '../../Authentification/components/component.button.dart';
+import '../Profile/components/componentPicWidget.dart';
 import 'component/component.input.dart';
 import 'component/component.inputDate.dart';
 
@@ -69,28 +70,26 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   height: 90.sp,
                                   width: 90.sp,
                                   decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.2),
-                                          spreadRadius: 2,
-                                          blurRadius: 7,
-                                          offset: const Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                      shape: BoxShape.circle,
-                                      image: controller.imageFromNetwork
-                                          ? DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(controller
-                                                      .user.picture ??
-                                                  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXQlMjBtYW58ZW58MHx8MHx8&w=1000&q=80"),
-                                            )
-                                          : DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: FileImage(
-                                                  controller.imageFile),
-                                            )),
+                                    color: KOrange,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.2),
+                                        spreadRadius: 2,
+                                        blurRadius: 7,
+                                        offset: const Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.circular(50.sp),
+                                      child: controller.imageFromNetwork
+                                          ? picWidgetModel(
+                                              controller.user.picture)
+                                          : Image.file(controller.imageFile,
+                                              fit: BoxFit.fill)),
                                 ),
                               )),
                     ),
@@ -114,33 +113,35 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               height: 2.h,
                             ),
                             InputComponentEditProfile(
-                                leadingIcon: 'assets/icons/fi-rr-user.svg',
-                                textEditingController: controller.nameController,
-                                readOnly: false,
-                                hint: "add_your".tr + "name".tr,validate: controller.validateName,),
+                              leadingIcon: 'assets/icons/fi-rr-user.svg',
+                              textEditingController: controller.nameController,
+                              readOnly: false,
+                              hint: "add_your".tr + "name".tr,
+                              validate: controller.validateName,
+                            ),
                             SizedBox(
                               height: 2.h,
                             ),
                             InputComponentEditProfile(
-                                leadingIcon: 'assets/icons/fi-rr-user.svg',
-                                textEditingController:
-                                    controller.lastNameController,
-                                readOnly: false,
-                                hint: "add_your".tr + "last_name".tr,validate: controller.validateLastName,),
+                              leadingIcon: 'assets/icons/fi-rr-user.svg',
+                              textEditingController:
+                                  controller.lastNameController,
+                              readOnly: false,
+                              hint: "add_your".tr + "last_name".tr,
+                              validate: controller.validateLastName,
+                            ),
                             SizedBox(
                               height: 2.h,
                             ),
-                            Obx(
-                              () {
+                            Obx(() {
                               return InputDateComponentEditProfile(
-                                  leadingIcon: 'assets/icons/fi-rr-calendar.svg',
-                                  hintText: controller.birthDate.value,
-                                  controller: controller,
-                                  function: controller.changeDate,
+                                leadingIcon: 'assets/icons/fi-rr-calendar.svg',
+                                hintText: controller.birthDate.value,
+                                controller: controller,
+                                function: controller.changeDate,
                                 validate: controller.validateDate,
-                                );
-                              }
-                            ),
+                              );
+                            }),
                             SizedBox(
                               height: 2.h,
                             ),
@@ -154,7 +155,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             SizedBox(
                               height: 2.h,
                             ),
-                           /* InputComponentEditProfile(
+                            /* InputComponentEditProfile(
                               leadingIcon: 'assets/icons/phone.svg',
                               textEditingController:
                                   controller.phoneNumberController,

@@ -31,12 +31,12 @@ class ForgetPasswordController extends GetxController{
   forgetPassword() async {
     if(formKey.currentState?.validate() ?? true ){
     switchBool();
-    var response = await AuthService.forgetPasswordSendVerificationAccount(emailController.text);
+    var response = await AuthService.forgetPasswordSendVerificationAccount(emailController.text,null);
     if (response.error) {
       snackBarModel("echec".tr,"check_informations".tr , true);
       switchBool();
     } else {
-      Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 1));
+      Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 1,password: "",));
       switchBool();
     }
   }}

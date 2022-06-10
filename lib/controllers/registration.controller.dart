@@ -135,7 +135,7 @@ class SignUpController extends GetxController {
     } else {
       WrapperProfileController controller = Get.find<WrapperProfileController>();
       controller.updateSign();
-      Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 0));
+      Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 0,password : passwordController.text));
       switchBool();
     }}
   }

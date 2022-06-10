@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:tiki/controllers/resetPasswordForgetController.dart';
 import 'package:tiki/controllers/wrapperProfileController.dart';
@@ -17,9 +18,10 @@ class ConfirmationController extends GetxController {
   late int cas ;
   late String email;
   late String? token;
+  late String password;
 
 
-  ConfirmationController({required this.cas,required this.email,required this.token});
+  ConfirmationController({required this.cas,required this.email,required this.token,required this.password});
 
   final TextEditingController codePinController = TextEditingController();
   var isProcessing = false.obs;
@@ -73,7 +75,6 @@ class ConfirmationController extends GetxController {
     } else{
       response = await AuthService.forgetPasswordValidateAccount(email, token, codePinController.text);
     }
-
     if (response.error) {
       snackBarModel("echek".tr,"check_informations".tr , true);
       switchBool();
@@ -81,4 +82,44 @@ class ConfirmationController extends GetxController {
        cas ==0 ?   Get.off(() => const BottomBarWidget()) : Get.off(() => ResetPasswordForgetWidget(email: email,token: response.data,));
     }
   }
+
+  resendCodeSignUp() async {
+    startTimer();
+    var response = await AuthService.resendVerification(email, password);
+    if (response.error) {
+      switchBool();
+    }else{
+      Fluttertoast.showToast(
+          msg: "code sent",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black.withOpacity(0.2),
+          textColor: Colors.black,
+          fontSize: 16.0
+      );
+      token = response.data;
+    }
+  }
+
+  resendCodeForget() async {
+    startTimer();
+    var response = await AuthService.forgetPasswordSendVerificationAccount(email,token);
+    if (response.error) {
+      switchBool();
+    }else{
+      Fluttertoast.showToast(
+          msg: "code sent",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      token = response.data;
+    }
+  }
+
+
 }

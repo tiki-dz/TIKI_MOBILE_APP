@@ -6,13 +6,28 @@ import '../constWidgets/snackBar.dart';
 import '../services/AuthService.dart';
 import 'localController.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class LogInController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   var isUpdating = false.obs;
+  late var tokenNotification;
+  var fbm = FirebaseMessaging.instance;
+
+  @override
+  void onInit() async {
+    getTokenNotification();
+    super.onInit();
+  }
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  getTokenNotification(){
+    fbm.getToken().then((token) {
+      tokenNotification = token;
+    });
+  }
 
   void switchBool() {
     isUpdating.value = !isUpdating.value;
@@ -47,7 +62,7 @@ class LogInController extends GetxController {
 
     if(formKey.currentState?.validate() ?? true ){
       switchBool();
-      var response = await AuthService.login(emailController.text, passwordController.text);
+      var response = await AuthService.login(emailController.text, passwordController.text,tokenNotification);
       if (response.error) {
         snackBarModel("echec".tr,"check_informations".tr  , true);
         switchBool();

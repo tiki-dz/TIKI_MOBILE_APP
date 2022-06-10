@@ -75,8 +75,6 @@ class ProfileService {
       request.headers.addAll(headers);
       http.StreamedResponse streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);
-      print(response.statusCode);
-      print("//////////");
       if (response.statusCode == 200) {
         return General<String>(data: "");
       }

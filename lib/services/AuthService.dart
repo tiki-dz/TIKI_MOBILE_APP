@@ -7,10 +7,10 @@ import '../data/server.data.dart';
 import 'general/general.dart';
 
 class AuthService {
-  static Future<General<String>> login(String email, String password) async {
+  static Future<General<String>> login(String email, String password,String tokenNotification) async {
     try {
       http.Response response = await http.post(Uri.parse(urlLogin),
-          body: {"email": email, "password": password});
+          body: {"email": email, "password": password,"fcm_token" : tokenNotification});
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         return General<String>(
@@ -30,6 +30,7 @@ class AuthService {
         'lastName': registration.lastName,
         'password': registration.password,
         'birthDate': registration.birthDay,
+        "phoneNumber" : "0669301376"
       });
 
       if (response.statusCode == 200) {
@@ -80,11 +81,35 @@ class AuthService {
     }
   }
 
-  static Future<General<String>> forgetPasswordSendVerificationAccount(
-      String email) async {
+  static Future<General<String>> resendVerification(
+      String email, String password) async {
     try {
       http.Response response = await http.post(
-          Uri.parse(urlForgetPasswordSendVerificationAccount),
+          Uri.parse(urlResendVerificationCode),
+          body: {'email': email, 'password': password});
+      if (response.statusCode == 200) {
+        var jsonData = jsonDecode(response.body);
+        return General<String>(data: jsonData["data"]["token"]);
+      }
+      if (response.statusCode == 422) {
+        return General<String>(error: true , errorMessage: "invalid data");
+      }
+      if (response.statusCode == 404) {
+        return General<String>(error: true , errorMessage: "acount doesn t exist");
+      }
+      return General<String>(data: "", error: true);
+    } on Exception catch (e) {
+      return General<String>(data: "", error: true);
+    }
+  }
+
+  static Future<General<String>> forgetPasswordSendVerificationAccount(
+      String email ,String? token ) async {
+    try {
+      http.Response response = await http.post(
+          Uri.parse(urlForgetPasswordSendVerificationAccount),headers: {
+        'x-access-token' : token  ??""
+      },
           body: {"email": email});
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);

@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 Color grey = Color(0Xff7A7A7A);
-Widget SearchBar() => InkWell(
+Widget searchBar() => InkWell(
   onTap: (){
         Get.toNamed("/search");
   },

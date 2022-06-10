@@ -16,10 +16,11 @@ import '../../controllers/registration.controller.dart';
 
 class ConfirmationWidget extends StatefulWidget {
   ConfirmationWidget(
-      {Key? key, required this.email, required this.token, required this.cas})
+      {Key? key, required this.email, required this.token, required this.cas,required this.password})
       : super(key: key);
   String email;
   String? token;
+  String password;
   int cas;
 
   @override
@@ -31,7 +32,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put<ConfirmationController>(ConfirmationController(
-        email: widget.email, cas: widget.cas, token: widget.token));
+        email: widget.email, cas: widget.cas, token: widget.token,password: widget.password));
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: BackGroundColor,
@@ -261,7 +262,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                       if (controller.start == 0) {
                         return InkWell(
                           onTap: () {
-                            controller.startTimer();
+                            widget.cas == 0 ?  controller.resendCodeSignUp() : controller.resendCodeForget();
                           },
                           child: Text(
                             'resend'.tr,

@@ -12,20 +12,20 @@ import 'package:tiki/Models/model.event.dart';
 import 'package:tiki/data/font.data.dart';
 import 'package:tiki/views/DetailEvent/widget.eventDetail.dart';
 
-import '../../../constWidgets/cashedNetwork.dart';
 import '../../../data/const.dart';
 import '../../../data/pallete.data.dart';
 import 'package:get/get.dart';
-Widget eventModel(EventModel? event) {
 
+import '../../constWidgets/cashedNetwork.dart';
+
+Widget eventModelSearch(EventModel? event) {
   return InkWell(
-    onTap: (){
-      Get.to(()=> EventDetailWidget(event: event));
+    onTap: () {
+      Get.to(() => EventDetailWidget(event: event));
     },
     child: Container(
-      height: 27.h,
-      width: 70.w,
-      margin: EdgeInsets.only(right: 5.w),
+      height: 30.h,
+      width: 90.w,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -44,15 +44,15 @@ Widget eventModel(EventModel? event) {
             children: [
               Expanded(
                 child: Container(
-                  width: 70.w,
+                  width: 90.w,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(7.sp),
                   ),
                   child: ClipRRect(
-                    borderRadius:  BorderRadius.circular(7.sp),
-                    child: cachedNetworkModel(event?.eventImage ?? "")
-                  ), ),
+                      borderRadius: BorderRadius.circular(7.sp),
+                      child: cachedNetworkModel(event?.eventImage ?? "")),
+                ),
               ),
               SizedBox(
                 height: 7.h,
@@ -63,8 +63,8 @@ Widget eventModel(EventModel? event) {
             children: [
               Expanded(
                   child: Container(
-                    color: Colors.transparent,
-                  )),
+                color: Colors.transparent,
+              )),
               Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -73,7 +73,7 @@ Widget eventModel(EventModel? event) {
                           bottomRight: Radius.circular(7.sp))),
                   child: Padding(
                     padding:
-                    EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+                        EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
                     child: Column(
                       children: [
                         SizedBox(
@@ -86,7 +86,7 @@ Widget eventModel(EventModel? event) {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  event?.nameHome()??"" ,
+                                  event?.nameHome() ?? "",
                                   style: TextStyle(
                                       fontWeight: semiBold, fontSize: 13.sp),
                                 ),
@@ -100,7 +100,7 @@ Widget eventModel(EventModel? event) {
                               ],
                             ),
                             Text(
-                                 "${event?.price} DA",
+                              "${event?.price} DA",
                               style: TextStyle(
                                   fontSize: 12.sp,
                                   fontWeight: semiBold,

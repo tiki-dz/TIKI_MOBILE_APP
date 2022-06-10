@@ -23,6 +23,7 @@ class _PaymentWebViewState extends State<PaymentWebView> {@override
 
   @override
   Widget build(BuildContext context) {
+    print(widget.url);
     return SafeArea(
       child: WebView(
         navigationDelegate: (NavigationRequest request) {

@@ -93,15 +93,43 @@ class _LogInWidgetState extends State<LogInWidget> {
                               await controller.login();
                             })
                           : circularProgressModel()),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+
+                      InkWell(
+                        onTap: () {
+                          Get.to(const SignUpWidget());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "not_account".tr,
+                              style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: medium,
+                                  color: SecondaryTextColor),
+                            ),
+                            Text(
+                              'signup'.tr,
+                              style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: semiBold,
+                                  color: ButtonColor),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
             SizedBox(
-              height: 4.h,
+              height: 19.h,
             ),
-            Row(
+            /*Row(
               children: [
                 Expanded(child: Divider(thickness: 0.1.h)),
                 Padding(
@@ -132,39 +160,13 @@ class _LogInWidgetState extends State<LogInWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  containerConnectWith("edit"),
-                  containerConnectWith("edit"),
-                  containerConnectWith("edit")
+                  containerConnectWith("fcb"),
+                  containerConnectWith("fcb"),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 3.h,
-            ),
-            InkWell(
-              onTap: () {
-                Get.to(const SignUpWidget());
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "not_account".tr,
-                    style: TextStyle(
-                        fontSize: 10.sp,
-                        fontWeight: medium,
-                        color: SecondaryTextColor),
-                  ),
-                  Text(
-                    'signup'.tr,
-                    style: TextStyle(
-                        fontSize: 10.sp,
-                        fontWeight: semiBold,
-                        color: ButtonColor),
-                  ),
-                ],
-              ),
-            )
+            ),*/
+
+
           ],
         ),
       ),

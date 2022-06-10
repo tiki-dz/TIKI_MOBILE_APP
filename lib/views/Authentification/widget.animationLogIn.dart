@@ -22,7 +22,7 @@ class _AnimationLogInWidgetState extends State<AnimationLogInWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         LottieBuilder.asset(
-            "assets/animation/11067-registration-animation.json"),
+            "assets/animation/72874-user-profile-v2.json"),
         SizedBox(height: 5.h,),
         Text(
           "animation_login".tr,
