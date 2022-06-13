@@ -28,7 +28,7 @@ class _PaymentWebViewState extends State<PaymentWebView> {@override
       child: WebView(
         navigationDelegate: (NavigationRequest request) {
           //http://localhost:8090/home
-          if(request.url=="http://localhost:8090/home") {
+          if(request.url=="http://127.0.0.1:8090/home") {
             Get.offAll(() => const BottomBarWidget(),
                 transition: Transition.rightToLeft);
             snackBarModel("succes".tr, "operation_done".tr, false);

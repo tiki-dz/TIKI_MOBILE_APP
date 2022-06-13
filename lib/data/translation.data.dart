@@ -97,7 +97,9 @@ class LocalString extends Translations {
           "last_name_valid": "please enter a valid last name",
           "try": "try after afiew minute",
           "operation_done": "operation done",
-          "success": "Succes"
+          "success": "Succes",
+          "saved_event" :"evenment seved",
+          "phone_number":"phone number"
         },
         'fr_FR': {
           'name': 'Nom',
@@ -194,7 +196,10 @@ class LocalString extends Translations {
           "try": "try after afiew minute",
           "operation_done": "operation done",
           "success": "Succes",
-          "account_exist": "account already exist"
+          "account_exist": "account already exist",
+          "saved_event" :"evenment seved",
+          "password":"mote de passe",
+          "phone_number":"numéro de téléphone"
         }
       };
 }

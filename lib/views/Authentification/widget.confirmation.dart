@@ -287,7 +287,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               width: 2.w,
                             ),
                             Text(
-                              controller.start.toString() + 'seconds'.tr,
+                              controller.start.toString() + " "+'seconds'.tr,
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 color: ButtonColor,

@@ -66,7 +66,7 @@ Widget addPerson(PersonModel? person, int index) {
                       InputComponentPerson(
                         hintText: 'phone number',
                         textEditingController: controller.phoneController,
-                        leadingIcon: 'assets/icons/fi-rr-user.svg',
+                        leadingIcon: 'assets/icons/phone.svg',
                         validate: controller.validatePhone,
                         number: true,
                       )

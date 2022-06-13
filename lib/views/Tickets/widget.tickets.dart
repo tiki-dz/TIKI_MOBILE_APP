@@ -14,9 +14,16 @@ class TicketsWidget extends StatefulWidget {
 }
 
 class _TicketsWidgetState extends State<TicketsWidget> {
+  final controller = Get.put(TicketsController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    controller.getTickets();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(TicketsController());
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

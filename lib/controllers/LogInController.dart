@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiki/controllers/ProfileController.dart';
 import 'package:tiki/controllers/wrapperProfileController.dart';
 import 'package:tiki/views/ButtomBar/widget.bottomBar.dart';
 import '../constWidgets/snackBar.dart';
@@ -69,8 +70,12 @@ class LogInController extends GetxController {
       } else {
         LocalController.setToken(response.token);
         LocalController.setProfile(response.data);
-        WrapperProfileController controller = Get.find<WrapperProfileController>();
-        controller.updateSign();
+        WrapperProfileController wrapperController = Get.find<WrapperProfileController>();
+        wrapperController.updateSign();
+        Get.put(ProfileController());
+        ProfileController profileController = Get.find<ProfileController>();
+        profileController.getUpdatedProfile();
+
         Get.offAll(() => const BottomBarWidget(),
             transition: Transition.rightToLeft);
 

@@ -155,13 +155,13 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             SizedBox(
                               height: 2.h,
                             ),
-                            /* InputComponentEditProfile(
+                            InputComponentEditProfile(
                               leadingIcon: 'assets/icons/phone.svg',
                               textEditingController:
                                   controller.phoneNumberController,
                               readOnly: true,
-                              hint: "add your phone number",
-                            ), */
+                              hint: "add your phone number", validate: controller.validatePhoneNumber,
+                            ),
                             SizedBox(
                               height: 2.h,
                             ),

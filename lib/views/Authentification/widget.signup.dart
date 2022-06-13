@@ -93,19 +93,27 @@ class SignUpWidget extends StatelessWidget {
             SizedBox(
               height: 2.h,
             ),
+            InputComponent(
+              hintText: 'phone_number'.tr,
+              textEditingController: controller.phoneNumberController,
+              validate: controller.validatePhoneNumber, leadingIcon: 'assets/icons/phone.svg',
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
             InputComponentPassword(
               hintText: 'password'.tr,
               textEditingController: controller.passwordController,
               validate: controller.validatePassword,
             ),
-            SizedBox(
+            /*SizedBox(
               height: 2.h,
             ),
             InputComponentPassword(
               hintText: 'confirmPassword'.tr,
               textEditingController: controller.confirmPasswordController,
               validate: controller.validateConfirmPassword,
-            ),
+            ),*/
             SizedBox(
               height: 7.h,
             ),

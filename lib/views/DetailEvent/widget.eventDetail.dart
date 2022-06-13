@@ -9,29 +9,31 @@ import 'package:get/get.dart';
 import 'package:tiki/views/Wrapper/widget.wrapperPurchase.dart';
 import 'package:tiki/views/payment/purshace.dart';
 import '../../Models/model.event.dart';
+import '../../constWidgets/cashedNetwork.dart';
 import 'component/component.button.dart';
 import 'component/component.buttonSave.dart';
 import 'component/component.info.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
 class EventDetailWidget extends StatefulWidget {
   EventDetailWidget({required this.event, Key? key}) : super(key: key);
-  EventModel? event;
+  EventModel event;
 
   @override
   _EventDetailWidgetState createState() => _EventDetailWidgetState();
 }
 
 class _EventDetailWidgetState extends State<EventDetailWidget> {
-
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     Get.find<DetailEventController>().dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(DetailEventController());
+    final controller = Get.put(DetailEventController(event: widget.event));
     return SafeArea(
         child: Scaffold(
       body: Stack(
@@ -41,13 +43,7 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
               SizedBox(
                 width: double.infinity,
                 height: 30.h,
-                child: CachedNetworkImage(
-                  imageUrl: widget.event?.eventImage ?? "",
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Image.asset('assets/logo/logo.png',fit: BoxFit.fill,),
-                  errorWidget: (context, url, error) =>  Image.asset('assets/icons/default.jpg',fit: BoxFit.fill,),
-                  fit: BoxFit.fill,
-                ),
+                child:  cachedNetworkModel(widget.event.eventImage)
               ),
               const Expanded(child: SizedBox())
             ],
@@ -89,7 +85,7 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              widget.event?.nameDetailEvent()??"",
+                              widget.event.nameDetailEvent(),
                               style: TextStyle(
                                   fontSize: 18.sp, fontWeight: semiBold),
                             ),
@@ -100,7 +96,7 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                           ],
                         ),
                         eventInfoMode(
-                          widget.event?.startDateFormat() ?? "",
+                          widget.event.startDateFormat(),
                           "12:00 AM - 12:00 PM",
                           "eventCalandrier",
                         ),
@@ -110,7 +106,7 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                           "eventPlace",
                         ),
                         eventInfoMode(
-                          widget.event?.price??""+" da",
+                          widget.event.price + " da",
                           "par place",
                           "eventTicket",
                         ),
@@ -129,19 +125,24 @@ class _EventDetailWidgetState extends State<EventDetailWidget> {
                         Expanded(
                             child: SingleChildScrollView(
                           child: Text(
-                            widget.event?.description ?? "",
+                            widget.event.description,
                             style: TextStyle(fontSize: 10.sp),
                           ),
                         )),
                         Row(
                           children: [
                             Expanded(
-                              child: buttonBuyEvent("buy_ticket".tr,  "gishet", () {
-                                Get.to(()=>WrapperPurchase(event: widget.event,));
+                              child:
+                                  buttonBuyEvent("buy_ticket".tr, "gishet", () {
+                                Get.to(() => WrapperPurchase(
+                                      event: widget.event,
+                                    ));
                                 controller.saveOrUnSaved();
                               }),
                             ),
-                            SizedBox(width: 2.w,),
+                            SizedBox(
+                              width: 2.w,
+                            ),
                             buttonSaveEvent(),
                           ],
                         ),

@@ -10,6 +10,8 @@ import '../constWidgets/snackBar.dart';
 import 'localController.dart';
 
 class PurchaseController extends GetxController {
+
+
   late EventModel? event;
 
   bool enableDiscountCode = false;
@@ -35,6 +37,11 @@ class PurchaseController extends GetxController {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+
+
+  String giveName(){
+    return userProfile.firstName[0] + "." + userProfile.lastName;
+  }
 
   List<PersonModel?> persons = [null, null, null];
 
@@ -65,7 +72,10 @@ class PurchaseController extends GetxController {
   String? validatePhone(String? phone) {
     if (validateName("") == null && validateLastName("") == null) {
       if (phoneController.text.isEmpty) {
-        return "phone number is required";
+        return "phone_num_req";
+      }
+      if(phoneController.text[0] != "0"){
+        return "phone_num_req";
       }
     }
     return null;
@@ -168,20 +178,21 @@ class PurchaseController extends GetxController {
     purchasing = !purchasing;
     update();
   }
+
+
   purchase()async {
     switchPurchasing();
-    var user = LocalController.getProfile();
+
     var data=[];
-    data.add({"firstName":user.firstName,"lastName":user.lastName,"phoneNumber":"0669301376"});
     for (int i = 0; i < persons.length; ++i) {
       if (persons[i] != null) {
         data.add({"firstName":persons[i]?.firstName??"","lastName":persons[i]?.lastName??"","phoneNumber":persons[i]?.phoneNumber??""});
       }
     }
 
-    var response = await PurchaseService.purchase(data,user.idClient,event);
+    var response = await PurchaseService.purchase(data,event,enableDiscountCode , discountCodeController.text);
     if(response.error){
-      snackBarModel("echec".tr, "mal", true);
+      snackBarModel("echec".tr, "try".tr, true);
     }else{
       Get.to(()=>PaymentWebView(url: response.data));
     }

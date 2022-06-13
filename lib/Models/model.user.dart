@@ -1,4 +1,6 @@
 
+import 'package:tiki/controllers/localController.dart';
+
 class UserModel {
   int idUser ;
   int idClient;
@@ -25,7 +27,7 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> item) {
     return UserModel(
       idUser: item["idUser"],
-        idClient: item["Client"]["idClient"],
+        idClient: item["Client"]==null ? LocalController.getIdClient() : item["Client"]["idClient"] ,
         firstName: item["firstName"].toString(),
         lastName: item["lastName"].toString(),
         phoneNumber: item["phoneNumber"].toString()=="null" ? null : item["phoneNumber"].toString(),

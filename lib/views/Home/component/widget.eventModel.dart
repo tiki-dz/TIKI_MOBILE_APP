@@ -20,7 +20,7 @@ Widget eventModel(EventModel? event) {
 
   return InkWell(
     onTap: (){
-      Get.to(()=> EventDetailWidget(event: event));
+      Get.to(()=> EventDetailWidget(event: event ?? EventModel(id: 1, name: "", description: "", organiser: "", address: "", eventImage: "", ticketImage: "", ticketNb: 0, startDate: DateTime.now(), endDate: DateTime.now(), price: "")));
     },
     child: Container(
       height: 27.h,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tiki/Models/model.notification.dart';
 import 'package:tiki/data/pallete.data.dart';
 
-Widget notificationModel() => Container(
+Widget notificationWidgetModel(NotificationModel notification) => Container(
     margin: EdgeInsets.symmetric(vertical: 1.h),
     padding: EdgeInsets.symmetric(vertical: 1.h),
     decoration: BoxDecoration(
@@ -13,7 +14,11 @@ Widget notificationModel() => Container(
         ListTile(
           leading: SvgPicture.asset("assets/icons/speaker.svg"),
           title: Text(
-            "une remise de 50% sur le ticket du film knives out ",
+            notification.title,
+            style: TextStyle(fontSize: 10.sp),
+          ),
+          subtitle: Text(
+            notification.body,
             style: TextStyle(fontSize: 10.sp),
           ),
         ),

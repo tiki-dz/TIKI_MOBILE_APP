@@ -6,6 +6,8 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:get/get.dart';
+import 'package:tiki/controllers/initialisationController.dart';
 import 'package:tiki/views/Authentification/widget.login.dart';
 import 'package:tiki/views/Authentification/widget.resetPasswordForget.dart';
 import 'package:tiki/views/Authentification/widget.signup.dart';
@@ -55,9 +57,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
+      Get.put(InitialisationController());
       return GetMaterialApp(
         translations: LocalString(),
-        locale: const Locale('en', 'EN'),
+        locale: GetStorage().read('lang').toString() == 'fr' ?Locale('fr', 'FR') : Locale('en', 'EN'),
+        fallbackLocale:Locale('en', 'EN') ,
         theme: ThemeData(
             textTheme: GoogleFonts.poppinsTextTheme(
               Theme.of(context).textTheme,
@@ -65,10 +69,10 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white),
         initialRoute: '/',
         getPages: [
-          GetPage(name: '/', page: () => WrapperOnBoardingWidget()),
-          GetPage(name: '/bottomBar', page: () => BottomBarWidget()),
-          GetPage(name: '/search', page: () => SearchWidget()),
-          GetPage(name: '/filter', page: () => FilterWidget()),
+          GetPage(name: '/', page: () => const WrapperOnBoardingWidget()),
+          GetPage(name: '/bottomBar', page: () => const BottomBarWidget()),
+          GetPage(name: '/search', page: () => const SearchWidget()),
+          GetPage(name: '/filter', page: () => const FilterWidget()),
         ],
         debugShowCheckedModeBanner: false,
         home: const WrapperOnBoardingWidget(),

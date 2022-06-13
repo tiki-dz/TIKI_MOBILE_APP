@@ -10,7 +10,6 @@ import '../views/Home/categories/widget.categories.dart';
 class HomeController extends GetxController {
   @override
   void onInit() async {
-
     getEvents();
 
     super.onInit();
@@ -22,7 +21,6 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-
   List<CategoriesModel>? categories;
   int? categoriesNumber;
 
@@ -33,8 +31,6 @@ class HomeController extends GetxController {
   bool processing = false;
 
   bool error = false;
-
-
 
   ScrollController scrollController = ScrollController();
 
@@ -58,9 +54,10 @@ class HomeController extends GetxController {
   double opacity = 12;
   double radiusContainer = 12;
 
-  initAnimation(){
+  initAnimation() {
     scrollController.addListener(onListen);
   }
+
   void onListen() {
     setRadiusContainer();
   }
@@ -80,7 +77,7 @@ class HomeController extends GetxController {
       radiusContainer = 12;
       opacity = radiusContainer;
     }
-  update();
+    update();
   }
 
   switchBool() {
@@ -110,6 +107,7 @@ class HomeController extends GetxController {
     switchBool();
     update();
     await getCategories();
+
     if (!error) {
       for (var category in categories!) {
         await getEventsCategories(category.name);
@@ -120,15 +118,12 @@ class HomeController extends GetxController {
             events?.add(map);
             eventsCategory = [];
 
-            processing=false;
+            processing = false;
             update();
           }
         }
       }
     }
-
-
-
   }
 
   toCategory(int index) {

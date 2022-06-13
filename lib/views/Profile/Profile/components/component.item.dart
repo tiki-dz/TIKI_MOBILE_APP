@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-Widget myListTile(String title, String icon, function) => Padding(
+Widget listTileModelWidget(String title, String icon, function) => Padding(
   padding: EdgeInsets.symmetric(vertical: 0.5.h),
   child: ListTile(
     onTap: function,

@@ -197,7 +197,7 @@ class _PurchaseWidgetState extends State<PurchaseWidget> {
                         ),
                         Visibility(
                             visible: !controller.checking,
-                            child: controller.purchasing? CircularProgressIndicator(color: KOrange,): buttonPayer(
+                            child: controller.purchasing? const CircularProgressIndicator(color: KOrange,): buttonPayer(
                                 "Payer",
                                 controller.enableDiscountCode
                                     ? controller.priceAllAfter

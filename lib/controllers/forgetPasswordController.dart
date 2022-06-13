@@ -36,7 +36,7 @@ class ForgetPasswordController extends GetxController{
       snackBarModel("echec".tr,"check_informations".tr , true);
       switchBool();
     } else {
-      Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 1,password: "",));
+      Get.to(()=>ConfirmationWidget(email: emailController.text, token: response.data, cas: 1,password: "",));
       switchBool();
     }
   }}

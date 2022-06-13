@@ -21,6 +21,13 @@ class LocalController{
     box.write('profile', profile);
   }
 
+  static setIdClient(int idClient){
+    box.write('idClient', idClient);
+  }
+  static int getIdClient(){
+    return box.read('idClient') ?? -1;
+  }
+
   // 0 for login  , 1 for edit profile
   static UserModel getProfile(){
     var data = jsonDecode(box.read("profile"));

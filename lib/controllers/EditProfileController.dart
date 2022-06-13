@@ -34,7 +34,7 @@ class EditProfileController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    radioSexe = user.sexe?? 0;
+    radioSexe = user.sexe ?? 0;
     picture = user.picture;
     lastNameController = TextEditingController(text: user.lastName);
     nameController = TextEditingController(text: user.firstName);
@@ -51,6 +51,7 @@ class EditProfileController extends GetxController {
   }
 
   var isUpdating = false.obs;
+
   void switchBool() {
     isUpdating.value = !isUpdating.value;
   }
@@ -76,44 +77,57 @@ class EditProfileController extends GetxController {
     }
   }
 
-  String? validateDate(String? date){
-    if(validateName("") == null && validateLastName("") == null){
-      if(birthDate.isEmpty){
+  String? validateDate(String? date) {
+    if (validateName("") == null && validateLastName("") == null) {
+      if (birthDate.isEmpty) {
         return "birthdate_req".tr;
       }
     }
     return null;
   }
 
-  String? validateCity(String? city){
+  String? validateCity(String? city) {
     return null;
   }
 
-  String? validateEmail(String? email){
+  String? validateEmail(String? email) {
     return null;
   }
 
+  String? validatePhoneNumber(String? phoneNumber) {
+    if (validateName("") == null &&
+        validateLastName("") == null &&
+        validateDate("") == "null") {
+      if (phoneNumberController.text.isEmpty) {
+        return "phone_num".tr;
+      }
+      if (phoneNumberController.text.length < 10 ||
+          phoneNumberController.text[0] != "0" ) {
+        return "phone_num_valid".tr;
+      }
+    }
+    return null;
+  }
 
-
-  String? validateName(String? name){
-    if(nameController.text.isEmpty){
-      return  "name_req".tr;
+  String? validateName(String? name) {
+    if (nameController.text.isEmpty) {
+      return "name_req".tr;
     }
 
-    if(nameController.text.length<2){
-      return  "name_valid".tr;
+    if (nameController.text.length < 2) {
+      return "name_valid".tr;
     }
     return null;
   }
 
-  String? validateLastName(String? email){
-    if(validateName("") == null){
-      if(lastNameController.text.isEmpty){
-        return  "last_name_req".tr;
+  String? validateLastName(String? email) {
+    if (validateName("") == null) {
+      if (lastNameController.text.isEmpty) {
+        return "last_name_req".tr;
       }
 
-      if(lastNameController.text.length<2){
-        return  "last_name_valid".tr;
+      if (lastNameController.text.length < 2) {
+        return "last_name_valid".tr;
       }
     }
     return null;
@@ -130,7 +144,6 @@ class EditProfileController extends GetxController {
           return;
         }
       }
-      print('cc');
 
       var response = await ProfileService.updateProfile(UserModel(
         idClient: user.idClient,
@@ -147,6 +160,7 @@ class EditProfileController extends GetxController {
         snackBarModel("echec".tr, "try".tr, true);
         switchBool();
       } else {
+        LocalController.setIdClient(user.idClient);
         LocalController.setProfile(response.data);
         switchBool();
         snackBarModel("succes".tr, "operation_done".tr, false);

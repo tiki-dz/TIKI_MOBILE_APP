@@ -8,6 +8,7 @@ import 'package:tiki/controllers/wrapperProfileController.dart';
 import 'package:tiki/views/Authentification/widget.confirmation.dart';
 import '../constWidgets/snackBar.dart';
 import '../services/AuthService.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SignUpController extends GetxController {
   final TextEditingController lastNameController = TextEditingController();
@@ -17,8 +18,23 @@ class SignUpController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  late var tokenNotification;
+  var fbm = FirebaseMessaging.instance;
+
+  final TextEditingController phoneNumberController =
+  TextEditingController();
+  @override
+  void onInit() async {
+    getTokenNotification();
+    super.onInit();
+  }
 
 
+  getTokenNotification(){
+    fbm.getToken().then((token) {
+      tokenNotification = token;
+    });
+  }
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -30,7 +46,7 @@ class SignUpController extends GetxController {
   }
 
   String? validatePassword(String? password) {
-    if(validateName("") == null && (validateLastName("")) == null && (validateEmail("")) == null  && validateDate("")==null) {
+    if(validateName("") == null && (validateLastName("")) == null && (validateEmail("")) == null  && validateDate("")==null  && validatePhoneNumber("")==null) {
       if (passwordController.text.isEmpty) {
         return 'password_req'.tr;
       }
@@ -43,7 +59,7 @@ class SignUpController extends GetxController {
     return null;
   }
 
-  String? validateConfirmPassword(String? password) {
+  /* String? validateConfirmPassword(String? password) {
     if (validateName("") == null && (validateLastName("")) == null &&
         (validateEmail("")) == null && (validatePassword("")) == null  && validateDate("")==null ) {
       if (confirmPasswordController.text.isEmpty) {
@@ -56,7 +72,7 @@ class SignUpController extends GetxController {
       return null;
     }
     return null;
-  }
+  } */
 
   String? validateEmail(String? email){
     if(validateName("") == null && validateLastName("") == null && validateDate("")==null ){
@@ -82,7 +98,7 @@ class SignUpController extends GetxController {
     return null;
   }
 
-  String? validateLastName(String? email){
+  String? validateLastName(String? lastName){
     if(validateName("") == null){
       if(lastNameController.text.isEmpty){
         return "last_name_req".tr;
@@ -104,6 +120,19 @@ class SignUpController extends GetxController {
     return null;
   }
 
+  String? validatePhoneNumber(String? date){
+    if (validateName("") == null && (validateLastName("")) == null &&
+        (validateEmail("")) == null && validateDate("")==null )
+    {
+      if(phoneNumberController.text.isEmpty){
+        return "phone_num".tr;
+      }
+      if(phoneNumberController.text.length < 10 || phoneNumberController.text[0] != "0" ){
+        return "phone_num_valid".tr;
+      }
+    }
+    return null;
+  }
 
   void changeDate(DateTime dateTime) {
     final DateTime date= dateTime;
@@ -127,7 +156,7 @@ class SignUpController extends GetxController {
         lastNameController.text,
         birthDateController.value,
         emailController.text,
-        passwordController.text));
+        passwordController.text,phoneNumberController.text));
 
     if (response.error) {
       snackBarModel("echec".tr,response.errorMessage , true);
@@ -135,7 +164,7 @@ class SignUpController extends GetxController {
     } else {
       WrapperProfileController controller = Get.find<WrapperProfileController>();
       controller.updateSign();
-      Get.to(ConfirmationWidget(email: emailController.text, token: response.data, cas: 0,password : passwordController.text));
+      Get.to(()=>ConfirmationWidget(email: emailController.text, token: response.data, cas: 0,password : passwordController.text));
       switchBool();
     }}
   }

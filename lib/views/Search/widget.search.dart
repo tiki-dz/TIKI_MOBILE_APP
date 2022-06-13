@@ -7,7 +7,7 @@ import 'package:tiki/data/pallete.data.dart';
 import 'package:get/get.dart';
 import 'package:tiki/views/Search/widget.eventModeSearch.dart';
 import '../../constWidgets/progressIndicator.dart';
-import '../Home/component/widget.eventMode.dart';
+import '../Home/component/widget.eventModel.dart';
 import '../Home/component/widget.searchBar.dart';
 
 class SearchWidget extends StatefulWidget {

@@ -11,6 +11,7 @@ import '../views/Authentification/widget.confirmation.dart';
 import '../views/Authentification/widget.resetPasswordForget.dart';
 import '../views/ButtomBar/widget.bottomBar.dart';
 import 'localController.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ConfirmationController extends GetxController {
 
@@ -19,6 +20,8 @@ class ConfirmationController extends GetxController {
   late String email;
   late String? token;
   late String password;
+  late var tokenNotification;
+  var fbm = FirebaseMessaging.instance;
 
 
   ConfirmationController({required this.cas,required this.email,required this.token,required this.password});
@@ -32,9 +35,15 @@ class ConfirmationController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    getTokenNotification();
     startTimer();
   }
 
+  getTokenNotification(){
+    fbm.getToken().then((token) {
+      tokenNotification = token;
+    });
+  }
 
   void switchBool() {
     isProcessing.value = !isProcessing.value;
@@ -67,7 +76,7 @@ class ConfirmationController extends GetxController {
     startTimer();
     late dynamic response;
     if(cas == 0){
-      response = await AuthService.verifyCode(email, token,codePinController.text );
+      response = await AuthService.verifyCode(email, token,codePinController.text ,tokenNotification);
       LocalController.setToken(response.token);
       LocalController.setProfile(response.data);
       WrapperProfileController controller = Get.find<WrapperProfileController>();
@@ -113,8 +122,8 @@ class ConfirmationController extends GetxController {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
+          backgroundColor: Colors.black.withOpacity(0.2),
+          textColor: Colors.black,
           fontSize: 16.0
       );
       token = response.data;

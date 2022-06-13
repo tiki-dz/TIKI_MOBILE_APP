@@ -7,7 +7,7 @@ import '../../data/pallete.data.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'component/widget.carousel.dart';
-import 'component/widget.eventMode.dart';
+import 'component/widget.eventModel.dart';
 import 'component/widget.searchBar.dart';
 import 'package:get/get.dart';
 

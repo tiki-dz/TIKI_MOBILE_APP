@@ -12,13 +12,14 @@ import 'package:tiki/Models/model.event.dart';
 import 'package:tiki/data/font.data.dart';
 import 'package:tiki/views/DetailEvent/widget.eventDetail.dart';
 
+import '../../../constWidgets/cashedNetwork.dart';
 import '../../../data/const.dart';
 import '../../../data/pallete.data.dart';
 import 'package:get/get.dart';
 
-import '../../constWidgets/cashedNetwork.dart';
 
-Widget eventModelSearch(EventModel event) {
+
+Widget eventSavedModel(EventModel event) {
   return InkWell(
     onTap: () {
       Get.to(() => EventDetailWidget(event: event));

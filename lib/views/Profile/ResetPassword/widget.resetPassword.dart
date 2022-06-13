@@ -55,7 +55,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                   SizedBox(
                       height: 30.h,
                       child: LottieBuilder.asset(
-                          "assets/animation/85012-password-security.json")),
+                          "assets/animation/85012-password-security.json",repeat: false,)),
                   SizedBox(height: 2.h),
                   InputComponentPassword(
                     hintText:  "current_password".tr,
