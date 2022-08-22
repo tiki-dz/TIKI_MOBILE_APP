@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tiki/Models/model.event.dart';
+import 'package:tiki/constWidgets/cashedNetwork.dart';
 import 'package:tiki/controllers/purchaseController.dart';
 import 'package:tiki/data/font.data.dart';
 import 'package:tiki/views/Authentification/components/component.button.dart';
@@ -19,7 +20,7 @@ import 'component/userWidgetModel.dart';
 class PurchaseWidget extends StatefulWidget {
   PurchaseWidget({required this.event, Key? key}) : super(key: key);
 
-  EventModel? event;
+  EventModel event;
 
   @override
   _PurchaseWidgetState createState() => _PurchaseWidgetState();
@@ -70,33 +71,49 @@ class _PurchaseWidgetState extends State<PurchaseWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 3.w),
                               height: 10.h,
+                              width: double.infinity,
                               decoration: BoxDecoration(
-                                  color: Colors.black,
                                   borderRadius: BorderRadius.circular(10.sp)),
-                              child: Center(
-                                child: Text(
-                                  controller.event?.name ?? "",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: controller.event?.nameSizePurchase()),
-                                ),
+                              child: Stack(
+                                children: [
+                                  SizedBox(
+                                      width: double.infinity,
+                                      child: cachedNetworkModel(
+                                          controller.event.eventImage)),
+                                  Container(
+                                    width: double.infinity,
+
+                                    decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.6),
+                                        borderRadius: BorderRadius.circular(10.sp)),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      controller.event.name,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: controller.event
+                                              .nameSizePurchase()),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             SizedBox(
                               height: 2.h,
                             ),
                             InputDiscountCode(
-                              hintText: 'Enter a discount code',
+                              hintText: 'enter_a_discount_code'.tr,
                               textEditingController:
-                                  controller.discountCodeController,
+                              controller.discountCodeController,
                               submit: controller.submit,
                             ),
                             SizedBox(
                               height: 2.h,
                             ),
                             Text(
-                              "Achter pour :",
+                              "Buy_for".tr + " :",
                               style: TextStyle(
                                   fontSize: 11.sp, fontWeight: semiBold),
                             ),
@@ -117,94 +134,97 @@ class _PurchaseWidgetState extends State<PurchaseWidget> {
                             ),
                             controller.checking
                                 ? const Center(
-                                    child: CircularProgressIndicator(
-                                    color: KOrange,
-                                  ))
+                                child: CircularProgressIndicator(
+                                  color: KOrange,
+                                ))
                                 : Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "summary".tr + " :",
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: semiBold),
+                                ),
+                                SizedBox(
+                                  height: 1.h,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 1.h, horizontal: 4.w),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(6.sp),
+                                      color: const Color(0xFFFAFAFA)),
+                                  child: Column(
                                     children: [
-                                      Text(
-                                        "Summary :",
-                                        style: TextStyle(
-                                            fontSize: 14.sp,
-                                            fontWeight: semiBold),
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 1.h, horizontal: 4.w),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(6.sp),
-                                            color: const Color(0xFFFAFAFA)),
+                                      priceDesc(
+                                          "prix unitaire",
+                                          controller.priceOneBefore
+                                              .toString() +
+                                              " " +
+                                              "DA"),
+                                      dottedLine,
+                                      priceDesc(
+                                          "places",
+                                          controller.places.toString() +
+                                              " place"),
+                                      dottedLine,
+                                      priceDesc(
+                                          "prix total",
+                                          controller.priceAllBefore
+                                              .toString() +
+                                              " " +
+                                              "DA"),
+                                      Visibility(
+                                        visible:
+                                        controller.enableDiscountCode,
                                         child: Column(
                                           children: [
                                             priceDesc(
-                                                "prix unitaire",
-                                                controller.priceOneBefore
-                                                        .toString() +
+                                                "réduction",
+                                                controller.reduction
+                                                    .toString() +
                                                     " " +
                                                     "DA"),
                                             dottedLine,
                                             priceDesc(
-                                                "places",
-                                                controller.places.toString() +
-                                                    " place"),
-                                            dottedLine,
-                                            priceDesc(
-                                                "prix total",
-                                                controller.priceAllBefore
-                                                        .toString() +
+                                                "prix unitaire après",
+                                                controller.priceOneAfter
+                                                    .toString() +
                                                     " " +
                                                     "DA"),
-                                            Visibility(
-                                              visible:
-                                                  controller.enableDiscountCode,
-                                              child: Column(
-                                                children: [
-                                                  priceDesc(
-                                                      "réduction",
-                                                      controller.reduction
-                                                              .toString() +
-                                                          " " +
-                                                          "DA"),
-                                                  dottedLine,
-                                                  priceDesc(
-                                                      "prix unitaire après",
-                                                      controller.priceOneAfter
-                                                              .toString() +
-                                                          " " +
-                                                          "DA"),
-                                                  dottedLine,
-                                                  priceDesc(
-                                                      "prix total après",
-                                                      controller.priceAllAfter
-                                                              .toString() +
-                                                          " " +
-                                                          "DA"),
-                                                ],
-                                              ),
-                                            ),
+                                            dottedLine,
+                                            priceDesc(
+                                                "prix total après",
+                                                controller.priceAllAfter
+                                                    .toString() +
+                                                    " " +
+                                                    "DA"),
                                           ],
                                         ),
                                       ),
                                     ],
-                                  )
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                         Visibility(
                             visible: !controller.checking,
-                            child: controller.purchasing? const CircularProgressIndicator(color: KOrange,): buttonPayer(
-                                "Payer",
+                            child: controller.purchasing
+                                ? const CircularProgressIndicator(
+                              color: KOrange,
+                            )
+                                : buttonPayer(
+                                "pay".tr,
                                 controller.enableDiscountCode
                                     ? controller.priceAllAfter
-                                    : controller.priceAllBefore,
-                                ()async {
-                                 await controller.purchase();
-                                }))
+                                    : controller.priceAllBefore, () async {
+                              await controller.purchase();
+                            }))
                       ],
                     );
                   }),

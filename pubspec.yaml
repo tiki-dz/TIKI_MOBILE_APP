@@ -47,6 +47,7 @@ dependencies:
   dio: ^4.0.4
   email_validator: ^2.0.1
   firebase_messaging: ^11.2.6
+  awesome_notifications: 0.0.6+10
   firebase_auth: ^3.3.7
   intl_phone_number_input: ^0.7.0+2
   stacked: ^2.2.8
@@ -68,6 +69,12 @@ dependencies:
   mime: ^1.0.1
   webview_flutter: ^3.0.3
   flutter_local_notifications: ^9.2.0
+<<<<<<< Updated upstream
+=======
+  qr_flutter: ^4.0.0
+  timeago: ^3.2.2
+
+>>>>>>> Stashed changes
 
 
 dev_dependencies:
@@ -82,7 +89,7 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/logo/logo.png
+  image: assets/logo/logoPlasti.png
   android_gravity: center
   android: true
   ios: true

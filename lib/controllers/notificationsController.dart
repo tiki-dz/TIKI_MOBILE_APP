@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tiki/Models/model.notification.dart';
+import 'package:tiki/controllers/localController.dart';
 
 import '../services/NotificationService.dart';
 
@@ -42,19 +43,22 @@ class NotificationsController extends GetxController {
   getNotifications() async {
     switchFetchingNotification();
     await getNotificationAll();
-    await getNotificationUser();
+    if(LocalController.getSign()){
+      await getNotificationUser();
+    }
+
     switchFetchingNotification();
   }
 
   getNotificationUser() async {
-    var response = await NotificationService.getNotificationUser(++pageUser);
+    var response = await NotificationService.getNotificationUser(0);
     if (response.error != true) {
       notificationUser = response.data ?? [];
     }
   }
 
   getNotificationAll() async {
-    var response = await NotificationService.getNotificationAll(++pageAll);
+    var response = await NotificationService.getNotificationAll(0);
     if (response.error != true) {
       notificationAll = response.data ?? [];
     }

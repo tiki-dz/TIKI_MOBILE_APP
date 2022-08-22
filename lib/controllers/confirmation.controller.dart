@@ -10,6 +10,8 @@ import '../services/AuthService.dart';
 import '../views/Authentification/widget.confirmation.dart';
 import '../views/Authentification/widget.resetPasswordForget.dart';
 import '../views/ButtomBar/widget.bottomBar.dart';
+import 'ProfileController.dart';
+import 'initialisationController.dart';
 import 'localController.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -55,7 +57,7 @@ class ConfirmationController extends GetxController {
     const oneSec = Duration(seconds: 1);
     timer = Timer.periodic(
       oneSec,
-      (Timer timer) {
+          (Timer timer) {
         if (start == 0) {
           timer.cancel();
           update();
@@ -81,6 +83,11 @@ class ConfirmationController extends GetxController {
       LocalController.setProfile(response.data);
       WrapperProfileController controller = Get.find<WrapperProfileController>();
       controller.updateSign();
+      Get.put(ProfileController());
+      ProfileController profileController = Get.find<ProfileController>();
+      profileController.getUpdatedProfile();
+      InitialisationController initialisationController = Get.find<InitialisationController>();
+      initialisationController.getSavedEvents();
     } else{
       response = await AuthService.forgetPasswordValidateAccount(email, token, codePinController.text);
     }
@@ -88,7 +95,7 @@ class ConfirmationController extends GetxController {
       snackBarModel("echek".tr,"check_informations".tr , true);
       switchBool();
     } else {
-       cas ==0 ?   Get.off(() => const BottomBarWidget()) : Get.off(() => ResetPasswordForgetWidget(email: email,token: response.data,));
+      cas ==0 ?   Get.offAll(() => const BottomBarWidget()) : Get.off(() => ResetPasswordForgetWidget(email: email,token: response.data,));
     }
   }
 

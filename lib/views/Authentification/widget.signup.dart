@@ -20,138 +20,139 @@ class SignUpWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
-    return Scaffold(
-      backgroundColor: BackGroundColor,
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: EdgeInsets.only(
-          left: 10.w,
-          right: 10.w,
-          top: 7.h,
-        ),
-        child: Form(
-          key: controller.formKey,
-          child: Column(children: [
-            SizedBox(
-              height: 1.h,
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: InkWell(
-                onTap: () {
-                  Get.offAll(const BottomBarWidget());
-                },
-                child: SvgPicture.asset(
-                    'assets/icons/fi-rr-cross-small.svg'),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: BackGroundColor,
+        body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 7.w),
+              child: Form(
+                key: controller.formKey,
+                child: Column(children: [
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: InkWell(
+                      onTap: () {
+                        Get.offAll(const BottomBarWidget());
+                      },
+                      child: SvgPicture.asset('assets/icons/fi-rr-cross-small.svg'),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  Image.asset(
+                    'assets/logo/logoPlasti.png',
+                    height: 70.sp,
+                  ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  InputComponent(
+                    leadingIcon: 'assets/icons/fi-rr-user.svg',
+                    hintText: 'name'.tr,
+                    textEditingController: controller.nameController,
+                    validate: controller.validateName,
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InputComponent(
+                    leadingIcon: 'assets/icons/fi-rr-user.svg',
+                    hintText: 'lastname'.tr,
+                    textEditingController: controller.lastNameController,
+                    validate: controller.validateLastName,
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Obx(
+                        () => InputDateComponent(
+                      leadingIcon: 'assets/icons/fi-rr-calendar.svg',
+                      hintText: controller.birthDateController.value == ""
+                          ? 'birthDate'.tr
+                          : controller.birthDateController.value,
+                      controller: controller,
+                      function: controller.changeDate,
+                      validate: controller.validateDate,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InputComponent(
+                    leadingIcon: 'assets/icons/fi-rr-envelope.svg',
+                    hintText: 'email'.tr,
+                    textEditingController: controller.emailController,
+                    validate: controller.validateEmail,
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InputComponent(
+                    hintText: 'phone_number'.tr,
+                    textEditingController: controller.phoneNumberController,
+                    validate: controller.validatePhoneNumber,
+                    leadingIcon: 'assets/icons/phone.svg',
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InputComponentPassword(
+                    hintText: 'password'.tr,
+                    textEditingController: controller.passwordController,
+                    validate: controller.validatePassword,
+                  ),
+                  /*SizedBox(
+                height: 2.h,
               ),
-            ),
-            SizedBox(
-              height: 3.h,
-            ),
-            Text(
-              'signup'.tr,
-              style: TextStyle(
-                fontSize: 27.sp,
-                fontWeight: semiBold,
-              ),
-            ),
-            SizedBox(
-              height: 5.h,
-            ),
-            InputComponent(
-                leadingIcon: 'assets/icons/fi-rr-user.svg',
-                hintText: 'name'.tr,
-                textEditingController: controller.nameController,validate: controller.validateName,),
-            SizedBox(
-              height: 2.h,
-            ),
-            InputComponent(
-                leadingIcon: 'assets/icons/fi-rr-user.svg',
-                hintText: 'lastname'.tr,
-                textEditingController: controller.lastNameController,validate:  controller.validateLastName,),
-            SizedBox(
-              height: 2.h,
-            ),
-            Obx(
-              () => InputDateComponent(
-                leadingIcon: 'assets/icons/fi-rr-calendar.svg',
-                hintText: controller.birthDateController.value == ""
-                    ? 'birthDate'.tr
-                    : controller.birthDateController.value,
-                controller: controller,
-                function: controller.changeDate,
-                validate: controller.validateDate,
-              ),
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            InputComponent(
-                leadingIcon: 'assets/icons/fi-rr-envelope.svg',
-                hintText: 'email'.tr,
-                textEditingController: controller.emailController,validate: controller.validateEmail,),
-            SizedBox(
-              height: 2.h,
-            ),
-            InputComponent(
-              hintText: 'phone_number'.tr,
-              textEditingController: controller.phoneNumberController,
-              validate: controller.validatePhoneNumber, leadingIcon: 'assets/icons/phone.svg',
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            InputComponentPassword(
-              hintText: 'password'.tr,
-              textEditingController: controller.passwordController,
-              validate: controller.validatePassword,
-            ),
-            /*SizedBox(
-              height: 2.h,
-            ),
-            InputComponentPassword(
-              hintText: 'confirmPassword'.tr,
-              textEditingController: controller.confirmPasswordController,
-              validate: controller.validateConfirmPassword,
-            ),*/
-            SizedBox(
-              height: 7.h,
-            ),
-            Obx(() => controller.isUpdating.value == false
-                ? button("signup".tr, () async {
+              InputComponentPassword(
+                hintText: 'confirmPassword'.tr,
+                textEditingController: controller.confirmPasswordController,
+                validate: controller.validateConfirmPassword,
+              ),*/
+                  SizedBox(
+                    height: 7.h,
+                  ),
+                  Obx(() => controller.isUpdating.value == false
+                      ? button("signup".tr, () async {
                     await controller.signUp();
                   })
-                : circularProgressModel()),
-            SizedBox(
-              height: 3.h,
-            ),
-            InkWell(
-              onTap: () {
-                Get.to(() =>LogInWidget());
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'you_already_have_account'.tr,
-                    style: TextStyle(
-                        fontSize: 10.sp,
-                        fontWeight: medium,
-                        color: SecondaryTextColor),
+                      : circularProgressModel()),
+                  SizedBox(
+                    height: 3.h,
                   ),
-                  Text(
-                    'login'.tr,
-                    style: TextStyle(
-                        fontSize: 10.sp,
-                        fontWeight: semiBold,
-                        color: ButtonColor),
-                  ),
-                ],
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => LogInWidget());
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'you_already_have_account'.tr,
+                          style: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: medium,
+                              color: SecondaryTextColor),
+                        ),
+                        Text(
+                          'login'.tr,
+                          style: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: semiBold,
+                              color: ButtonColor),
+                        ),
+                      ],
+                    ),
+                  )
+                ]),
               ),
-            )
-          ]),
-        ),
-      )),
+            )),
+      ),
     );
   }
 }

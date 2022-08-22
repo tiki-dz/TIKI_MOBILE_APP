@@ -5,11 +5,8 @@ import 'package:tiki/services/SearchService.dart';
 
 class SearchController extends GetxController{
   late FocusNode focusNode;
-
-  TextEditingController searchController = TextEditingController();
   List<EventModel> events = [];
-
-
+  List<EventModel> fullEvents = [];
   bool isFetching = false;
   bool isFetchingPage = false;
   bool haveNext = false;
@@ -31,10 +28,19 @@ class SearchController extends GetxController{
     filterSearch = search;
     if(search.isEmpty){
       events =[];
+      fullEvents = [];
       update();
     }else {
       await getEvents();
     }
+  }
+
+  filter(DateTime fromDate,DateTime toDate , int startPrice , int endPrice , String category){
+    events = fullEvents.where((event) =>
+      event.startDate.isAfter(fromDate) && event.startDate.isBefore(toDate) &&
+        int.parse(event.price) > startPrice && int.parse(event.price) < endPrice && (category =="All"|| category == event.category)
+    ).toList();
+    update();
   }
 
   getEvents() async {
@@ -44,9 +50,10 @@ class SearchController extends GetxController{
     var response = await SearchService.getSearchEvents(page,filterSearch);
     if (!response.error) {
       if (page == 0) {
-        events = [];
+        fullEvents  = [];
       }
-      events.addAll(response.data ?? []);
+      fullEvents.addAll(response.data ?? []);
+      events = fullEvents;
       haveNext = response.haveNext;
       if (haveNext) {
         ++page;

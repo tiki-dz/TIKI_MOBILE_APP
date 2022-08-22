@@ -38,6 +38,7 @@ class _InputDateComponentEditProfileState extends State<InputDateComponentEditPr
                   DateTime.now().subtract(const Duration(days: 2190)).year,
                   initialDateTime:
                   DateTime.now().subtract(const Duration(days: 2190)),
+                  minimumYear:DateTime.now().subtract(const Duration(days: 29190)).year ,
                   mode: CupertinoDatePickerMode.date,
                   onDateTimeChanged: widget.function,
                 ),

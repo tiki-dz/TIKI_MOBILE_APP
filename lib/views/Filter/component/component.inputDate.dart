@@ -10,18 +10,23 @@ import 'package:sizer/sizer.dart';
 class InputDateComponentFilter extends StatefulWidget {
   String leadingIcon;
   var controller;
-  String hint ;
+  String hintText;
+
+  String? Function(String?) validate;
   Function(DateTime) function;
 
   InputDateComponentFilter(
-      {Key? key, required this.hint,
+      {Key? key,
+      required this.hintText,
+      required this.validate,
       required this.leadingIcon,
       required this.controller,
       required this.function})
       : super(key: key);
 
   @override
-  State<InputDateComponentFilter> createState() => _InputDateComponentFilterState();
+  State<InputDateComponentFilter> createState() =>
+      _InputDateComponentFilterState();
 }
 
 class _InputDateComponentFilterState extends State<InputDateComponentFilter> {
@@ -36,10 +41,12 @@ class _InputDateComponentFilterState extends State<InputDateComponentFilter> {
               children: [
                 Expanded(
                   child: CupertinoDatePicker(
-                    maximumYear:
-                        DateTime.now().subtract(const Duration(days: 2190)).year,
+                    maximumYear: DateTime.now()
+                        .add(const Duration(days: 2190))
+                        .year,
                     initialDateTime:
-                        DateTime.now().subtract(const Duration(days: 2190)),
+                          DateTime.now().add(const Duration(days: 1)),
+                    minimumDate: DateTime.now(),
                     mode: CupertinoDatePickerMode.date,
                     onDateTimeChanged: widget.function,
                   ),
@@ -65,7 +72,7 @@ class _InputDateComponentFilterState extends State<InputDateComponentFilter> {
       cursorColor: ButtonColor,
       style: TextStyle(fontSize: 10.sp, fontWeight: regular),
       decoration: InputDecoration(
-        hintText: widget.hint,
+        hintText: widget.hintText,
         contentPadding: EdgeInsets.symmetric(vertical: 0.05.h, horizontal: 0.0),
         prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(

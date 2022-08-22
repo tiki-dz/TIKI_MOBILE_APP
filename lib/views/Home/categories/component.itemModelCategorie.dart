@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tiki/controllers/categoriesController.dart';
 import 'package:tiki/data/pallete.data.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';

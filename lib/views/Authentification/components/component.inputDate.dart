@@ -43,6 +43,7 @@ class _InputDateComponentState extends State<InputDateComponent> {
                         DateTime.now().subtract(const Duration(days: 2190)).year,
                     initialDateTime:
                         DateTime.now().subtract(const Duration(days: 2190)),
+                    minimumYear:DateTime.now().subtract(const Duration(days: 29190)).year ,
                     mode: CupertinoDatePickerMode.date,
                     onDateTimeChanged: widget.function,
                   ),
@@ -54,7 +55,7 @@ class _InputDateComponentState extends State<InputDateComponent> {
                         Get.back();
                       },
                       child: Text(
-                        "Save",
+                        "save".tr,
                         style: TextStyle(
                             fontWeight: medium,
                             fontSize: 13.sp,

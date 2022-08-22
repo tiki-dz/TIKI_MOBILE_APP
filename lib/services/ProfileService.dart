@@ -28,23 +28,22 @@ class ProfileService {
   }
 
   static Future<General<String>> updateProfile(UserModel user) async {
-    Map<String, String?> body ;
-    if(user.city?.isEmpty ?? true){
+    print(user.sexe);
+    Map<String, String?> body ={} ;
+
     body = {
       "firstName": user.firstName,
       "lastName": user.lastName,
-      "sexe": user.sexe == 0 ? "Homme" : "Femme",
-      "birthDate": user.birthDate
+      "sexe": user.sexe == 1 ? "Homme" : "Femme",
+      "birthDate": user.birthDate,
+      "phoneNumber" :user.phoneNumber
     };
-    }else {
-      body = {
-        "city" : user.city,
-        "firstName": user.firstName,
-        "lastName": user.lastName,
-        "sexe": user.sexe == 0 ? "Homme" : "Femme",
-        "birthDate": user.birthDate
-      };
+    if(user.city?.isNotEmpty ?? true){
+      body["city"] = user.city;
     }
+
+
+
     try {
       http.Response response = await http.put(Uri.parse(urlUpdateProfile),
           body: body, headers: {'x-access-token': LocalController.getToken()});
@@ -88,7 +87,7 @@ class ProfileService {
       String currentPassword, String newPassword) async {
     try {
       http.Response response =
-          await http.put(Uri.parse(urlResetPassword), body: {
+      await http.put(Uri.parse(urlResetPassword), body: {
         "password": currentPassword,
         "newPassword": newPassword,
       }, headers: {

@@ -10,6 +10,8 @@ import '../constWidgets/snackBar.dart';
 import '../services/AuthService.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'ProfileController.dart';
+
 class SignUpController extends GetxController {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
@@ -17,7 +19,7 @@ class SignUpController extends GetxController {
   late RxString birthDateController = "".obs;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController confirmPasswordController =
-      TextEditingController();
+  TextEditingController();
   late var tokenNotification;
   var fbm = FirebaseMessaging.instance;
 
@@ -92,19 +94,19 @@ class SignUpController extends GetxController {
       return "name_req".tr;
     }
 
-    if(nameController.text.length<2){
+    if(nameController.text.length<3 || !RegExp(r'^[a-zA-Z]+$').hasMatch(nameController.text)){
       return "name_valid".tr;
     }
     return null;
   }
 
-  String? validateLastName(String? lastName){
+  String? validateLastName(String? lastName ){
     if(validateName("") == null){
       if(lastNameController.text.isEmpty){
         return "last_name_req".tr;
       }
 
-      if(lastNameController.text.length<2){
+      if(lastNameController.text.length<3 || !RegExp(r'^[a-zA-Z]+$').hasMatch(lastNameController.text)){
         return "last_name_valid".tr;
       }
     }
@@ -127,7 +129,7 @@ class SignUpController extends GetxController {
       if(phoneNumberController.text.isEmpty){
         return "phone_num".tr;
       }
-      if(phoneNumberController.text.length < 10 || phoneNumberController.text[0] != "0" ){
+      if(phoneNumberController.text.length != 10 || phoneNumberController.text[0] != "0" || !RegExp(r'^[0-9]+$').hasMatch(phoneNumberController.text)){
         return "phone_num_valid".tr;
       }
     }
@@ -151,22 +153,20 @@ class SignUpController extends GetxController {
 
     if(formKey.currentState?.validate() ?? true ){
       switchBool();
-    var response = await AuthService.signUp(RegistrationModel(
-        nameController.text,
-        lastNameController.text,
-        birthDateController.value,
-        emailController.text,
-        passwordController.text,phoneNumberController.text));
+      var response = await AuthService.signUp(RegistrationModel(
+          nameController.text,
+          lastNameController.text,
+          birthDateController.value,
+          emailController.text,
+          passwordController.text,phoneNumberController.text));
 
-    if (response.error) {
-      snackBarModel("echec".tr,response.errorMessage , true);
-      switchBool();
-    } else {
-      WrapperProfileController controller = Get.find<WrapperProfileController>();
-      controller.updateSign();
-      Get.to(()=>ConfirmationWidget(email: emailController.text, token: response.data, cas: 0,password : passwordController.text));
-      switchBool();
-    }}
+      if (response.error) {
+        snackBarModel("echec".tr,response.errorMessage , true);
+        switchBool();
+      } else {
+        Get.to(()=>ConfirmationWidget(email: emailController.text, token: response.data, cas: 0,password : passwordController.text));
+        switchBool();
+      }}
   }
 
 }

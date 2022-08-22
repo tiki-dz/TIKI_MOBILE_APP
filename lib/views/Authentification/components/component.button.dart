@@ -18,7 +18,7 @@ Widget button(String title, VoidCallback? function) {
           ),
         ),
         color: ButtonColor,
-        elevation: 4,
+        elevation: 0,
         child: Center(
           child: Text(
             title,

@@ -7,9 +7,9 @@ import '../../Models/model.event.dart';
 import '../../controllers/wrapperProfileController.dart';
 
 class WrapperPurchase extends StatelessWidget {
-   WrapperPurchase({required this.event,Key? key}) : super(key: key);
+  WrapperPurchase({required this.event,Key? key}) : super(key: key);
 
-  EventModel? event;
+  EventModel event;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(WrapperProfileController());

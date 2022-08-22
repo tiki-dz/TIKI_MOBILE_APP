@@ -52,66 +52,74 @@ class _HomeWidgetState extends State<HomeWidget> {
                               topLeft: Radius.circular(
                                   controller.radiusContainer.sp)),
                           color: Colors.white),
-                      child: controller.processing
-                          ? circularProgressModel()
-                          : ListView.builder(
-                              controller: controller.scrollController,
-                              itemCount: controller.events?.length,
-                              itemBuilder: (context, indexFirst) => Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                      child: RefreshIndicator(
+                        color: KOrange,
+                        onRefresh: ()async{
+                          await controller.refr();
+                        },
+                        child: controller.processing
+                            ? Center(child: circularProgressModel())
+                            : ListView.builder(
+                            controller: controller.scrollController,
+                            itemCount: controller.events.length,
+                            itemBuilder: (context, indexFirst) => Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      3.w, 2.h, 3.w, 0.5.h),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            3.w, 2.h, 3.w, 0.5.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              controller
-                                                      .events?[indexFirst].keys
-                                                      .toList()
-                                                      .first ??
-                                                  "",
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 15.sp,
-                                                  fontWeight: semiBold),
-                                            ),
-                                            InkWell(
-                                                onTap: () {
-                                                  controller
-                                                      .toCategory(indexFirst);
-                                                },
-                                                child: Text(
-                                                  "show more",
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      color: Color(0xff707070)),
-                                                ))
-                                          ],
-                                        ),
+                                      Text(
+                                        controller
+                                            .events[indexFirst].keys
+                                            .toList()
+                                            .first ,
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 15.sp,
+                                            fontWeight: semiBold),
                                       ),
-                                      SizedBox(
-                                          height: 27.h,
-                                          child: ListView.builder(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 1.h,
-                                                  horizontal: 4.w),
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: controller
-                                                  .events?[indexFirst].values
-                                                  .toList()
-                                                  .first
-                                                  ?.length,
-                                              itemBuilder: (context, index) =>
-                                                  eventModel(controller
-                                                      .events?[indexFirst]
-                                                      .values
-                                                      .toList()
-                                                      .first?[index]))),
+                                      InkWell(
+                                          onTap: () {
+                                            controller
+                                                .toCategory(controller
+                                                .events[indexFirst].keys
+                                                .toList()
+                                                .first);
+                                          },
+                                          child: Text(
+                                            "show_more".tr,
+                                            style: TextStyle(
+                                                fontSize: 10.sp,
+                                                color: Color(0xff707070)),
+                                          ))
                                     ],
-                                  ))),
+                                  ),
+                                ),
+                                SizedBox(
+                                    height: 27.h,
+                                    child: ListView.builder(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 1.h,
+                                            horizontal: 4.w),
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: controller
+                                            .events[indexFirst].values
+                                            .toList()
+                                            .first
+                                            .length,
+                                        itemBuilder: (context, index) =>
+                                            eventModel(controller
+                                                .events[indexFirst]
+                                                .values
+                                                .toList()
+                                                .first[index]))),
+                              ],
+                            )),
+                      )),
                 ),
               ],
             );

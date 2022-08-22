@@ -1,8 +1,9 @@
-String ip = "192.168.1.108";
-
+String ip = "192.168.15.37";
+//192.168.14.71
+//192.168.15.37
 String urlLogin = "http://$ip:5001/api/common/login";
 String urlVerifyCode= "http://$ip:5001/api/client/verifyCode";
-String urlProfile= "192.168.1.104/api/client/profile";
+String urlProfile= "http://$ip:5001/api/client/profile";
 String urlSignup = "http://$ip:5001/api/client/signup";
 String urlForgetPasswordSendVerificationAccount ="http://$ip:5001/api/common/forgetPasswordSendVerificationAccount";
 String urlForgetPasswordValidateAccount ="http://$ip:5001/api/common/forgetPasswordValidateAccount";
@@ -13,6 +14,9 @@ String urlUpdateProfile = "http://$ip:5001/api/client";
 String urlUpdatePicProfile = "http://$ip:5001/api/client/updateimage";
 String urlResetPassword = "http://$ip:5001/api/client/resetPassword";
 
+//get Cities
+
+String urlCities = "http://$ip:5001/api/autre/cities";
 ////home
 String urlCategories = "http://$ip:5002/api/admin/category";
 String urlEventsHome = "http://$ip:5002/api/admin/event?size=5&category=";
@@ -34,4 +38,4 @@ String urlNotificationAll = "http://$ip:5001/api/client/notificationAll?";
 
 
 //tikcets
-String urlTickets = "http://$ip:5003/api/payment/";
+String urlTickets = "http://$ip:5003/api/payment";

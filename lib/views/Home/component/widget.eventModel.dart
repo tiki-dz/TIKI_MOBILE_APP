@@ -16,11 +16,25 @@ import '../../../constWidgets/cashedNetwork.dart';
 import '../../../data/const.dart';
 import '../../../data/pallete.data.dart';
 import 'package:get/get.dart';
-Widget eventModel(EventModel? event) {
 
+Widget eventModel(EventModel? event) {
   return InkWell(
-    onTap: (){
-      Get.to(()=> EventDetailWidget(event: event ?? EventModel(id: 1, name: "", description: "", organiser: "", address: "", eventImage: "", ticketImage: "", ticketNb: 0, startDate: DateTime.now(), endDate: DateTime.now(), price: "")));
+    onTap: () {
+      Get.to(() => EventDetailWidget(
+          event: event ??
+              EventModel(
+                  id: 1,
+                  name: "",
+                  description: "",
+                  organiser: "",
+                  address: "",
+                  eventImage: "",
+                  ticketImage: "",
+                  ticketNb: 0,
+                  startDate: DateTime.now(),
+                  endDate: DateTime.now(),
+                  price: "",
+                  category: '')));
     },
     child: Container(
       height: 27.h,
@@ -50,9 +64,9 @@ Widget eventModel(EventModel? event) {
                     borderRadius: BorderRadius.circular(7.sp),
                   ),
                   child: ClipRRect(
-                    borderRadius:  BorderRadius.circular(7.sp),
-                    child: cachedNetworkModel(event?.eventImage ?? "")
-                  ), ),
+                      borderRadius: BorderRadius.circular(7.sp),
+                      child: cachedNetworkModel(event?.eventImage ?? "")),
+                ),
               ),
               SizedBox(
                 height: 7.h,
@@ -86,12 +100,12 @@ Widget eventModel(EventModel? event) {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  event?.nameHome()??"" ,
+                                  event?.nameHome() ?? "",
                                   style: TextStyle(
                                       fontWeight: semiBold, fontSize: 13.sp),
                                 ),
                                 Text(
-                                  "${event?.address},7:30 pm",
+                                  "${event?.city()}",
                                   style: GoogleFonts.poppins(
                                       fontWeight: medium,
                                       fontSize: 9.sp,
@@ -100,7 +114,7 @@ Widget eventModel(EventModel? event) {
                               ],
                             ),
                             Text(
-                                 "${event?.price} DA",
+                              "${event?.price} DA",
                               style: TextStyle(
                                   fontSize: 12.sp,
                                   fontWeight: semiBold,

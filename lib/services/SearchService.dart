@@ -11,7 +11,7 @@ class SearchService {
   static Future<General<List<EventModel>>> getSearchEvents(
       int page, String search) async {
     String url =
-        "http://$ip:5002/api/admin/event?search=$search&tag=twitter&page=$page&size=20";
+        "http://$ip:5002/api/admin/event?search=$search&page=$page&size=100";
     try {
       http.Response response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {

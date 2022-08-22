@@ -13,3 +13,14 @@ List<String> monthsAn = [
   'November',
   'December'
 ];
+
+List<String> weekDays = [
+  '',
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+];

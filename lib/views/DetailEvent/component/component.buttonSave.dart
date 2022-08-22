@@ -12,22 +12,22 @@ Widget buttonSaveEvent() {
     height: 45.sp,
     width: 45.sp,
     child: InkWell(
-       onTap: (){
-         controller.saveEvent();
-       },
+      onTap: (){
+        controller.saveUnSaveEvent();
+      },
       child: Card(
-        margin: const EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(6.sp),
+          margin: const EdgeInsets.all(0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(6.sp),
+            ),
           ),
-        ),
-        color: Colors.white,
-        elevation: 2,
-        child: Padding(
-          padding:EdgeInsets.all(14.sp),
-          child: Obx(()=>SvgPicture.asset('assets/icons/${controller.icon}.svg',width: 13.sp,height: 13.sp),
-        ),)
+          color: Colors.white,
+          elevation: 2,
+          child: Padding(
+            padding:EdgeInsets.all(14.sp),
+            child: Obx(()=>SvgPicture.asset('assets/icons/${controller.icon}.svg',width: 13.sp,height: 13.sp),
+            ),)
       ),
     ),
   );

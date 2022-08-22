@@ -37,14 +37,14 @@ Widget addPerson(PersonModel? person, int index) {
                         height: 3.h,
                       ),
                       Text(
-                        "Add a person",
+                        "add_a_person".tr,
                         style: TextStyle(fontSize: 12.sp, fontWeight: semiBold),
                       ),
                       SizedBox(
                         height: 3.h,
                       ),
                       InputComponentPerson(
-                        hintText: 'firstName',
+                        hintText: 'name'.tr,
                         textEditingController: controller.firstNameController,
                         leadingIcon: 'assets/icons/fi-rr-user.svg',
                         validate: controller.validateName,
@@ -54,7 +54,7 @@ Widget addPerson(PersonModel? person, int index) {
                         height: 2.h,
                       ),
                       InputComponentPerson(
-                        hintText: 'lastName',
+                        hintText: 'last_name'.tr,
                         textEditingController: controller.lastNameController,
                         leadingIcon: 'assets/icons/fi-rr-user.svg',
                         validate: controller.validateLastName,
@@ -64,7 +64,7 @@ Widget addPerson(PersonModel? person, int index) {
                         height: 2.h,
                       ),
                       InputComponentPerson(
-                        hintText: 'phone number',
+                        hintText: 'phone_number'.tr,
                         textEditingController: controller.phoneController,
                         leadingIcon: 'assets/icons/phone.svg',
                         validate: controller.validatePhone,
@@ -75,15 +75,15 @@ Widget addPerson(PersonModel? person, int index) {
                   SizedBox(
                     height: 10.h,
                   ),
-                  button(add ? "Add" : "Edit", () {
+                  button(add ? "add".tr : "save".tr, () {
                     controller.addPersonOrEdit(index);
                   }),
                   SizedBox(height: 2.h,),
                   Visibility(
-                    visible: !add,
-                    child: buttonDelete("Delete", (){
-                      controller.deletePerson(index);
-                    })
+                      visible: !add,
+                      child: buttonDelete("delete".tr, (){
+                        controller.deletePerson(index);
+                      })
                   ),
                   SizedBox(
                     height: 2.h,
@@ -104,23 +104,23 @@ Widget addPerson(PersonModel? person, int index) {
       child: Column(
         children: [
           SizedBox(
+            height: 60.sp,
+            width: 60.sp,
+            child: add ? SvgPicture.asset(
+              "assets/icons/addperson.svg" ,
+            ):Container(
+              margin: EdgeInsets.only(right: 2.w),
+              padding: EdgeInsets.all(10.sp),
               height: 60.sp,
               width: 60.sp,
-              child: add ? SvgPicture.asset(
-                "assets/icons/addperson.svg" ,
-              ):Container(
-                margin: EdgeInsets.only(right: 2.w),
-                padding: EdgeInsets.all(10.sp),
-                height: 60.sp,
-                width: 60.sp,
-                decoration: BoxDecoration(
-                    color: const Color(0xffF5F5F5),
-                    borderRadius: BorderRadius.circular(8.sp)),
-                child: SvgPicture.asset(
-                  "assets/icons/customerS.svg" ,
-                  color: KOrange,
-                ),
-              ),),
+              decoration: BoxDecoration(
+                  color: const Color(0xffF5F5F5),
+                  borderRadius: BorderRadius.circular(8.sp)),
+              child: SvgPicture.asset(
+                "assets/icons/customerS.svg" ,
+                color: KOrange,
+              ),
+            ),),
           Text(
             person?.abr() ?? "",
             style: TextStyle(fontSize: 8.sp),

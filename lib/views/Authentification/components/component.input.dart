@@ -23,6 +23,7 @@ class InputComponent extends StatelessWidget {
       validator: validate,
       cursorColor: ButtonColor,
       controller: textEditingController,
+      keyboardType: leadingIcon == 'assets/icons/phone.svg'?  TextInputType.number:TextInputType.text ,
       style: TextStyle(fontSize: 10.sp, fontWeight: regular),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 0.05.h, horizontal: 0.0),

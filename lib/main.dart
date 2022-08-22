@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
 import 'package:tiki/controllers/initialisationController.dart';
+import 'package:tiki/controllers/localController.dart';
 import 'package:tiki/views/Authentification/widget.login.dart';
 import 'package:tiki/views/Authentification/widget.resetPasswordForget.dart';
 import 'package:tiki/views/Authentification/widget.signup.dart';
@@ -21,7 +22,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:tiki/views/Search/widget.search.dart';
 import 'package:tiki/views/Wrapper/widget.wrapperOnBoarding.dart';
 import 'package:tiki/views/onBoarding/widget.onBoarding.dart';
-
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 
@@ -50,18 +51,61 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  listeNotification() {
+    AwesomeNotifications().initialize(null, // icon for your app notification
+        [
+          NotificationChannel(
+            channelKey: 'PLASTI_NOTIFICATION',
+            channelName: 'Proto Coders Point',
+            channelDescription: "Notification example",
+            defaultColor: Color(0XFF9050DD),
+            playSound: true,
+            enableLights: true,
+            enableVibration: true,
+          )
+        ]);
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: DateTime
+              .now()
+              .microsecond,
+          color: Colors.transparent,
+          displayOnBackground: true,
+          displayOnForeground: true,
+          channelKey: 'PLASTI_NOTIFICATION',
+          notificationLayout: NotificationLayout.Inbox,
+          hideLargeIconOnExpand: true,
+          title: notification!.title,
+          body: notification.body,
+        ),
+      );
+    });
+  }
+  @override
+  void initState() {
+    listeNotification();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       Get.put(InitialisationController());
       return GetMaterialApp(
         translations: LocalString(),
-        locale: GetStorage().read('lang').toString() == 'fr' ?Locale('fr', 'FR') : Locale('en', 'EN'),
-        fallbackLocale:Locale('en', 'EN') ,
+        locale: LocalController.getLang() == "fr" ?  Locale('fr', 'FR') : Locale('en', 'EN') ,
         theme: ThemeData(
             textTheme: GoogleFonts.poppinsTextTheme(
               Theme.of(context).textTheme,
@@ -72,10 +116,10 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/', page: () => const WrapperOnBoardingWidget()),
           GetPage(name: '/bottomBar', page: () => const BottomBarWidget()),
           GetPage(name: '/search', page: () => const SearchWidget()),
-          GetPage(name: '/filter', page: () => const FilterWidget()),
+          GetPage(name: '/filter', page: () =>  FilterWidget(search: "",)),
         ],
         debugShowCheckedModeBanner: false,
-        home: const WrapperOnBoardingWidget(),
+        home: WrapperOnBoardingWidget(),
       );
     });
   }

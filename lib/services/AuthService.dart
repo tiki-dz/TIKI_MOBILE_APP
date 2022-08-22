@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:tiki/Models/model.city.dart';
 import 'package:tiki/Models/model.registration.dart';
+import 'package:tiki/controllers/localController.dart';
 import 'package:tiki/data/server.data.dart';
 import 'package:http/http.dart' as http;
 import '../data/server.data.dart';
@@ -15,6 +17,7 @@ class AuthService {
         "password": password,
         "fcm_token": tokenNotification
       });
+      print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         return General<String>(
@@ -22,6 +25,7 @@ class AuthService {
       }
       return General<String>(data: "", error: true);
     } on Exception catch (e) {
+      print(e);
       return General<String>(data: "", error: true);
     }
   }
@@ -118,7 +122,6 @@ class AuthService {
           Uri.parse(urlForgetPasswordSendVerificationAccount),
           headers: {'x-access-token': token ?? ""},
           body: {"email": email});
-      print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         return General<String>(data: jsonData["data"]["token"]);
@@ -142,6 +145,42 @@ class AuthService {
       return General<String>(data: "", error: true);
     } on Exception catch (e) {
       return General<String>(data: "", error: true);
+    }
+  }
+
+  static Future<General<String>> getProfile() async {
+    try {
+      http.Response response = await http.get(
+          Uri.parse(urlProfile),
+          headers: {'x-access-token':LocalController.getToken()  });
+      if (response.statusCode == 200) {
+
+        return General<String>(data: response.body);
+      }
+      return General<String>(data: "", error: true);
+    } on Exception catch (e) {
+      return General<String>(data: "", error: true);
+    }
+  }
+
+  static Future<General<List<CityModel>>> getCities() async {
+    try {
+      http.Response response = await http.get(
+          Uri.parse(urlCities));
+
+      if (response.statusCode == 200) {
+        List<CityModel> cities = [];
+        var jsonData = jsonDecode(response.body);
+        var data = jsonData["data"];
+        cities.add(CityModel(id: -1, name: "Wilaya"));
+        for(var item in data){
+          cities.add(CityModel.fromJson(item));
+        }
+        return General<List<CityModel>>(data: cities);
+      }
+      return General<List<CityModel>>( error: true);
+    } on Exception catch (e) {
+      return General<List<CityModel>>( error: true);
     }
   }
 }

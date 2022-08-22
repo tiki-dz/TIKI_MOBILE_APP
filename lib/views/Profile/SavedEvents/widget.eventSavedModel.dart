@@ -26,7 +26,7 @@ Widget eventSavedModel(EventModel event) {
     },
     child: Container(
       height: 30.h,
-      width: 90.w,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -45,7 +45,7 @@ Widget eventSavedModel(EventModel event) {
             children: [
               Expanded(
                 child: Container(
-                  width: 90.w,
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(7.sp),
@@ -64,8 +64,8 @@ Widget eventSavedModel(EventModel event) {
             children: [
               Expanded(
                   child: Container(
-                color: Colors.transparent,
-              )),
+                    color: Colors.transparent,
+                  )),
               Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -74,7 +74,7 @@ Widget eventSavedModel(EventModel event) {
                           bottomRight: Radius.circular(7.sp))),
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+                    EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
                     child: Column(
                       children: [
                         SizedBox(

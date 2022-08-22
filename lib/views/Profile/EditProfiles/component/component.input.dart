@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tiki/controllers/EditProfileController.dart';
 import 'package:tiki/data/pallete.data.dart';
 
 import '../../../../data/font.data.dart';
+import '../popUpCitis/popUpMenu.dart';
 
 class InputComponentEditProfile  extends StatelessWidget {
   String leadingIcon;
@@ -23,6 +25,13 @@ class InputComponentEditProfile  extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: leadingIcon == 'assets/icons/phone.svg'?  TextInputType.number:TextInputType.text ,
+      onTap: (){
+        if(leadingIcon =='assets/icons/city.svg' ){
+          final controller = Get.find<EditProfileController>();
+          showCities(context,controller.cities);
+        }
+      },
       validator: validate,
       readOnly: readOnly,
       cursorColor: KOrange,

@@ -29,107 +29,108 @@ class _LogInWidgetState extends State<LogInWidget> {
     final controller = Get.put(LogInController());
     return SafeArea(
         child: Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 3.h),
-        child: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 7.w),
-                child: Form(
-                  key: controller.formKey,
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: InkWell(
-                          onTap: () {
-                            Get.offAll(const BottomBarWidget());
-                          },
-                          child: SvgPicture.asset(
-                              'assets/icons/fi-rr-cross-small.svg'),
-                        ),
-                      ),
-                      Expanded(child: Image.asset('assets/logo/logo.png')),
-                      Text(
-                        "sing_up_to".tr,
-                        style: TextStyle(fontSize: 10.sp, fontWeight: medium),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 4.h,
-                      ),
-                      InputComponent(
-                          leadingIcon: 'assets/icons/fi-rr-envelope.svg',
-                          hintText: 'email'.tr,
-                          textEditingController: controller.emailController,validate: controller.validateEmail,),
-                      SizedBox(height: 2.h),
-                      InputComponentPassword(
-                        hintText: 'password'.tr,
-                        textEditingController: controller.passwordController,
-                        validate: controller.validatePassword,
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: InkWell(
-                          onTap: () {
-                            Get.to(ForgetPasswordWidget());
-                          },
-                          child: Text(
-                            "forget_password_?".tr,
-                            style:
-                                TextStyle(fontSize: 10.sp, fontWeight: regular),
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
+          body: Padding(
+            padding: EdgeInsets.symmetric(vertical: 3.h),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 7.w),
+                    child: Form(
+                      key: controller.formKey,
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: InkWell(
+                              onTap: () {
+                                Get.offAll(const BottomBarWidget());
+                              },
+                              child: SvgPicture.asset(
+                                  'assets/icons/fi-rr-cross-small.svg'),
+                            ),
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 4.h,
-                      ),
-                      Obx(() => controller.isUpdating.value == false
-                          ? button("login".tr, () async {
-                              FocusManager.instance.primaryFocus?.unfocus();
-
-                              await controller.login();
-                            })
-                          : circularProgressModel()),
-                      SizedBox(
-                        height: 3.h,
-                      ),
-
-                      InkWell(
-                        onTap: () {
-                          Get.to(const SignUpWidget());
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "not_account".tr,
-                              style: TextStyle(
-                                  fontSize: 10.sp,
-                                  fontWeight: medium,
-                                  color: SecondaryTextColor),
+                          Expanded(child: Image.asset('assets/logo/logoPlasti.png')),
+                          Text(
+                            "sing_up_to".tr,
+                            style: TextStyle(fontSize: 10.sp, fontWeight: medium),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: 4.h,
+                          ),
+                          InputComponent(
+                            leadingIcon: 'assets/icons/fi-rr-envelope.svg',
+                            hintText: 'email'.tr,
+                            textEditingController: controller.emailController,validate: controller.validateEmail,),
+                          SizedBox(height: 2.h),
+                          InputComponentPassword(
+                            hintText: 'password'.tr,
+                            textEditingController: controller.passwordController,
+                            validate: controller.validatePassword,
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: InkWell(
+                              onTap: () {
+                                Get.to(ForgetPasswordWidget());
+                              },
+                              child: Text(
+                                "forget_password_?".tr,
+                                style:
+                                TextStyle(fontSize: 10.sp, fontWeight: regular),
+                              ),
                             ),
-                            Text(
-                              'signup'.tr,
-                              style: TextStyle(
-                                  fontSize: 10.sp,
-                                  fontWeight: semiBold,
-                                  color: ButtonColor),
+                          ),
+                          SizedBox(
+                            height: 4.h,
+                          ),
+                          Obx(() => controller.isUpdating.value == false
+                              ? button("login".tr, () async {
+                            FocusManager.instance.primaryFocus?.unfocus();
+
+                            await controller.login();
+                          })
+                              : circularProgressModel()),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+
+                          InkWell(
+                            onTap: () {
+                              Get.to(()=> SignUpWidget());
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "not_account".tr,
+                                  style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontWeight: medium,
+                                      color: SecondaryTextColor),
+                                ),
+                                Text(
+                                  'signup'.tr,
+                                  style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontWeight: semiBold,
+                                      color: ButtonColor),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 19.h,
-            ),
-            /*Row(
+                SizedBox(
+                  height: 19.h,
+                ),
+                /*Row(
               children: [
                 Expanded(child: Divider(thickness: 0.1.h)),
                 Padding(
@@ -167,23 +168,23 @@ class _LogInWidgetState extends State<LogInWidget> {
             ),*/
 
 
-          ],
-        ),
-      ),
-    ));
+              ],
+            ),
+          ),
+        ));
   }
 }
 
 Widget containerConnectWith(String icon) => Container(
-      padding: EdgeInsets.all(12.sp),
-      decoration: BoxDecoration(
-        border: Border.all(color: KOrange),
-        shape: BoxShape.circle,
-      ),
-      child: SvgPicture.asset(
-        "assets/icons/$icon.svg",
-        height: 20,
-        width: 20,
-        color: KOrange,
-      ),
-    );
+  padding: EdgeInsets.all(12.sp),
+  decoration: BoxDecoration(
+    border: Border.all(color: KOrange),
+    shape: BoxShape.circle,
+  ),
+  child: SvgPicture.asset(
+    "assets/icons/$icon.svg",
+    height: 20,
+    width: 20,
+    color: KOrange,
+  ),
+);

@@ -13,6 +13,14 @@ class LocalController{
     return box.read("token") ??"";
   }
 
+  static String getLang(){
+    return box.read("lang") ??"";
+  }
+
+  static  setLang(String lang){
+    box.write('lang', lang);
+  }
+
   static logOut(){
     box.remove("token");
   }

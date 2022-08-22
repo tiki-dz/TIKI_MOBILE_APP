@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiki/controllers/ProfileController.dart';
+import 'package:tiki/controllers/initialisationController.dart';
 import 'package:tiki/controllers/wrapperProfileController.dart';
 import 'package:tiki/views/ButtomBar/widget.bottomBar.dart';
 import '../constWidgets/snackBar.dart';
@@ -15,6 +16,7 @@ class LogInController extends GetxController {
   var isUpdating = false.obs;
   late var tokenNotification;
   var fbm = FirebaseMessaging.instance;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void onInit() async {
@@ -22,7 +24,8 @@ class LogInController extends GetxController {
     super.onInit();
   }
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+
 
   getTokenNotification(){
     fbm.getToken().then((token) {
@@ -51,7 +54,6 @@ class LogInController extends GetxController {
       if (passwordController.text.isEmpty) {
         return "password_req".tr;
       }
-
       if (passwordController.text.length < 8) {
         return "password_valid".tr;
       }
@@ -75,7 +77,8 @@ class LogInController extends GetxController {
         Get.put(ProfileController());
         ProfileController profileController = Get.find<ProfileController>();
         profileController.getUpdatedProfile();
-
+        InitialisationController initialisationController = Get.find<InitialisationController>();
+        initialisationController.getSavedEvents();
         Get.offAll(() => const BottomBarWidget(),
             transition: Transition.rightToLeft);
 

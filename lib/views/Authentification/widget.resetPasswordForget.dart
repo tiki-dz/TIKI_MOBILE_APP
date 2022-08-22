@@ -22,44 +22,44 @@ class _ResetPasswordForgetWidgetState extends State<ResetPasswordForgetWidget> {
   @override
   Widget build(BuildContext context) {
     final controller =
-        Get.put<ResetPasswordForgetController>(ResetPasswordForgetController(email : widget.email,token: widget.token));
+    Get.put<ResetPasswordForgetController>(ResetPasswordForgetController(email : widget.email,token: widget.token));
 
     return SafeArea(
         child: Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 7.w),
-        child: Form(
-          key: controller.formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              backWidget,
-              Column(
+          body: Padding(
+            padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 7.w),
+            child: Form(
+              key: controller.formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Enter_your_new_password".tr , style: TextStyle(fontSize: 15.sp, fontWeight: bold),),
-                  SizedBox(height: 7.h),
-                  InputComponentPassword(
-                    hintText: 'Password'.tr,
-                    textEditingController: controller.passwordController,
-                    validate: controller.validatePassword,
+                  backWidget,
+                  Column(
+                    children: [
+                      Text("enter_your_new_password".tr , style: TextStyle(fontSize: 15.sp, fontWeight: bold),),
+                      SizedBox(height: 7.h),
+                      InputComponentPassword(
+                        hintText: 'password'.tr,
+                        textEditingController: controller.passwordController,
+                        validate: controller.validatePassword,
+                      ),
+                      SizedBox(height: 3.h),
+                      InputComponentPassword(
+                        hintText: 'confirmPassword'.tr,
+                        textEditingController: controller.confirmPasswordController,
+                        validate:  controller.validateConfirmPassword,
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 3.h),
-                  InputComponentPassword(
-                    hintText: 'confirmPassword'.tr,
-                    textEditingController: controller.confirmPasswordController,
-                    validate:  controller.validateConfirmPassword,
-                  ),
+                  Obx(() => controller.isSending.value == false
+                      ? button("confirm".tr, () async {
+                    await controller.resetPassword();
+                  })
+                      : circularProgressModel())
                 ],
               ),
-              Obx(() => controller.isSending.value == false
-                  ? button("confirm".tr, () async {
-                      await controller.resetPassword();
-                    })
-                  : circularProgressModel())
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 }

@@ -8,20 +8,20 @@ class PurchaseModel {
   int idEvent;
   int nbTickets;
   EventModel event;
-  List<ModelTicket> tickets;
+  List<TicketModel> tickets;
 
   PurchaseModel(
       {required this.event,
-      required this.id,
-      required this.idClient,
-      required this.idEvent,
-      required this.nbTickets,
-      required this.tickets});
+        required this.id,
+        required this.idClient,
+        required this.idEvent,
+        required this.nbTickets,
+        required this.tickets});
 
   factory PurchaseModel.fromJson(Map<String, dynamic> item) {
-    List<ModelTicket> tickets = [];
+    List<TicketModel> tickets = [];
     for (var sousItem in item["MultipleTickets"]) {
-      tickets.add(ModelTicket.fromJson(sousItem));
+      tickets.add(TicketModel.fromJson(sousItem));
     }
     return PurchaseModel(
         id: item["idPurchase"],

@@ -24,7 +24,7 @@ class ResetPasswordController extends GetxController{
   String? validateConfirmPassword(String? password) {
     if(validatePassword("") == null){
       if (newPasswordController.text.isEmpty) {
-        return 'confirmation_password_req'.tr;
+        return 'new_password_req'.tr;
       }
 
       if (newPasswordController.text == passwordController.text) {
@@ -49,7 +49,7 @@ class ResetPasswordController extends GetxController{
       if (response.error) {
         snackBarModel("echec".tr, "try".tr, true);
       } else {
-
+        Get.back();
         snackBarModel("success".tr, "operation_done".tr, false);
 
       }

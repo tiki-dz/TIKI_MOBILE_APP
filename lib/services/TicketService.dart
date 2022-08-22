@@ -12,8 +12,10 @@ class TicketService {
   static Future<General<List<PurchaseModel>>> getTickets() async {
     var user = LocalController.getProfile();
     try {
+
       http.Response response =
-          await http.get(Uri.parse(urlTickets + "/${user.idClient}/purchases"));
+      await http.get(Uri.parse(urlTickets + "/${user.idClient}/purchases"));
+      print(response.body);
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         List<PurchaseModel> purchases = [];
@@ -25,6 +27,7 @@ class TicketService {
       }
       return General<List<PurchaseModel>>(error: true);
     } on Exception catch (e) {
+      print(e);
       return General<List<PurchaseModel>>(error: true);
     }
   }

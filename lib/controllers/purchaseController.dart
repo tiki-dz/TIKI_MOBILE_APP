@@ -12,7 +12,7 @@ import 'localController.dart';
 class PurchaseController extends GetxController {
 
 
-  late EventModel? event;
+  late EventModel event;
 
   bool enableDiscountCode = false;
   int places = 1;
@@ -22,11 +22,11 @@ class PurchaseController extends GetxController {
   double  priceAllAfter = 1200;
   double  reduction = 0;
 
-  initEvent(EventModel? event) {
+  initEvent(EventModel event) {
     this.event = event;
-    priceOneBefore =double.parse(event?.price??"3");
-    priceOneAfter =double.parse(event?.price??"3");
-    priceAllBefore =double.parse(event?.price??"3");
+    priceOneBefore =double.parse(event.price);
+    priceOneAfter =double.parse(event.price);
+    priceAllBefore =double.parse(event.price);
   }
 
   late UserModel userProfile = LocalController.getProfile();
@@ -74,7 +74,7 @@ class PurchaseController extends GetxController {
       if (phoneController.text.isEmpty) {
         return "phone_num_req";
       }
-      if(phoneController.text[0] != "0"){
+      if(phoneController.text[0] != "0" || phoneController.text.length !=10){
         return "phone_num_req";
       }
     }
@@ -189,7 +189,9 @@ class PurchaseController extends GetxController {
         data.add({"firstName":persons[i]?.firstName??"","lastName":persons[i]?.lastName??"","phoneNumber":persons[i]?.phoneNumber??""});
       }
     }
-
+    if(event.ticketNb < persons.length +1 ){
+      snackBarModel("echec".tr, "there is no available tickets".tr, true);
+    }
     var response = await PurchaseService.purchase(data,event,enableDiscountCode , discountCodeController.text);
     if(response.error){
       snackBarModel("echec".tr, "try".tr, true);

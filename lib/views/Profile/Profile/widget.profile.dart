@@ -55,12 +55,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         height: 45.sp,
                         width: 45.sp,
                         decoration: const BoxDecoration(
-                            /* image: DecorationImage(
+                          /* image: DecorationImage(
                               image:
                               picWidgetModel(controller.userProfile.picture),
                               fit: BoxFit.fill),*/
                             shape: BoxShape.circle),
-                        child: picWidgetModel(controller.userProfile.picture),
+                        child: ClipRRect(borderRadius: BorderRadius.circular(20.h),child: picWidgetModel(controller.userProfile.picture)),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,8 +110,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      myContainer("2600", "score"),
-                      myContainer("2600", "wallet"),
+                      myContainer(controller.userProfile.score.toString(), "score"),
+                      myContainer("0", "wallet"),
                     ],
                   ),
                 ),
@@ -119,15 +119,34 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   padding: EdgeInsets.symmetric(horizontal: 3.w),
                   child: Column(
                     children: [
-                      listTileModelWidget("score".tr, "score", () {}),
+                      /*listTileModelWidget("score".tr, "score", () {}),*/
                       listTileModelWidget("saved_event".tr, "saveEventNotSolid",
-                          () {
-                        Get.to(() => const SavedEventsWidget());
-                      }),
+                              () {
+                            Get.to(() => const SavedEventsWidget());
+                          }),
                       const ExpansionTileSettings(),
                       const ExpansionTileMore(),
                       listTileModelWidget("log_out".tr, "logout", () {
-                        controller.logOut();
+                        Get.defaultDialog(
+                          onCancel: (){
+                            Get.back();
+                            controller.logOut();
+                          },
+                          onConfirm: (){
+                            Get.back();
+                          },
+                          radius: 10.sp,
+                          buttonColor: KOrange,
+                          cancelTextColor: KOrange,
+                          confirmTextColor: Colors.white,
+                          textCancel:"deconnecter" ,
+                          textConfirm:"annuler" ,
+                          middleText: "Pouvez vous confirmer la déconnection",
+                          contentPadding: EdgeInsets.symmetric(vertical: 2.h,horizontal: 7.w),
+                          title: "Deconnection",
+                        );
+
+                        //
                       })
                     ],
                   ),

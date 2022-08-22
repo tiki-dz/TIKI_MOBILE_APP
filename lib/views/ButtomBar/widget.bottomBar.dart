@@ -14,7 +14,7 @@ import 'package:tiki/views/Wrapper/widget.wrapperProfile.dart';
 import 'bottomBarPackage.dart';
 import '../Home/widget.home.dart';
 import 'component/component.appBar.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 class BottomBarWidget extends StatefulWidget {
   const BottomBarWidget({Key? key}) : super(key: key);
 
@@ -23,6 +23,9 @@ class BottomBarWidget extends StatefulWidget {
 }
 
 class _BottomBarWidgetState extends State<BottomBarWidget> {
+
+  DateTime backTimePressed = DateTime.now();
+  FToast fToast = FToast();
 
   @override
   Widget build(BuildContext context) {

@@ -21,7 +21,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
 
   @override
   void initState() {
-    print('ccc');
     controller.getNotifications();
     // TODO: implement initState
     super.initState();
@@ -62,7 +61,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                 ),
               ], color: greyColor, borderRadius: BorderRadius.circular(20.sp)),
               child: Obx(
-                () => Row(
+                    () => Row(
                   children: [
                     Expanded(
                         child: animatedContainerModel(
@@ -83,14 +82,14 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                   return controller.fetchingNotification
                       ? circularProgressModel()
                       : controller.currentLength() == 0
-                          ? noItemWidgetModel()
-                          : ListView.builder(
-                              padding: EdgeInsets.symmetric(horizontal: 4.w),
-                              itemCount: controller.currentLength(),
-                              itemBuilder: (context, index) =>
-                                  notificationWidgetModel(
-                                      controller.currentNotification(index)),
-                            );
+                      ? noItemWidgetModel()
+                      : ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    itemCount: controller.currentLength(),
+                    itemBuilder: (context, index) =>
+                        notificationWidgetModel(
+                            controller.currentNotification(index)),
+                  );
                 }),
           )
         ],

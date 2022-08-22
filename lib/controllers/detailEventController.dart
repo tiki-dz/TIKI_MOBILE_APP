@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:tiki/Models/model.event.dart';
+import 'package:tiki/constWidgets/snackBar.dart';
 import 'package:tiki/controllers/initialisationController.dart';
+import 'package:tiki/controllers/localController.dart';
 import 'package:tiki/controllers/savedEventController.dart';
 import 'package:tiki/services/EventService.dart';
 
@@ -34,11 +36,10 @@ class DetailEventController extends GetxController {
 
   switchIcon() {
     icon.value =
-        icon.value == "saveEventNotSolid" ? "saveEvent" : "saveEventNotSolid";
+    icon.value == "saveEventNotSolid" ? "saveEvent" : "saveEventNotSolid";
     newCase = !newCase;
     final controller = Get.find<InitialisationController>();
 
-    print(newCase);
     if (newCase == true) {
       controller.addEvent(event);
     } else {
@@ -50,8 +51,13 @@ class DetailEventController extends GetxController {
     }
   }
 
-  saveEvent() {
-    switchIcon();
+  saveUnSaveEvent() {
+    if(LocalController.getSign()){
+      switchIcon();
+    } else {
+      snackBarModel("echec".tr, "you_must_connect".tr, true);
+    }
+
   }
 
   saveOrUnSaved() {

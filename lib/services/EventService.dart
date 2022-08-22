@@ -52,6 +52,7 @@ class EventService {
         for (var item in jsonData["data"]) {
           events.add(EventModel.fromJson(item));
         }
+        print(events.length);
         return General<List<EventModel>>(data: events);
       }
       return General<List<EventModel>>(error: true);

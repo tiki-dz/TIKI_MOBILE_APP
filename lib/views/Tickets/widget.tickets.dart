@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:tiki/controllers/ticketsController.dart';
 import 'package:tiki/views/Tickets/component/component.switch.dart';
 import 'package:get/get.dart';
+import '../../constWidgets/progressIndicator.dart';
 import '../../data/pallete.data.dart';
 import 'component/component.carousel.dart';
 
@@ -22,6 +23,7 @@ class _TicketsWidgetState extends State<TicketsWidget> {
     controller.getTickets();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +32,17 @@ class _TicketsWidgetState extends State<TicketsWidget> {
         elevation: 0,
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text(
-          "Tickets (3)",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
-              fontSize: 16.sp),
+        title: GetBuilder(
+            init: controller,
+            builder: (context) {
+              return Text(
+                "Tickets " + controller.currentList().length.toString(),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16.sp),
+              );
+            }
         ),
       ),
       body: Padding(
@@ -46,8 +53,17 @@ class _TicketsWidgetState extends State<TicketsWidget> {
             children: [
               Column(
                 children: [
-                  SizedBox(height: 7.h,),
-                  CarouselTickets(),
+                  SizedBox(
+                    height: 7.h,
+                  ),
+                  GetBuilder(
+                      init: controller,
+                      builder: (context) {
+                        return controller.gettingData
+                            ? Expanded(
+                            child: Center(child: circularProgressModel()))
+                            : CarouselTickets();
+                      }),
                 ],
               ),
               Column(
@@ -57,7 +73,7 @@ class _TicketsWidgetState extends State<TicketsWidget> {
                   ),
                   Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.w),
+                      EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.w),
                       margin: EdgeInsets.symmetric(horizontal: 8.w),
                       decoration: BoxDecoration(
                           boxShadow: [
@@ -66,13 +82,13 @@ class _TicketsWidgetState extends State<TicketsWidget> {
                               spreadRadius: 1,
                               blurRadius: 7,
                               offset:
-                                  Offset(0, 4), // changes position of shadow
+                              Offset(0, 4), // changes position of shadow
                             ),
                           ],
                           color: greyColor,
                           borderRadius: BorderRadius.circular(20.sp)),
                       child: Obx(
-                        () => Row(
+                            () => Row(
                           children: [
                             Expanded(
                                 child: animatedContainerModel(
@@ -81,8 +97,8 @@ class _TicketsWidgetState extends State<TicketsWidget> {
                               width: 1.w,
                             ),
                             Expanded(
-                                child: animatedContainerModel(
-                                    "historique".tr, 1, controller.selected.value))
+                                child: animatedContainerModel("historique".tr,
+                                    1, controller.selected.value))
                           ],
                         ),
                       )),

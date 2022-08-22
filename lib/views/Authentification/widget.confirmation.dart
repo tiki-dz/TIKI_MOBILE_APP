@@ -277,7 +277,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'resendAfter'.tr,
+                              'resend_after'.tr,
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 color: SecondaryTextColor,

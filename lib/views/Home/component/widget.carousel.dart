@@ -15,7 +15,7 @@ class CarouselHome extends StatefulWidget {
 }
 
 class _CarouselHomeState extends State<CarouselHome> {
-  List myList = [1, 2, 3];
+  List myList = ["1", "2", "3","4","5"];
 
 
   @override
@@ -27,6 +27,7 @@ class _CarouselHomeState extends State<CarouselHome> {
         scale: controller.opacity /12,
         child: CarouselSlider(
           options: CarouselOptions(
+            viewportFraction:controller.opacity==12 ? 0.8 :1 ,
             enlargeCenterPage: true,
             height: controller.opacity/ 26 * 45.h,
             autoPlay: true,
@@ -34,8 +35,8 @@ class _CarouselHomeState extends State<CarouselHome> {
             autoPlayAnimationDuration: const Duration(milliseconds: 700),
             autoPlayCurve: Curves.fastOutSlowIn,
           ),
-          items: myList.map((wallet) {
-            return itemModel();
+          items: myList.map((pic) {
+            return itemModel(pic);
           }).toList(),
         ),
       ),
@@ -43,46 +44,32 @@ class _CarouselHomeState extends State<CarouselHome> {
   }
 }
 double radius = 9;
-Widget itemModel() => Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 1.h),
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 7,
-                offset: Offset(0, 1), // changes position of shadow
-              ),
-            ],
-            borderRadius: BorderRadius.circular(radius.sp),
-            color: Colors.black,
+Widget itemModel(String pic) => Stack(
+  children: [
+    Container(
+      margin: EdgeInsets.symmetric(vertical: 1.h),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 7,
+            offset: Offset(0, 1), // changes position of shadow
           ),
-          width: 80.w,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(9.sp),
-            child: Image.network(
-              "https://horreurqc.b-cdn.net/wp-content/uploads/2019/11/MV5BNDM2NTBiOWYtN2E3Mi00MDdjLTk2MjMtZjlmMWE2N2QxNjdjXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_SY1000_CR0014991000_AL_-1155x770.jpg",
-              fit: BoxFit.fill,
-            ),
-          ),
+        ],
+        borderRadius: BorderRadius.circular(radius.sp),
+        color: Colors.black,
+      ),
+      width: 80.w,
+      height: double.infinity,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(9.sp),
+        child: Image.asset(
+          "assets/icons/$pic.jpeg",
+          fit: BoxFit.fill,
         ),
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 1.h),
-          width: 80.w,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  Colors.transparent,
-                  Colors.black,
-                ],
-              ),
-              borderRadius: BorderRadius.circular(radius.sp)),
-        )
-      ],
-    );
+      ),
+    ),
+
+  ],
+);
