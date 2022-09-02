@@ -69,12 +69,8 @@ dependencies:
   mime: ^1.0.1
   webview_flutter: ^3.0.3
   flutter_local_notifications: ^9.2.0
-<<<<<<< Updated upstream
-=======
   qr_flutter: ^4.0.0
   timeago: ^3.2.2
-
->>>>>>> Stashed changes
 
 
 dev_dependencies:
